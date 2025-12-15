@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door Website</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar section-content">
+
+            <a href="#" class="nav-logo" id="logo-link"> 
+    <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image">
+</a>
+        </a>
+
+            <ul class="nav-menu">
+
+                <button id="menu-close-button" class="fas fa-times"></button>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#products" class="nav-link">Product</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+
+            </ul>
+
+            <button id="menu-open-button" class="fas fa-bars"></button>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero-section">
+            <div class="section-content">
+                <div class="hero-details">
+                    <h2 class="title">Welcome to</h2>
+                    <h3 class="subtitle">Ajor Doors Manufacturer</h3>
+
+                    <p class="description">
+                        The finest quality of wood and skilled labour goes in the making of our finished doors.
+                    </p>
+
+                    <div class="buttons">
+
+
+                        <a href="#contact" class="button Order-now">Make Your Enquiry Now!</a>
+
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <img src="images/welcome.webp" alt="hero image" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="section-content">
+
+                <div class="about-image-wrapper">
+                    <img src="images/jpg100-t3-scale100.jpeg" alt="about" class="about-image">
+                </div>
+
+                <div class="about-details">
+                    <h2 class="section-title">Let's Talk about Company</h2>
+
+                    <p class="text">
+                        Ajor Doors is a trusted name in premium door manufacturing, offering high-quality, stylish, and
+                        durable door solutions for homes, offices, and commercial spaces. With a strong commitment to
+                        craftsmanship and innovation, we design doors that combine modern aesthetics with long-lasting
+                        performance.
+                        For years, we have supplied a wide range of wooden doors, laminated doors, flush doors, PVC
+                        doors, and customized designs to customers across India. Every door is crafted using advanced
+                        manufacturing technology, high-grade raw materials, and strict quality standards to ensure
+                        superior strength, smooth finishes, and long life.
+                    </p>
+
+                   
+                </div>
+
+            </div>
+        </section>
+        <!--products section
+        <section class="menu-section" id="products">
+            <h2 class="section-title">Our Products</h2>
+            <div class="section-content">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <img src="images/solid wood primer.jpg" alt="solid wood primer" class="menu-image">
+                        <h3 class="name">Solid Wood Primer Door</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/exclusive laminated.jpg" alt="exclusive laminated" class="menu-image">
+                        <h3 class="name">Exclusive Laminates Doors</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/antique laminated.jpg" alt="antique laminated" class="menu-image">
+                        <h3 class="name">Antique Laminate Doors</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/premium digital.jpg" alt="premium digital" class="menu-image">
+                        <h3 class="name">Premium Digital Korean Doors</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/wpc digital.jpg" alt="wpc digital" class="menu-image">
+                        <h3 class="name">WPC Digital Doors</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/teak wood.jpg" alt="teak wood" class="menu-image">
+                        <h3 class="name">Teak Veneer Grooving Door</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/premium teak wood door.jpg" alt="teak wood" class="menu-image">
+                        <h3 class="name">Premium Teak Wood Door</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/laminate doors.png" alt="teak wood" class="menu-image">
+                        <h3 class="name">Laminate Doors</h3>
+                    </li>
+                    <li class="menu-item">
+                        <img src="images/WPC.png" alt="teak wood" class="menu-image">
+                        <h3 class="name">WPC Door & Frame </h3>
+                    </li>
+                </ul>
+            </div>
+        </section>-->
+        <!--product slider-->
+        <section class="products-section" id="products">
+            <h2 class="section-title">Our Collection</h2>
+            <div class="section-content">
+                <div class="slider-container swiper">
+                    <div class="slider-wrapper">
+                        <ul class="products-list swiper-wrapper">
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=solid-wood-primer">
+                                    <img src="images/solid wood primer.jpg" alt="solid wood primer"
+                                        class="Products-image">
+                                    <h3 class="name">Solid Wood Primer Door</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=exclusive-laminates">
+                                    <img src="images/exclusive laminated.jpg" alt="exclusive laminates"
+                                        class="Products-image">
+                                    <h3 class="name">Exclusive Laminates Doors</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=antique-laminated">
+                                    <img src="images/antique laminated.jpg" alt="antique laminated"
+                                        class="Products-image">
+                                    <h3 class="name">Antique Laminate Doors</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=premium-digital">
+                                    <img src="images/premium digital.jpg" alt="premium digital" class="Products-image">
+                                    <h3 class="name">Premium Digital Korean Doors</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=wpc-digital">
+                                    <img src="images/wpc digital.jpg" alt="wpc digital" class="Products-image">
+                                    <h3 class="name">WPC Digital Doors</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=teak-veneer">
+                                    <img src="images/teak wood.jpg" alt="teak wood" class="Products-image">
+                                    <h3 class="name">Teak Veneer Grooving Door</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=premium-teak-wood">
+                                    <img src="images/premium teak wood door.jpg" alt="teak wood" class="Products-image">
+                                    <h3 class="name">Premium Teak Wood Door</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=laminate-doors">
+                                    <img src="images/laminate doors.png" alt="laminate doors" class="Products-image">
+                                    <h3 class="name">Laminate Doors</h3>
+                                </a>
+                            </li>
+                            <li class="products swiper-slide">
+                                <a href="product-details.html?id=wpc-door-frame">
+                                    <img src="images/WPC.png" alt="wpc" class="Products-image">
+                                    <h3 class="name">WPC Door & Frame</h3>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-slide-button swiper-button-prev"></div>
+                        <div class="swiper-slide-button swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--why choose-->
+        <section class="why-section">
+            <div class="why-left">
+                <h4 class="why-small">WHY</h4>
+                <h2 class="why-title">Choose Us</h2>
+
+                <p class="why-text">
+                    When people choose Ajor Doors, they opt for a unique blend of sophistication and comfort.
+                    We believe in using premium quality wood that helps the products last for generations.
+                </p>
+
+                <p class="why-text">
+                    Our doors are a mix of old-world elegance and modern luxury, depending on customer taste.
+                    Our artisans are committed to providing superior quality and durability in every design.
+                    Choose us to help you define your interior with style.
+                </p>
+
+              
+            </div>
+
+            <div class="why-right">
+
+                <div class="why-box">
+                    <img src="images/Best-Price.png" class="why-icon" alt="best price">
+                    <h3 class="why-box-title">Best Price</h3>
+                </div>
+
+                <div class="why-box">
+                    <img src="images/Factory-Made.png" class="why-icon" alt="factory">
+                    <h3 class="why-box-title">Factory Made</h3>
+                </div>
+
+                <div class="why-box">
+                    <img src="images/Custom-Made.png" class="why-icon" alt="custom made">
+                    <h3 class="why-box-title">Custom Made</h3>
+                </div>
+
+                <div class="why-box">
+                    <img src="images/Wood-From-Sustainable-Forest.png" class="why-icon" alt="forest wood">
+                    <h3 class="why-box-title">Wood from Sustainable Forest</h3>
+                </div>
+
+                <div class="why-box">
+                    <img src="images/Natural-Wood.png" class="why-icon" alt="natural wood">
+                    <h3 class="why-box-title">100% Natural Wood</h3>
+                </div>
+
+                <div class="why-box">
+                    <img src="images/Quick-Delivery.png" class="why-icon" alt="quick delivery">
+                    <h3 class="why-box-title">Quick Delivery</h3>
+                </div>
+
+            </div>
+        </section>
+        <!--contact section-->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">
+               Need Help? Call Us. +91 98444 43388
+            </h2>
+            <div class="section-content">
+                <ul class="contact-info-list">
+                    <li class="contact-info">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <p>SHREE DHANALAXMI HARDWARE AND PLY
+                            Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village, Bengaluru, Karnataka
+                            560043</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>sdlhp2002@gmail.com</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Monday-Saturday : 9:00 AM - 7:00 PM</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Sunday : closed</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-globe"></i>
+                        <p>www.ajormart.in</p>
+                    </li>
+                </ul>
+
+
+                <form action="https://formsubmit.co/fbdc76b46be51887b7994387a1fedd11" method="POST"
+                    class="contact-form">
+                    <input type="hidden" name="_subject" value="New Door Enquiry from ajormart.in">
+
+                    <input type="text" placeholder="Your Name" name="Name" class="form-input" required>
+                    <input type="email" placeholder="Your Email" name="Email" class="form-input" required>
+                    <input type="number" placeholder="Your Contact" name="Number" class="form-input" required>
+                    <textarea placeholder="Your Message" name="Message" class="form-input" required></textarea>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
+        </section>
+        <!--footer section-->
+        <footer class="footer-section">
+            <div class="section-content">
+                <p class="copyright-text"> ©2002 Ajor Door's Manufacturer</p>
+                <div class="social-link-list">
+                    <a href="https://www.facebook.com/sdlhp2002" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/Sdlhp2002" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+                <p class="policy-text">
+                    <a href="#" class="policy-link">Home</a>
+                    <span class="separator"></span>
+                    <a href="#about" class="policy-link">About</a>
+                     <span class="separator"></span>
+                      <a href="#contact" class="policy-link">Contact</a>
+                </p>
+            </div>
+        </footer>
+
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Door Details | Ajor Door's</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Main CSS stylesheet -->
+  <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar section-content">
+      <a href="#" class="nav-logo">
+        <h2 class="logo-text">🚪Ajor Door's</h2>
+      </a>
+      <ul class="nav-menu">
+
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="index.html#about" class="nav-link">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="index.html#products" class="nav-link">Product</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding-top:90px; min-height:70vh;">
+    <!-- HERO/BREADCRUMBS AREA -->
+    <section class="product-detail-hero">
+      <div class="section-content">
+        <nav id="breadcrumb-area" class="breadcrumbs"></nav>
+        <h1 id="product-title" class="product-detail-title"></h1>
+      </div>
+    </section>
+
+    <!-- PRODUCT DETAILS CONTENT -->
+    <section class="product-section">
+      <div class="product-details-wrapper">
+        <!-- LEFT COLUMN: MAIN IMAGE & THUMBNAILS -->
+        <aside class="product-preview">
+          <img src="" id="main-door-image" class="product-main-image" alt="Door Product">
+          <div id="similar-images" class="product-thumbnails"></div>
+        </aside>
+        <!-- RIGHT COLUMN: TEXT & SPECS -->
+        <section class="product-info">
+          <p id="short-description" class="product-description"></p>
+          <div class="specifications">
+            <span class="section-label">Specification & Dimensions</span>
+            <table id="spec-table" class="spec-table"></table>
+          </div>
+          <div class="description-long">
+            <span class="section-label">Description</span>
+            <ul id="product-features" class="description-list"></ul>
+          </div>
+          <button class="enquiry-btn" onclick="window.location.href='index.html#contact'">Enquiry Now</button>
+        </section>
+      </div>
+    </section>
+
+    <!--contact section-->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">
+                Make Your Enquiry Now!
+            </h2>
+            <div class="section-content">
+                <ul class="contact-info-list">
+                    <li class="contact-info">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <p>SHREE DHANALAXMI HARDWARE AND PLY
+                            Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village, Bengaluru, Karnataka
+                            560043</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>sdlhp2002@gmail.com</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Monday-Saturday : 9:00 AM - 7:00 PM</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Sunday : closed</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-globe"></i>
+                        <p>www.ajormart.in</p>
+                    </li>
+                </ul>
+
+
+                <form action="https://formsubmit.co/fbdc76b46be51887b7994387a1fedd11" method="POST"
+                    class="contact-form">
+                    <input type="hidden" name="_subject" value="New Door Enquiry from ajormart.in">
+
+                    <input type="text" placeholder="Your Name" name="Name" class="form-input" required>
+                    <input type="email" placeholder="Your Email" name="Email" class="form-input" required>
+                     <input type="number" placeholder="Your Contact" name="Number" class="form-input" required>
+                    <textarea placeholder="Your Message" name="Message" class="form-input" required></textarea>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
+        </section>
+        <!--footer section-->
+       <footer class="footer-section">
+            <div class="section-content">
+                <p class="copyright-text"> ©2002 Ajor Door's Manufacturer</p>
+                <div class="social-link-list">
+                    <a href="https://www.facebook.com/sdlhp2002" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/Sdlhp2002" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+                <p class="policy-text">
+                    <a href="#" class="policy-link">Home</a>
+                    <span class="separator"></span>
+                    <a href="#about" class="policy-link">About</a>
+                     <span class="separator"></span>
+                      <a href="#contact" class="policy-link">Contact</a>
+                </p>
+            </div>
+        </footer>
+
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+
+  <!-- JS files for dynamic data -->
+  
+  <script src="products-data.js"></script>
+  <script src="product-details.js"></script>
+</body>
+
+</html>
