@@ -103,7 +103,7 @@ header .navbar {
 }
 
 .navbar .nav-menu .nav-link {
-    color:var(--dark-color);
+    color: var(--dark-color);
     padding: 10px 20px;
     transition: 0.3s ease;
     border-radius: var(--border-redius-m);
@@ -122,7 +122,7 @@ header .navbar {
 }
 
 .navbar .nav-logo .logo-text {
-    color:var(--dark-color);
+    color: var(--dark-color);
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     font-family: 'Courier New', Courier, monospace;
@@ -132,33 +132,39 @@ header .navbar {
     display: flex;
     gap: 20px;
 }
+
 /* Style for the logo image element */
 /* --- 1. Resizing the Logo Image --- */
 .nav-logo .logo-image {
     /* Set a fixed height and let the width scale proportionally */
-    height: 70px; /* Adjust this value (e.g., 50px, 80px) until it looks right */
+    height: 80px;
+    /* Adjust this value (e.g., 50px, 80px) until it looks right */
     width: auto;
-    display: block; /* Ensures the image behaves well */
+    display: block;
+    /* Ensures the image behaves well */
 }
 
 /* --- 2. Styling the Logo Container for Zoom Effect --- */
 .nav-logo {
     /* Add a small margin to separate the logo from the edge if needed */
-    margin-right: 20px; 
-    
+    margin-right: 20px;
+
     /* Enables smooth transition for the zoom effect */
-    transition: transform 0.3s ease-in-out; 
+    transition: transform 0.3s ease-in-out;
     cursor: pointer;
-    display: inline-block; /* Essential for the transform (zoom) to work */
+    display: inline-block;
+    /* Essential for the transform (zoom) to work */
 }
+
 .nav-logo:hover {
     /* Scale the logo up by 5% on hover (adjust value as desired) */
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
+
 /* --- 3. The Zoom Effect Class --- */
 .nav-logo.zoom-effect {
     /* Scale the logo up by 10% when clicked */
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 /* --- 4. Ensuring the Navbar is Aligned (If the navigation is still misplaced) --- */
@@ -228,7 +234,7 @@ header .navbar {
 }
 
 .hero-section .hero-image-wrapper {
-    max-width: 500px;
+    max-width: 800px;
     margin-right: 40px;
 }
 
@@ -250,7 +256,7 @@ header .navbar {
     width: 400px;
     height: 400px;
     object-fit: cover;
-   
+
 }
 
 .about-section .about-details .section-title {
@@ -389,7 +395,7 @@ header .navbar {
     }
 
     .navbar #menu-open-button {
-        color:var(--dark-color);
+        color: var(--dark-color);
     }
 
     .navbar .nav-menu {
@@ -443,7 +449,7 @@ header .navbar {
     .about-section .section-content {
         gap: 70px;
         flex-direction: column;
-      
+
     }
 
     .about-section .about-image-wrapper .about-image {
@@ -763,14 +769,18 @@ header .navbar {
     margin-bottom: 16px;
     font-size: var(--font-size-m);
 }
-.products-section .products .name, 
-.products-section .products-list .name, 
-.products-section .products .Products-image + .name {
+
+.products-section .products .name,
+.products-section .products-list .name,
+.products-section .products .Products-image+.name {
     color: var(--primary-color) !important;
     /* or use: color: #3b141c;  if you prefer hex */
     font-weight: var(--font-weight-bold, 700);
 }
-.products-section .products a .name { color: var(--primary-color) !important; }
+
+.products-section .products a .name {
+    color: var(--primary-color) !important;
+}
 
 .products-section .swiper-pagination-bullet {
     width: 15px;
@@ -800,7 +810,7 @@ header .navbar {
 
 /*new*/
 .product-section {
-    
+
     background: #faf8fa;
 }
 
@@ -834,7 +844,7 @@ header .navbar {
 .product-main-image {
     width: 300px;
     aspect-ratio: 9/18;
-    background:var(--light-pink-color);
+    background: var(--light-pink-color);
     border-radius: 10px;
     border: 1.5px solid #575454;
     box-shadow: 0 2px 10px rgba(85, 60, 20, 0.07);
@@ -863,7 +873,7 @@ header .navbar {
     background: var(--light-pink-color);
     cursor: pointer;
     object-fit: contain;
-    transition: border 0.2s ;
+    transition: border 0.2s;
 }
 
 .product-thumbnails img.selected,
@@ -963,7 +973,7 @@ header .navbar {
     border: 2px solid var(--secondary-color);
     box-shadow: 0 2px 15px rgba(245, 150, 28, 0.05);
     transition:
-      
+
         color 0.2s,
         border 0.2s,
         box-shadow 0.2s;
@@ -973,7 +983,7 @@ header .navbar {
 .enquiry-btn:hover,
 .enquiry-button:hover {
     background: var(--secondary-color);
-   color: var(--primary-color);
+    color: var(--primary-color);
     border: 2px solid var(--secondary-color);
     box-shadow: 0 4px 24px rgba(160, 85, 30, 0.11);
 }
