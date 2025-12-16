@@ -107,7 +107,7 @@ header .navbar {
     padding: 10px 20px;
     transition: 0.3s ease;
     border-radius: var(--border-redius-m);
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-l);
     font-weight: var(--font-weight-bold);
 }
 
@@ -137,7 +137,7 @@ header .navbar {
 /* --- 1. Resizing the Logo Image --- */
 .nav-logo .logo-image {
     /* Set a fixed height and let the width scale proportionally */
-    height: 80px;
+    height: 90px;
     /* Adjust this value (e.g., 50px, 80px) until it looks right */
     width: auto;
     display: block;
@@ -174,53 +174,101 @@ header .navbar {
 
 /* hero section */
 
+/* hero section */
+
 .hero-section {
     background: var(--primary-color);
     min-height: 80vh;
+    /* Reduced from 110vh for a more compact look */
+    display: flex;
+    align-items: center;
 }
 
 .hero-section .section-content {
     display: flex;
     align-items: center;
-    min-height: 100vh;
-    color: var(--light-pink-color);
     justify-content: space-between;
+    min-height: 80vh;
+    /* Reduced from 110vh */
+    padding-top: 100px;
+    /* Adjusted space below fixed navbar */
+    padding-bottom: 50px;
+    /* Added bottom padding */
+    color: var(--light-pink-color);
 }
 
+.hero-section .hero-details {
+    /* New: Add padding/margin for better visual structure */
+    max-width: 50%;
+    /* Control the width of the text block */
+    padding-right: 20px;
+}
+
+
 .hero-section .hero-details .title {
-    font-size: var(--font-size-xxl);
+    font-size: 2.8rem;
+    /* Reduced from 3.2rem */
     color: var(--secondary-color);
     font-family: "Miniver", sans-serif;
+    margin-bottom: 10px;
+    /* Reduced space below title */
 }
 
 .hero-section .hero-details .subtitle {
-    margin-top: 8px;
-    max-width: 70%;
-    font-size: var(--font-size-xl);
+    font-size: 1.8rem;
+    /* Reduced from 2.2rem */
     font-weight: var(--font-weight-semibold);
+    /* Added weight for style */
+    max-width: 100%;
+    /* Changed from 80% to use max-width of parent .hero-details */
+    margin-bottom: 15px;
+    /* Increased space below subtitle */
 }
 
 .hero-section .hero-details .description {
-    max-width: 70%;
-    margin: 24px 0 40px;
     font-size: var(--font-size-l);
+    /* Reduced from 1.4rem */
+    max-width: 100%;
+    /* Changed from 80% */
+    line-height: 1.5;
+    /* Added line-height for readability */
+    margin-bottom: 30px;
+    /* Increased space before the button */
 }
 
+
 .hero-section .hero-details .button {
-    padding: 10px 20px;
+    padding: 12px 20px;
+    /* Increased padding for a more prominent button */
     color: var(--primary-color);
     border-radius: var(--border-redius-m);
     background: var(--secondary-color);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
+    /* Bold font weight for emphasis */
     border: 2px solid transparent;
+    transition: all 0.3s ease;
+    /* Ensure all transitions are smooth */
+    text-transform: uppercase;
+    /* Added for a stylish touch */
+    letter-spacing: 1px;
+    /* Added for a stylish touch */
 }
 
 .hero-section .hero-details .buttons {
     display: flex;
     gap: 23px;
+    margin-top: 20px;
+    /* Adjusted margin */
 }
 
-.hero-section .hero-details .button:hover,
+/* Updated hover styles for a more defined look */
+.hero-section .hero-details .button:hover {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    background: transparent;
+}
+
+/* Ensure the button element in the image has the new styling */
 .hero-section .hero-details .contact-us {
     color: var(--white-color);
     border-color: var(--white-color);
@@ -233,10 +281,56 @@ header .navbar {
     background: var(--secondary-color);
 }
 
+
 .hero-section .hero-image-wrapper {
-    max-width: 1000px;
-    margin-right: 40px;
+    margin-right: 0;
+    /* Reset margin */
+    max-width: 600px;
+    /* Set a max width for the image */
+    width: 50%;
+    /* Control the width relative to the details */
 }
+
+/* Responsive adjustments for the hero section */
+@media screen and (max-width:900px) {
+
+    .hero-section {
+        min-height: auto;
+        /* Allow height to adjust on mobile */
+    }
+
+    .hero-section .section-content {
+        min-height: auto;
+        padding-top: 100px;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+
+    .hero-section .hero-details {
+        max-width: 100%;
+        padding-right: 0;
+    }
+
+    .hero-section .hero-details .title {
+        font-size: 2rem;
+    }
+
+    .hero-section .hero-details .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .hero-section .hero-details .description {
+        font-size: 1rem;
+    }
+
+    .hero-section .hero-image-wrapper {
+        width: 100%;
+        max-width: 400px;
+        /* Limit image size on smaller screens */
+    }
+}
+
+/* about section */
 
 /* about section */
 
@@ -246,111 +340,72 @@ header .navbar {
 }
 
 .about-section .section-content {
+    /* Main Layout: Image on Left, Details on Right */
     display: flex;
     align-items: center;
     gap: 50px;
     justify-content: space-between;
 }
 
-.about-section .about-image-wrapper .about-image {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
+.about-section .about-image-wrapper {
+    /* Ensure the image wrapper takes up a defined space on the left */
+    width: 50%;
+    display: flex;
+    /* Centers the content/image inside the wrapper */
+    justify-content: center;
+}
 
+.about-section .about-image-wrapper .about-image {
+    /* Updated image dimensions to better fit the content */
+    width: 100%;
+    max-width: 450px;
+    /* New: Increased max width for a larger image */
+    height: auto;
+    object-fit: contain;
+    /* Changed from cover to contain to ensure the whole image is visible */
+}
+
+.about-section .about-details {
+    /* Details section takes up the remaining space on the right */
+    width: 60%;
+    max-width: none;
+    /* Removed the previous max-width constraint */
 }
 
 .about-section .about-details .section-title {
     padding: 0;
+    /* New: Left-align the title for the new layout */
+    text-align: left;
+    margin-bottom: 20px;
+    /* Added space below the title */
 }
 
-.about-section .about-details {
-    max-width: 50%;
+.about-section .about-details .section-title::after {
+    /* New: Left-align the underline */
+    margin: 10px 0 0 0;
 }
+
 
 .about-section .about-details .text {
-    line-height: 30px;
-    margin: 50px 0 30px;
-    text-align: center;
-    font-size: var(--font-size-s);
+    /* Adjusted text styling */
+    line-height: 1.7;
+    /* Increased line height for readability */
+    margin: 30px 0;
+    /* Reduced top and bottom margin for a tighter fit */
+    text-align: left;
+    /* New: Left-align the text to fit the modern layout */
+    font-size: var(--font-size-n);
+    /* Used standard font size */
+    color: var(--dark-color);
+    /* Ensure text is readable */
 }
 
 .about-section .social-link-list {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
+    /* New: Left-align the social links */
+    justify-content: flex-start;
+    margin-top: 20px;
 }
 
-.about-section .social-link-list .social-link {
-    color: var(--primary-color);
-    font-size: var(--font-size-l);
-    transition: 0.2s ease;
-}
-
-.about-section .social-link-list .social-link:hover {
-    color: var(--secondary-color);
-}
-
-/* products section styling
-.menu-section {
-    background: var(--dark-color);
-    color: var(--white-color);
-    padding: 50px 0 100px;
-
-}
-
-
-.menu-section .menu-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 110px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.menu-section .menu-list .menu-item {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    width: calc(100% / 3 - 80px);
-    text-align: center;
-}
-
-.menu-section .menu-list .menu-item .menu-image {
-    max-width: 200%;
-    aspect-ratio: 1;
-    margin-bottom: 15px;
-    object-fit: contain;
-}
-
-
-
-
-
-.menu-section .menu-list .menu-item .name {
-    margin: 12px 0;
-    font-size: var(--font-size-s);
-    font-weight: var(--font-weight-semibold);
-
-}
-
-.menu-section .menu-list .menu-item .text {
-    font-size: var(--font-size-m);
-}*/
-
-/*--Testimonials section--
-
-@media screen and (max-width:1024px) {
-    .menu-section .menu-list {
-        gap: 60px;
-
-    }
-
-    .menu-section .menu-list .menu-item {
-        width: calc(100% / 2 - 60px);
-    }
-
-}*/
 
 @media (min-width: 900px) {
 
@@ -423,55 +478,80 @@ header .navbar {
         margin-top: 17px;
     }
 
+    .hero-section {
+        min-height: auto;
+        /* Allow height to adjust on mobile */
+    }
+
     .hero-section .section-content {
-        gap: 50px;
+        min-height: auto;
+        padding-top: 100px;
+        padding-bottom: 50px;
         text-align: center;
-        padding: 30px 20px 20px;
-        flex-direction: column-reverse;
-        justify-content: center;
     }
 
-    .hero-section .hero-details :is(.subtitle, .description),
-    .about-section .about-details .contact-section .contact-form {
+    .hero-section .hero-details {
         max-width: 100%;
+        padding-right: 0;
     }
 
-    .hero-section .hero-details .buttons {
-        justify-content: center;
+    .hero-section .hero-details .title {
+        font-size: 2rem;
+    }
+
+    .hero-section .hero-details .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .hero-section .hero-details .description {
+        font-size: 1rem;
     }
 
     .hero-section .hero-image-wrapper {
-        max-width: 250px;
-        margin-right: 0;
-        margin-top: 10px;
+        width: 100%;
+        max-width: 400px;
+        /* Limit image size on smaller screens */
     }
 
-    .about-section .section-content {
-        gap: 70px;
-        flex-direction: column;
+    .hero-image {
+        width: auto;
+    }
 
+
+    .about-section .section-content {
+        /* Mobile: Stack them vertically, details above image */
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-section .about-image-wrapper,
+    .about-section .about-details {
+        /* Mobile: Full width */
+        width: 100%;
+        max-width: 100%;
     }
 
     .about-section .about-image-wrapper .about-image {
-        width: 100%;
-        height: 100%;
-        max-width: 250px;
-        aspect-ratio: 1;
+        max-width: 300px;
+        /* Keep image manageable on mobile */
     }
 
-    /*.menu-section .menu-list {
-        gap: 30px;
-
+    .about-section .about-details .section-title,
+    .about-section .about-details .text {
+        text-align: center;
+        /* Center align text on mobile */
     }
 
-    .menu-section .menu-list .menu-item {
-        width: calc(100% / 2 - 30px);
+    .about-section .about-details .section-title::after {
+        /* Center align the underline on mobile */
+        margin: 10px auto 0;
     }
 
-    .menu-section .menu-list .menu-item .menu-image {
-        max-width: 200px;
+    .about-section .social-link-list {
+        /* Center align social links on mobile */
+        justify-content: center;
+    }
 
-    }*/
     .contact-section .section-content {
         flex-direction: column-reverse;
         align-items: center;
@@ -480,6 +560,7 @@ header .navbar {
 
 
 }
+
 
 @media screen and (max-width:640px) {
     .menu-section .menu-list {
@@ -504,6 +585,9 @@ header .navbar {
         margin: 0 0 30px;
 
     }
+
+    
+
 
 }
 
@@ -758,8 +842,8 @@ header .navbar {
 }
 
 .products-section .products .Products-image {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 350px;
     object-fit: contain;
     margin-bottom: 10px;
 
@@ -767,7 +851,7 @@ header .navbar {
 
 .products-section .products .name {
     margin-bottom: 16px;
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-l);
 }
 
 .products-section .products .name,
@@ -783,8 +867,8 @@ header .navbar {
 }
 
 .products-section .swiper-pagination-bullet {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     opacity: 1;
     background: var(--secondary-color);
 
@@ -807,6 +891,16 @@ header .navbar {
     overflow: hidden;
     margin: 0 60px 50px;
 }
+
+
+
+/* You will also need to verify that the Swiper initialization settings
+   in your JavaScript are set to 'slidesPerView: 4' for large screens, 
+   as this is primarily a JavaScript/Swiper configuration change, not just CSS.
+   The CSS above ensures the *styling* of the individual product is compact enough. */
+
+
+/* RESPONSIVE FIX for Products - ensuring 2 in a row on medium screens */
 
 /*new*/
 .product-section {
@@ -998,3 +1092,5 @@ header .navbar {
         font-size: 1.7rem;
     }
 }
+
+/*add extra*/

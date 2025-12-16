@@ -44,5 +44,27 @@ const PRODUCTS = [
       "Can be painted or polished."
     ]
   },
+  {
+    id: "wpc-digital",
+    name: "WPC Digital Doors",
+    mainImage: "images/wpc digital.jpg",
+    similarImages: [
+      "images/wpc digital.jpg",
+      "images/w1.jpg",
+      "images/w2.jpg",
+      "images/w3.jpg"
+    ],
+    shortDescription: "Solid Wood Primer Doors are sturdy, durable, and serve as a perfect base for home and office applications.",
+    specifications: {
+      "Thickness": "32 mm",
+      "Height": '78", 81", 84"',
+      "Width": '30", 32", 33", 36", 38"'
+    },
+    features: [
+      "Customizable finish to match your interior style.",
+      "Highly durable and classic look.",
+      "Can be painted or polished."
+    ]
+  },
   // Add other products as needed...
 ];
