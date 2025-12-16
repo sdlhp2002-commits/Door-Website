@@ -176,7 +176,7 @@ header .navbar {
 
 .hero-section {
     background: var(--primary-color);
-    min-height: 100vh;
+    min-height: 80vh;
 }
 
 .hero-section .section-content {
