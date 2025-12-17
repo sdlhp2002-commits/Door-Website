@@ -9,12 +9,12 @@
 
 :root {
     /*colors*/
-    --white-color: #fff;
-    --dark-color: #252525;
-    --primary-color: #3b141c;
-    --secondary-color: #f3961c;
-    --light-pink-color: #faf4f5;
-    --medium-gray-color: #ccc;
+    --white-color: #ffffff;
+    --dark-color: #1a1a1a;
+    --primary-color: #2c2c2c;
+    --secondary-color: #c5a059;
+    --light-pink-color: #f8f6f2;
+    --medium-gray-color: #e0e0e0;
 
     /*font size*/
     --font-size-s: 0.9rem;
@@ -94,7 +94,7 @@ header {
     position: fixed;
     width: 100%;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 header .navbar {
@@ -105,17 +105,20 @@ header .navbar {
     max-width: var(--site-max-width);
     margin: 0 auto;
 }
+
 .navbar .nav-menu .nav-link {
     color: var(--dark-color);
     padding: 10px 15px;
     font-weight: 600;
     transition: 0.3s;
-    border-radius: 10px;
+    border-radius: 30px;
+    font-size: var(--font-size-m);
 }
+
 .navbar .nav-menu .nav-link:hover {
     color: var(--primary-color);
     background: var(--secondary-color);
-   
+
 }
 
 /* FIXED: Correct ID names */
@@ -153,7 +156,10 @@ header .navbar {
     transition: transform 0.3s ease;
 }
 
-.nav-logo:hover .logo-image { transform: scale(1.05); }
+.nav-logo:hover .logo-image {
+    transform: scale(1.05);
+}
+
 /* --- 4. Ensuring the Navbar is Aligned (If the navigation is still misplaced) --- */
 /* If you have a separate style for the navbar that controls alignment,
     you might need to ensure the items are centered vertically.
@@ -189,6 +195,7 @@ header .navbar {
     color: var(--secondary-color);
     margin-bottom: 10px;
 }
+
 .hero-section .hero-details .subtitle {
     font-size: 2.5rem;
     font-weight: 700;
@@ -230,9 +237,10 @@ header .navbar {
     display: flex;
     justify-content: center;
 }
+
 .hero-section .hero-image-wrapper img {
     width: 100%;
-    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
 }
 
 /* Responsive adjustments for the hero section */
@@ -501,7 +509,7 @@ header .navbar {
 
     }
 
-   
+
 }
 
 /* WHY CHOOSE US SECTION */
@@ -581,19 +589,23 @@ header .navbar {
 .why-door-img {
     width: 100%;
     max-width: 450px;
-   
-   
+
+
     border-radius: 4px;
 }
-.why-door-img{
+
+.why-door-img {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    will-change: transform; /* This tells the browser to keep it stable */
+    will-change: transform;
+    /* This tells the browser to keep it stable */
 }
+
 /* The Grid of White Cards */
 .why-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns to fit the side layout */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns to fit the side layout */
     gap: 20px;
 }
 
@@ -602,7 +614,8 @@ header .navbar {
     padding: 30px 15px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07); /* The soft shadow from image */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    /* The soft shadow from image */
     transition: all 0.3s ease;
     border: 1px solid #f9f9f9;
 }
@@ -611,6 +624,7 @@ header .navbar {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
+
 /* DELETE IF YOU FIND THIS */
 
 .why-icon {
@@ -632,7 +646,7 @@ header .navbar {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .why-content-wrapper {
         flex-direction: column;
         width: 100%;
@@ -646,17 +660,20 @@ header .navbar {
 
 @media screen and (max-width: 600px) {
     .why-grid {
-        grid-template-columns: 1fr; /* Single column for small phones */
+        grid-template-columns: 1fr;
+        /* Single column for small phones */
     }
-    
+
     .why-title {
         font-size: 2.5rem;
     }
 
     .why-main-image-container {
-        display: none; /* Hide door image on very small mobile to save space */
+        display: none;
+        /* Hide door image on very small mobile to save space */
     }
 }
+
 /* WHY CHOOSE US - Card Refinement */
 .why-box {
     background: #ffffff;
@@ -667,8 +684,8 @@ header .navbar {
     align-items: center;
     justify-content: center;
     /* This specific shadow creates the 'depth' seen in your image */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
-    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -690,6 +707,7 @@ header .navbar {
     color: #333;
     line-height: 1.2;
 }
+
 /* contact section*/
 /* --- Base Contact Section Styling --- */
 .contact-section {
@@ -759,7 +777,7 @@ header .navbar {
     border-radius: var(--border-redius-m);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-m);
-    border: 2px solid var(--primary-color);
+
     transition: 0.3s ease;
     cursor: pointer;
     align-self: flex-start;
@@ -768,7 +786,8 @@ header .navbar {
 
 .contact-section .contact-form .submit-button:hover {
     background: transparent;
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 /* --- MOBILE RESPONSIVE FIXES --- */
