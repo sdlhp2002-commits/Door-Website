@@ -14,10 +14,12 @@ menuCloseButton.addEventListener("click", () => {
 });
 
 // ✅ Auto close menu when clicking any menu item (Home, About, etc.)
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        document.body.classList.remove("show-mobile-menu");
-    });
+
+// Close menu when a link is clicked
+document.querySelectorAll(".nav-link").forEach(link => {
+  link.addEventListener("click", () => {
+    document.body.classList.remove("show-mobile-menu");
+  });
 });
 
 // Swiper Slider
