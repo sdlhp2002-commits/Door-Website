@@ -1344,16 +1344,25 @@ header .navbar {
     position: absolute;
     top: 5px;
     left: 5px;
-    background: #0066CC;
-    color: var(--white-color);
+    background: transparent;
+    color: #333;
     padding: 5px 12px;
-    font-size: 0.85rem;
+    font-size: 0.70rem;
     font-weight: var(--font-weight-semibold);
     border-radius: 5px;
     z-index: 10;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
     min-width: 50px;
     text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-color);
+}
+
+.door-catalog-label:hover {
+    background: #0066CC;
+    color: var(--white-color);
+    border-color: #0066CC;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments for catalog grid */
