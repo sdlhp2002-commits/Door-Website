@@ -976,7 +976,7 @@ header .navbar {
 /* --- UPDATED MAIN PRODUCT IMAGE STYLE --- */
 .product-main-image {
     width: 100%;
-    max-width: 450px;
+    max-width: 380px;
     height: auto;
     object-fit: contain;
 
@@ -1011,9 +1011,9 @@ header .navbar {
 }
 
 .product-thumbnails img {
-    width: 80px;
+    width: 100px;
     /* Fixed width for consistency */
-    height: 100px;
+    height: 120px;
     /* Fixed height for a vertical door look */
     object-fit: contain;
     background: #ffffff;
@@ -1247,14 +1247,195 @@ header .navbar {
     }
 
     .product-thumbnails img {
-        width: 65px;
+        width: 80px;
         /* Smaller thumbs to prevent horizontal scrolling */
-        height: 65px;
+        height: 95px;
     }
 
     .enquiry-btn {
         width: 100%;
         /* Full width button is easier to tap on phones */
         text-align: center;
+    }
+}
+
+/* ======================================================= */
+/* DOOR CATALOG GALLERY SECTION STYLING                   */
+/* ======================================================= */
+
+.door-catalog-section {
+    background: var(--white-color);
+    padding: 80px 0 100px;
+}
+
+.catalog-section-title {
+    text-align: center;
+    font-size: var(--font-size-l);
+    color: var(--primary-color);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 50px;
+    padding: 0 20px;
+    line-height: 1.6;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.door-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: opacity 0.3s ease;
+}
+
+.door-catalog-grid.filtering {
+    opacity: 0.7;
+}
+
+.door-catalog-item {
+    position: relative;
+    background: #fff;
+    padding: 8px 5px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease;
+    border: 1px solid #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+}
+
+.door-catalog-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--secondary-color);
+}
+
+.door-catalog-image-wrapper {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    overflow: hidden;
+    background: var(--white-color);
+}
+
+.door-catalog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    max-width: 320px;
+    max-height: 280px;
+}
+
+.door-catalog-label {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #0066CC;
+    color: var(--white-color);
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 5px;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Responsive adjustments for catalog grid */
+@media screen and (max-width: 1024px) {
+    .door-catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .door-catalog-section {
+        padding: 60px 0 80px;
+    }
+
+    .catalog-section-title {
+        font-size: var(--font-size-m);
+        margin-bottom: 40px;
+    }
+
+    .door-catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 18px;
+        padding: 0 15px;
+    }
+
+    .door-catalog-item {
+        min-height: 240px;
+        padding: 6px 4px;
+    }
+
+    .door-catalog-image-wrapper {
+        height: 200px;
+        margin-bottom: 5px;
+    }
+
+    .door-catalog-image {
+        max-width: 250px;
+        max-height: 220px;
+    }
+
+    .door-catalog-label {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        top: 6px;
+        left: 6px;
+        min-width: 40px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .door-catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 10px;
+    }
+
+    .catalog-section-title {
+        font-size: var(--font-size-s);
+        padding: 0 15px;
+    }
+
+    .door-catalog-item {
+        min-height: 200px;
+        padding: 6px 4px;
+    }
+
+    .door-catalog-image-wrapper {
+        height: 160px;
+        margin-bottom: 5px;
+    }
+
+    .door-catalog-image {
+        max-width: 180px;
+        max-height: 170px;
+    }
+
+    .door-catalog-label {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+        top: 5px;
+        left: 5px;
+        min-width: 35px;
     }
 }
