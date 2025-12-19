@@ -8,13 +8,19 @@
 }
 
 :root {
-    /*colors*/
+    /*colors - Premium Door/Furniture Theme*/
     --white-color: #ffffff;
     --dark-color: #1a1a1a;
-    --primary-color: #2c2c2c;
-    --secondary-color: #c5a059;
-    --light-pink-color: #f8f6f2;
-    --medium-gray-color: #e0e0e0;
+    --primary-color: #1f1f1f; /* Richer, deeper charcoal for more sophistication */
+    --secondary-color: #b8860b; /* Rich golden bronze - warmer and more premium than previous */
+    --light-pink-color: #faf8f5; /* Warmer cream/ivory - complements wood tones better */
+    --medium-gray-color: #d4d4d4; /* Softer gray for better contrast */
+    
+    /* Additional accent colors for enhanced design */
+    --accent-gold: #d4af37; /* Bright gold for highlights */
+    --accent-brown: #8b6914; /* Deep brown for depth */
+    --light-gray: #f5f5f5; /* Light gray for subtle backgrounds */
+    --border-color: #e8e6e3; /* Soft border color */
 
     /*font size*/
     --font-size-s: 0.9rem;
@@ -991,7 +997,27 @@ header .navbar {
     /* The inner "frame" look */
     box-shadow: inset 0 0 0 1px #d1d1d1, 0 4px 12px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, opacity 0.3s ease;
+    position: relative;
+}
+
+/* Loading state for main image */
+.product-main-image.loading {
+    opacity: 0.6;
+}
+
+.product-main-image.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
 /* Adds a hover effect to the main image container */
@@ -1016,11 +1042,11 @@ header .navbar {
     height: 120px;
     /* Fixed height for a vertical door look */
     object-fit: contain;
-    background: #ffffff;
+    background: var(--white-color);
     padding: 5px;
     border-radius: 4px;
     cursor: pointer;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     transition: 0.2s ease-in-out;
 }
 
@@ -1030,6 +1056,21 @@ header .navbar {
     border: 2px solid var(--primary-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Accessibility: Focus styles for thumbnail images */
+.product-thumb:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.product-thumb:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.product-thumb:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
 }
 
 /* --- RIGHT COLUMN TEXT STYLES (Focus of the final fix) --- */
@@ -1046,8 +1087,8 @@ header .navbar {
 
 /* --- HERO SECTION STYLING --- */
 .product-detail-hero {
-    background: #4a4a4a;
-    /* Dark gray from your image */
+    background: var(--primary-color);
+    /* Rich charcoal background */
     padding: 70px 0 10px;
     text-align: center;
 }
@@ -1299,15 +1340,35 @@ header .navbar {
 
 .door-catalog-item {
     position: relative;
-    background: #fff;
+    background: var(--white-color);
     padding: 8px 5px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
     transition: all 0.3s ease;
-    border: 1px solid #f9f9f9;
+    border: 1px solid var(--border-color);
     cursor: pointer;
     display: flex;
+    outline: none; /* Remove default outline, we'll add custom focus styles */
+}
+
+/* Accessibility: Focus styles for keyboard navigation */
+.door-catalog-item:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+    border-color: var(--secondary-color);
+}
+
+/* Accessibility: Focus visible for keyboard users only */
+.door-catalog-item:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.door-catalog-item:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+    border-color: var(--secondary-color);
+}
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1329,6 +1390,38 @@ header .navbar {
     margin-bottom: 5px;
     overflow: hidden;
     background: var(--white-color);
+    position: relative;
+}
+
+/* Loading spinner for images */
+.image-loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.door-catalog-image.lazy-load:not([src]) ~ .image-loading-spinner,
+.door-catalog-image.loading ~ .image-loading-spinner {
+    opacity: 1;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Hide spinner when image is loaded */
+.door-catalog-image:not(.loading):not(.lazy-load) ~ .image-loading-spinner {
+    opacity: 0;
 }
 
 .door-catalog-image {
@@ -1338,6 +1431,23 @@ header .navbar {
     display: block;
     max-width: 320px;
     max-height: 280px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Loading state */
+.door-catalog-image.loading {
+    opacity: 0.5;
+}
+
+/* Error state */
+.door-catalog-image.error {
+    opacity: 0.7;
+    filter: grayscale(50%);
+}
+
+/* Smooth fade-in when loaded */
+.door-catalog-image:not(.loading) {
+    opacity: 1;
 }
 
 .door-catalog-label {
