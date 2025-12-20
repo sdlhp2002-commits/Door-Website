@@ -19,22 +19,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Ajor Doors - Shree Dhanalaxmi Hardware and Ply",
-      "image": "images/logo.png",
-      "url": "https://door-website.vercel.app/",
-      "telephone": "+919844443388",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village",
-        "addressLocality": "Bengaluru",
-        "postalCode": "560043",
-        "addressCountry": "IN"
-      }
-    }
-    </script>
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "Ajor Doors Manufacturing Process",
+          "description": "Premium wooden door manufacturing by Ajor Doors in Bengaluru since 2002.",
+          "thumbnailUrl": "https://door-website.vercel.app/images/video-poster.jpg",
+          "uploadDate": "2024-01-01",
+          "contentUrl": "https://door-website.vercel.app/videos/video.mp4",
+          "embedUrl": "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Ajor Doors",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://door-website.vercel.app/images/logo.png"
+            }
+          }
+        }
+        </script>
+
 </head>
 
 
@@ -106,6 +110,25 @@
 
             </div>
         </section>
+        <section class="full-video-section">
+            <div class="full-video-wrapper">
+                <div class="video-overlay-text">
+                    <h3>Crafting Excellence</h3>
+                </div>
+
+                <video id="aboutIntroVideo" muted loop playsinline preload="auto">
+                    <source src="videos/video.mp4" type="video/mp4">
+                </video>
+
+                <button id="fullScreenBtn" class="video-control-btn">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </section>
+
+
+
+
         <section class="products-section" id="products">
             <h2 class="section-title">Premium Door Collection</h2>
             <div class="section-content">
@@ -115,7 +138,8 @@
                             <li class="products swiper-slide">
                                 <a href="product-details.html?id=solid-wood-primer">
                                     <img src="images/solid wood primer.jpg"
-                                        alt="Solid Wood Primer Door Manufacturer Bangalore" class="Products-image" loading="lazy">
+                                        alt="Solid Wood Primer Door Manufacturer Bangalore" class="Products-image"
+                                        loading="lazy">
                                     <h3 class="name">Solid Wood Primer Doors</h3>
                                 </a>
                             </li>
@@ -149,7 +173,8 @@
                             </li>
                             <li class="products swiper-slide">
                                 <a href="product-details.html?id=teak-veneer">
-                                    <img src="images/teak wood.jpg" alt="Teak Veneer Doors" class="Products-image" loading="lazy">
+                                    <img src="images/teak wood.jpg" alt="Teak Veneer Doors" class="Products-image"
+                                        loading="lazy">
                                     <h3 class="name">Teak Veneer Doors</h3>
                                 </a>
                             </li>
@@ -163,13 +188,15 @@
                             </li>
                             <li class="products swiper-slide">
                                 <a href="product-details.html?id=laminate-doors">
-                                    <img src="images/laminated doors.png" alt="Laminate Doors" class="Products-image" loading="lazy">
+                                    <img src="images/laminated doors.png" alt="Laminate Doors" class="Products-image"
+                                        loading="lazy">
                                     <h3 class="name"> Laminate Doors</h3>
                                 </a>
                             </li>
                             <li class="products swiper-slide">
                                 <a href="product-details.html?id=wpc-door-frame">
-                                    <img src="images/WPC.png" alt="WPC Door and Frame" class="Products-image" loading="lazy">
+                                    <img src="images/WPC.png" alt="WPC Door and Frame" class="Products-image"
+                                        loading="lazy">
                                     <h3 class="name">WPC Door and Frame</h3>
                                 </a>
                             </li>
@@ -263,19 +290,26 @@
                 </ul>
 
 
-                <form action="https://formsubmit.co/fbdc76b46be51887b7994387a1fedd11" method="POST"
+                <form id="ajor-contact-form"
+                    data-url="https://script.google.com/macros/s/AKfycbz824FphQ38vAY1Q2qeJt9ZFYtq1rMWCZBjm7-E7IjnSdcPkXCHLsMChiVcaaWYilv2/exec"
                     class="contact-form">
-                    <input type="hidden" name="_subject" value="New Door Enquiry from Bengaluru Website">
 
                     <input type="text" placeholder="Your Name" name="Name" class="form-input" required>
                     <input type="email" placeholder="Your Email" name="Email" class="form-input" required>
-                    <input type="number" placeholder="Phone Number (WhatsApp)" name="Number" class="form-input"
-                        required>
-                    <textarea placeholder="Tell us about your door or interior requirements" name="Message"
-                        class="form-input" required></textarea>
-                    <button type="submit" class="submit-button">Get Free Quote</button>
+                    <input type="number" placeholder="Phone Number" name="Number" class="form-input" required>
+                    <textarea placeholder="Message" name="Message" class="form-input" required></textarea>
+
+                    <button type="submit" id="submit-btn" class="submit-button">Get Free Quote</button>
                 </form>
+
+                <a href="https://api.whatsapp.com/send?phone=919844443388&text=Hello%20Ajor%20Doors,%20I%20am%20interested%20in%20your%20products."
+                    class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
             </div>
+
+
         </section>
         <!--footer section-->
         <footer class="footer-section">
@@ -297,6 +331,7 @@
                 </p>
             </div>
         </footer>
+
 
 
     </main>

@@ -11,16 +11,24 @@
     /*colors - Premium Door/Furniture Theme*/
     --white-color: #ffffff;
     --dark-color: #1a1a1a;
-    --primary-color: #1f1f1f; /* Richer, deeper charcoal for more sophistication */
-    --secondary-color: #b8860b; /* Rich golden bronze - warmer and more premium than previous */
-    --light-pink-color: #faf8f5; /* Warmer cream/ivory - complements wood tones better */
-    --medium-gray-color: #d4d4d4; /* Softer gray for better contrast */
-    
+    --primary-color: #1f1f1f;
+    /* Richer, deeper charcoal for more sophistication */
+    --secondary-color: #b8860b;
+    /* Rich golden bronze - warmer and more premium than previous */
+    --light-pink-color: #faf8f5;
+    /* Warmer cream/ivory - complements wood tones better */
+    --medium-gray-color: #d4d4d4;
+    /* Softer gray for better contrast */
+
     /* Additional accent colors for enhanced design */
-    --accent-gold: #d4af37; /* Bright gold for highlights */
-    --accent-brown: #8b6914; /* Deep brown for depth */
-    --light-gray: #f5f5f5; /* Light gray for subtle backgrounds */
-    --border-color: #e8e6e3; /* Soft border color */
+    --accent-gold: #d4af37;
+    /* Bright gold for highlights */
+    --accent-brown: #8b6914;
+    /* Deep brown for depth */
+    --light-gray: #f5f5f5;
+    /* Light gray for subtle backgrounds */
+    --border-color: #e8e6e3;
+    /* Soft border color */
 
     /*font size*/
     --font-size-s: 0.9rem;
@@ -122,8 +130,8 @@ header .navbar {
 }
 
 .navbar .nav-menu .nav-link:hover {
-    color: var(--primary-color);
-    background: var(--secondary-color);
+    color: var(--secondary-color);
+
 
 }
 
@@ -506,14 +514,7 @@ header .navbar {
         gap: 20px;
     }
 
-    .products-section .swiper-slide-button {
-        display: none;
-    }
-
-    .products-section .slider-wrapper {
-        margin: 0 0 30px;
-
-    }
+   
 
 
 }
@@ -946,6 +947,36 @@ header .navbar {
     overflow: hidden;
     margin: 0 60px 50px;
 }
+/* --- Product Slider Visibility Logic --- */
+
+/* 1. Desktop Mode (901px and up) */
+@media screen and (min-width: 901px) {
+    /* Hide the Dots (Pagination) */
+    .products-section .swiper-pagination {
+        display: none !important;
+    }
+
+    /* Ensure Arrows are Visible */
+    .products-section .swiper-slide-button {
+        display: flex !important;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* 2. Mobile/Tablet Mode (900px and down) */
+@media screen and (max-width: 900px) {
+    /* Hide the Arrows */
+    .products-section .swiper-slide-button {
+        display: none !important;
+    }
+
+    /* Ensure Dots are Visible */
+    .products-section .swiper-pagination {
+        display: block !important;
+        bottom: 10px; /* Adjust position if needed */
+    }
+}
 
 
 
@@ -1349,7 +1380,8 @@ header .navbar {
     border: 1px solid var(--border-color);
     cursor: pointer;
     display: flex;
-    outline: none; /* Remove default outline, we'll add custom focus styles */
+    outline: none;
+    /* Remove default outline, we'll add custom focus styles */
 }
 
 /* Accessibility: Focus styles for keyboard navigation */
@@ -1368,11 +1400,6 @@ header .navbar {
     outline: 3px solid var(--secondary-color);
     outline-offset: 2px;
     border-color: var(--secondary-color);
-}
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 280px;
 }
 
 .door-catalog-item:hover {
@@ -1410,17 +1437,19 @@ header .navbar {
     pointer-events: none;
 }
 
-.door-catalog-image.lazy-load:not([src]) ~ .image-loading-spinner,
-.door-catalog-image.loading ~ .image-loading-spinner {
+.door-catalog-image.lazy-load:not([src])~.image-loading-spinner,
+.door-catalog-image.loading~.image-loading-spinner {
     opacity: 1;
 }
 
 @keyframes spin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* Hide spinner when image is loaded */
-.door-catalog-image:not(.loading):not(.lazy-load) ~ .image-loading-spinner {
+.door-catalog-image:not(.loading):not(.lazy-load)~.image-loading-spinner {
     opacity: 0;
 }
 
@@ -1556,5 +1585,108 @@ header .navbar {
         top: 5px;
         left: 5px;
         min-width: 35px;
+    }
+}
+
+/* Video Section */
+.full-video-section {
+    width: 100%;
+    background: #000;
+    margin: 40px 0;
+}
+
+.full-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    /* Limits width so it doesn't look stretched on huge monitors */
+    margin: 0 auto;
+    overflow: hidden;
+    background: #000;
+}
+
+#aboutIntroVideo {
+    width: 100%;
+    height: auto; 
+    object-fit: contain; /* Shows full original video frame */
+    transform: none;      /* Removes any previous zooming/scaling */
+    pointer-events: none; /* Prevents the user from pausing it by accident */
+}
+/* Hide default play/pause/controls */
+
+/* Custom Full Screen Button Styling */
+.video-control-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(179, 139, 89, 0.8);
+    /* Your brand gold */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.video-control-btn:hover {
+    background: #b38b59;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .video-control-btn {
+        width: 40px;
+        height: 40px;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Map & WhatsApp */
+
+/* Fixed WhatsApp Button for Mobile & Desktop */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 35px;
+    /* Larger icon for easy tapping */
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999999;
+    /* Higher than everything else on the page */
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    color: #fff;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
     }
 }
