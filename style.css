@@ -105,8 +105,10 @@ img {
 /* navbar */
 
 header {
-    background: rgba(250, 248, 245, 0.85); /* Semi-transparent */
-    backdrop-filter: blur(12px); /* Glassmorphism effect */
+    background: rgba(250, 248, 245, 0.85);
+    /* Semi-transparent */
+    backdrop-filter: blur(12px);
+    /* Glassmorphism effect */
     position: fixed;
     width: 100%;
     z-index: 100;
@@ -214,11 +216,18 @@ header .navbar {
 
 /* Hero Text Animation */
 @keyframes slideUpFade {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.hero-section .hero-details > * {
+.hero-section .hero-details>* {
     opacity: 0;
     animation: slideUpFade 0.8s ease forwards;
 }
@@ -241,7 +250,7 @@ header .navbar {
     margin-bottom: 25px;
     line-height: 1.2;
     color: var(--secondary-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     animation-delay: 0.4s;
 }
 
@@ -289,8 +298,15 @@ header .navbar {
 }
 
 @keyframes floatImage {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 /* Responsive adjustments for the hero section */
@@ -374,7 +390,8 @@ header .navbar {
     object-fit: contain;
     /* Changed from cover to contain to ensure the whole image is visible */
     border-radius: 20px;
-    box-shadow: 20px 20px 0px var(--secondary-color); /* Stylish offset shadow */
+    box-shadow: 20px 20px 0px var(--secondary-color);
+    /* Stylish offset shadow */
     transition: transform 0.3s ease;
 }
 
@@ -446,8 +463,10 @@ header .navbar {
         top: 0;
         height: 100%;
         width: 100%;
-        backdrop-filter: blur(5px);
-        background: rgba(0, 0, 0, 0.2);
+        /* FIX: Increase opacity to 0.5 or 0.7 to hide background better */
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+        /* Must be lower than nav-menu but higher than everything else */
     }
 
     /* FIXED: Correct IDs */
@@ -469,16 +488,24 @@ header .navbar {
 
     .navbar .nav-menu {
         background: var(--white-color);
+        /* Ensures background is solid white */
         position: fixed;
         left: -300px;
         top: 0;
         width: 300px;
-        height: 100%;
+        height: 100vh;
+        /* Use vh to cover full height */
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 100px;
-        transition: left 0.2s ease;
+        transition: left 0.3s ease;
+
+        /* FIX: Increase z-index and ensure it is opaque */
+        z-index: 1000;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+        /* Stronger shadow to separate from background */
+        border-right: 2px solid var(--secondary-color);
     }
 
     body.show-mobile-menu .navbar .nav-menu {
@@ -490,6 +517,32 @@ header .navbar {
         font-size: var(--font-size-l);
         display: block;
         margin-top: 17px;
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        font-family: "Playfair Display", serif;
+        letter-spacing: 1px;
+    }
+
+    body.show-mobile-menu .navbar .nav-menu .nav-link {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(2) .nav-link {
+        transition-delay: 0.2s;
+    }
+
+    body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(3) .nav-link {
+        transition-delay: 0.3s;
+    }
+
+    body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(4) .nav-link {
+        transition-delay: 0.4s;
+    }
+
+    body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(5) .nav-link {
+        transition-delay: 0.5s;
     }
 
     .about-section .section-content {
@@ -553,7 +606,7 @@ header .navbar {
         gap: 20px;
     }
 
-   
+
 
 
 }
@@ -794,7 +847,7 @@ header .navbar {
     background: var(--white-color);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .contact-section .contact-form .form-input,
@@ -834,7 +887,7 @@ header .navbar {
     cursor: pointer;
     align-self: flex-start;
     /* Keeps button left-aligned */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .contact-section .contact-form .submit-button:hover {
@@ -1020,10 +1073,12 @@ header .navbar {
     overflow: hidden;
     margin: 0 60px 50px;
 }
+
 /* --- Product Slider Visibility Logic --- */
 
 /* 1. Desktop Mode (901px and up) */
 @media screen and (min-width: 901px) {
+
     /* Hide the Dots (Pagination) */
     .products-section .swiper-pagination {
         display: none !important;
@@ -1039,6 +1094,7 @@ header .navbar {
 
 /* 2. Mobile/Tablet Mode (900px and down) */
 @media screen and (max-width: 900px) {
+
     /* Hide the Arrows */
     .products-section .swiper-slide-button {
         display: none !important;
@@ -1047,7 +1103,8 @@ header .navbar {
     /* Ensure Dots are Visible */
     .products-section .swiper-pagination {
         display: block !important;
-        bottom: 10px; /* Adjust position if needed */
+        bottom: 10px;
+        /* Adjust position if needed */
     }
 }
 
@@ -1073,24 +1130,26 @@ header .navbar {
 }
 
 .testimonial-slider {
-    padding-bottom: 50px; /* Space for pagination */
+    padding-bottom: 50px;
+    /* Space for pagination */
 }
 
 .testimonial-card {
     background: var(--white-color);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease;
-    height: auto; /* Allow content to dictate height */
+    height: auto;
+    /* Allow content to dictate height */
     display: flex;
     flex-direction: column;
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     border-color: var(--secondary-color);
 }
 
@@ -1784,11 +1843,15 @@ header .navbar {
 
 #aboutIntroVideo {
     width: 100%;
-    height: auto; 
-    object-fit: contain; /* Shows full original video frame */
-    transform: none;      /* Removes any previous zooming/scaling */
-    pointer-events: none; /* Prevents the user from pausing it by accident */
+    height: auto;
+    object-fit: contain;
+    /* Shows full original video frame */
+    transform: none;
+    /* Removes any previous zooming/scaling */
+    pointer-events: none;
+    /* Prevents the user from pausing it by accident */
 }
+
 /* Hide default play/pause/controls */
 
 /* Custom Full Screen Button Styling */
@@ -1881,4 +1944,6 @@ header .navbar {
     transform: none;
 }
 
-.delay-200 { transition-delay: 0.2s; }
+.delay-200 {
+    transition-delay: 0.2s;
+}
