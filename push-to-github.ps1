@@ -43,6 +43,17 @@ try {
     Write-Host "Failed to add remote origin. It may already exist. Continuing."
 }
 
+# Auto-update sitemap.xml dates
+$sitemapPath = ".\sitemap.xml"
+if (Test-Path $sitemapPath) {
+    Write-Host "Updating sitemap.xml lastmod dates..."
+    $today = (Get-Date).ToString("yyyy-MM-dd")
+    $content = Get-Content $sitemapPath -Raw
+    $newContent = $content -replace "<lastmod>.*?</lastmod>", "<lastmod>$today</lastmod>"
+    Set-Content -Path $sitemapPath -Value $newContent -Encoding UTF8
+    Write-Host "Sitemap updated to $today"
+}
+
 # Stage and commit
 Write-Host "Staging files..."
 & git add .
