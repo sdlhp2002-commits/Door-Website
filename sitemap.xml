@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://doors.ajormart.in/</loc>
-    <lastmod>2025-12-18</lastmod>
-    <priority>1.00</priority>
-  </url>
-  
-  <url>
-    <loc>https://doors.ajormart.in/#about</loc>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://doors.ajormart.in/product-details.html?id=solid-wood-primer</loc>
-    <priority>0.70</priority>
+    <loc>https://www.ajormart.in/</loc>
+    <lastmod>2025-12-24</lastmod>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://doors.ajormart.in/product-details.html?id=wpc-door-frame</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://doors.ajormart.in/product-details.html?id=premium-teak-wood</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://doors.ajormart.in/product-details.html?id=exclusive-laminates</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://doors.ajormart.in/product-details.html?id=antique-laminated</loc>
-    <priority>0.70</priority>
+    <loc>https://www.ajormart.in/hardware.html</loc>
+    <lastmod>2025-12-24</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>
