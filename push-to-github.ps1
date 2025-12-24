@@ -50,8 +50,16 @@ if (Test-Path $sitemapPath) {
     $today = (Get-Date).ToString("yyyy-MM-dd")
     $content = Get-Content $sitemapPath -Raw
     $newContent = $content -replace "<lastmod>.*?</lastmod>", "<lastmod>$today</lastmod>"
-    Set-Content -Path $sitemapPath -Value $newContent -Encoding UTF8
+    # Write with UTF-8 No BOM to ensure Google can parse it correctly
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText((Resolve-Path $sitemapPath).Path, $newContent, $utf8NoBom)
     Write-Host "Sitemap updated to $today"
+}
+
+# Ensure .nojekyll exists to prevent 404s on GitHub Pages
+if (-not (Test-Path ".\.nojekyll")) {
+    Write-Host "Creating .nojekyll file..."
+    New-Item -Path ".\.nojekyll" -ItemType File -Force | Out-Null
 }
 
 # Stage and commit

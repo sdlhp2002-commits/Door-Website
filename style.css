@@ -276,6 +276,13 @@ header .navbar {
     animation-delay: 0.8s;
 }
 
+/* Mobile optimization for Hero Background */
+@media screen and (max-width: 768px) {
+    .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop');
+    }
+}
+
 .hero-section .button:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 30px rgba(184, 134, 11, 0.5);
@@ -1123,6 +1130,13 @@ header .navbar {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* Mobile optimization for Testimonial Background */
+@media screen and (max-width: 768px) {
+    .testimonial-section {
+        background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+    }
 }
 
 .testimonial-section .section-title {
