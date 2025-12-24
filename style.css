@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 * {
     margin: 0;
@@ -88,6 +88,7 @@ img {
     padding: 60px 0 100px;
     text-transform: uppercase;
     font-size: var(--font-size-xl);
+    font-family: "Playfair Display", serif;
     margin-top: 40px;
 }
 
@@ -104,11 +105,13 @@ img {
 /* navbar */
 
 header {
-    background: var(--light-pink-color);
+    background: rgba(250, 248, 245, 0.85); /* Semi-transparent */
+    backdrop-filter: blur(12px); /* Glassmorphism effect */
     position: fixed;
     width: 100%;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 header .navbar {
@@ -122,11 +125,13 @@ header .navbar {
 
 .navbar .nav-menu .nav-link {
     color: var(--dark-color);
-    padding: 10px 15px;
-    font-weight: 600;
+    padding: 10px 20px;
+    font-weight: 500;
     transition: 0.3s;
     border-radius: 30px;
-    font-size: var(--font-size-m);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .navbar .nav-menu .nav-link:hover {
@@ -182,11 +187,16 @@ header .navbar {
 /* hero section */
 
 .hero-section {
-    background: var(--primary-color);
+    /* Modern Interior Background with Overlay */
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
+    position: relative;
 }
 
 .hero-section .section-content {
@@ -202,45 +212,65 @@ header .navbar {
     color: var(--white-color);
 }
 
+/* Hero Text Animation */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-section .hero-details > * {
+    opacity: 0;
+    animation: slideUpFade 0.8s ease forwards;
+}
 
 .hero-section .hero-details .title {
-    font-family: "Miniver", cursive;
-    font-size: 3.5rem;
-    color: var(--secondary-color);
-    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2rem;
+    color: var(--white-color);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 500;
+    animation-delay: 0.2s;
 }
 
 .hero-section .hero-details .subtitle {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
+    font-family: "Playfair Display", serif;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     line-height: 1.2;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation-delay: 0.4s;
 }
 
 .hero-section .hero-details .description {
-    font-size: var(--font-size-xl);
+    font-size: 1.1rem;
     margin-bottom: 35px;
     line-height: 1.6;
     opacity: 0.9;
+    animation-delay: 0.6s;
 }
 
 .hero-section .button {
-    background: var(--secondary-color);
-    color: var(--primary-color);
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-gold));
+    color: #fff;
     padding: 15px 35px;
     border-radius: var(--border-redius-m);
     font-weight: 700;
     text-transform: uppercase;
     display: inline-block;
     transition: 0.3s;
-    border: 2px solid var(--secondary-color);
+    border: none;
+    box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
+    animation-delay: 0.8s;
 }
 
-
-
 .hero-section .button:hover {
-    background: transparent;
-    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(184, 134, 11, 0.5);
+    color: #fff;
 }
 
 /* Ensure the button element in the image has the new styling */
@@ -255,6 +285,12 @@ header .navbar {
 .hero-section .hero-image-wrapper img {
     width: 100%;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    animation: floatImage 5s ease-in-out infinite;
+}
+
+@keyframes floatImage {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 /* Responsive adjustments for the hero section */
@@ -281,12 +317,12 @@ header .navbar {
     }
 
     .hero-section .hero-details .title {
-        font-size: 2rem;
+        font-size: 1rem;
         margin-top: 20px;
     }
 
     .hero-section .hero-details .subtitle {
-        font-size: 1.4rem;
+        font-size: 2.2rem;
     }
 
     .hero-section .hero-details .description {
@@ -337,6 +373,9 @@ header .navbar {
     height: auto;
     object-fit: contain;
     /* Changed from cover to contain to ensure the whole image is visible */
+    border-radius: 20px;
+    box-shadow: 20px 20px 0px var(--secondary-color); /* Stylish offset shadow */
+    transition: transform 0.3s ease;
 }
 
 .about-section .about-details {
@@ -557,6 +596,7 @@ header .navbar {
 
 .why-title {
     font-size: 3.5rem;
+    font-family: "Playfair Display", serif;
     font-weight: 800;
     line-height: 1;
     margin-bottom: 25px;
@@ -621,7 +661,7 @@ header .navbar {
     padding: 30px 15px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     /* The soft shadow from image */
     transition: all 0.3s ease;
     border: 1px solid #f9f9f9;
@@ -629,7 +669,7 @@ header .navbar {
 
 .why-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
 /* DELETE IF YOU FIND THIS */
@@ -737,6 +777,7 @@ header .navbar {
 
 .contact-info-list h2 {
     font-size: var(--font-size-xxl);
+    font-family: "Playfair Display", serif;
     font-weight: var(--font-weight-bold);
     color: var(--dark-color);
     line-height: 1.2;
@@ -750,6 +791,10 @@ header .navbar {
     max-width: 50%;
     display: flex;
     flex-direction: column;
+    background: var(--white-color);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
 .contact-section .contact-form .form-input,
@@ -778,23 +823,23 @@ header .navbar {
 }
 
 .contact-section .contact-form .submit-button {
-    background: var(--primary-color);
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-gold));
     padding: 14px 30px;
     color: var(--white-color);
     border-radius: var(--border-redius-m);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-m);
-
+    border: none;
     transition: 0.3s ease;
     cursor: pointer;
     align-self: flex-start;
     /* Keeps button left-aligned */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .contact-section .contact-form .submit-button:hover {
-    background: transparent;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(184, 134, 11, 0.4);
 }
 
 /* --- MOBILE RESPONSIVE FIXES --- */
@@ -893,6 +938,7 @@ header .navbar {
     align-items: center;
     padding: 35px;
     text-align: center;
+    position: relative;
 }
 
 .products-section .products .Products-image {
@@ -902,7 +948,34 @@ header .navbar {
     height: 350px;
     object-fit: contain;
     margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
 
+.products-section .products:hover .Products-image {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+.products-section .products::after {
+    content: "View Details";
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: var(--secondary-color);
+    color: var(--white-color);
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.products-section .products:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .products-section .products .name {
@@ -981,6 +1054,109 @@ header .navbar {
 
 
 /* RESPONSIVE FIX for Products - ensuring 2 in a row on medium screens */
+
+/* ======================================================= */
+/* TESTIMONIAL SECTION STYLING                             */
+/* ======================================================= */
+
+.testimonial-section {
+    padding: 80px 0;
+    background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.testimonial-section .section-title {
+    color: var(--white-color);
+}
+
+.testimonial-slider {
+    padding-bottom: 50px; /* Space for pagination */
+}
+
+.testimonial-card {
+    background: var(--white-color);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+    height: auto; /* Allow content to dictate height */
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    border-color: var(--secondary-color);
+}
+
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.quote-icon {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    opacity: 0.3;
+}
+
+.testimonial-text {
+    font-size: var(--font-size-n);
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+    flex: 1;
+}
+
+.testimonial-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary-color);
+}
+
+.user-info .user-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.user-info .user-role {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.testimonial-section .swiper-pagination-bullet {
+    background: var(--secondary-color);
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+}
+
+.testimonial-section .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 25px;
+    border-radius: 10px;
+    transition: width 0.3s;
+}
 
 /* ======================================================= */
 /* PRODUCT DETAIL PAGE STYLING (UPDATED)                   */
@@ -1147,7 +1323,7 @@ header .navbar {
 .hero-main-title {
     color: #ffffff;
     font-size: var(--font-size-l);
-    font-family: 'Poppins', sans-serif;
+    font-family: "Playfair Display", serif;
     text-transform: capitalize;
     margin-bottom: 10px;
 }
@@ -1344,6 +1520,7 @@ header .navbar {
     text-align: center;
     font-size: var(--font-size-l);
     color: var(--primary-color);
+    font-family: "Playfair Display", serif;
     font-weight: var(--font-weight-semibold);
     margin-bottom: 50px;
     padding: 0 20px;
@@ -1690,3 +1867,18 @@ header .navbar {
         font-size: 28px;
     }
 }
+
+/* --- SCROLL ANIMATIONS --- */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.delay-200 { transition-delay: 0.2s; }

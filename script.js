@@ -24,6 +24,13 @@ const swiper = new Swiper('.slider-wrapper', {
     grabCursor: true,
     spaceBetween: 30,
 
+    // Autoplay
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+
     // Pagination (Dots)
     pagination: {
         el: '.swiper-pagination',
@@ -37,6 +44,26 @@ const swiper = new Swiper('.slider-wrapper', {
         prevEl: '.swiper-button-prev',
     },
 
+    breakpoints: {
+        0: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 4 }
+    }
+});
+
+// 2.1 Testimonial Slider
+const testimonialSwiper = new Swiper('.testimonial-slider', {
+    loop: true,
+    grabCursor: true,
+    spaceBetween: 30,
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
     breakpoints: {
         0: { slidesPerView: 1 },
         768: { slidesPerView: 2 },
@@ -103,4 +130,18 @@ form.addEventListener('submit', (e) => {
             btn.innerText = "Get Free Quote";
             btn.disabled = false;
         });
+});
+
+// 4. Fade In Animation on Scroll
+const fadeObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in-section').forEach(section => {
+    fadeObserver.observe(section);
 });
