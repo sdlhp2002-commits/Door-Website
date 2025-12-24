@@ -128,7 +128,7 @@ header .navbar {
 .navbar .nav-menu .nav-link {
     color: var(--dark-color);
     padding: 10px 20px;
-    font-weight: 500;
+    font-weight: var(--font-weight-bold);
     transition: 0.3s;
     border-radius: 30px;
     font-size: 1rem;
@@ -514,7 +514,7 @@ header .navbar {
 
     .navbar .nav-menu .nav-link {
         color: var(--dark-color);
-        font-size: var(--font-size-l);
+        font-size: var(--font-size-m);
         display: block;
         margin-top: 17px;
         opacity: 0;
