@@ -54,6 +54,16 @@ if (Test-Path $sitemapPath) {
     $utf8NoBom = New-Object System.Text.UTF8Encoding $false
     [System.IO.File]::WriteAllText((Resolve-Path $sitemapPath).Path, $newContent, $utf8NoBom)
     Write-Host "Sitemap updated to $today"
+
+    # Validate XML syntax locally
+    try {
+        [xml]$check = Get-Content $sitemapPath
+        Write-Host "✅ Sitemap XML syntax is valid." -ForegroundColor Green
+    } catch {
+        Write-Host "❌ Sitemap XML syntax is INVALID!" -ForegroundColor Red
+        Write-Host $_.Exception.Message -ForegroundColor Red
+        exit 1 # Stop deployment if sitemap is broken
+    }
 }
 
 # Ensure .nojekyll exists to prevent 404s on GitHub Pages
