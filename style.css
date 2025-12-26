@@ -153,7 +153,7 @@ header .navbar {
     font-weight: var(--font-weight-bold);
     transition: 0.3s;
     border-radius: 30px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -638,7 +638,7 @@ header .navbar {
 /* --- NEW WHY CHOOSE US SECTION STYLE --- */
 .why-section {
     padding: 100px 0;
-    background: #fff;
+    background: linear-gradient(to bottom, #ffffff, var(--light-pink-color));
     overflow: hidden;
 }
 
@@ -716,7 +716,7 @@ header .navbar {
 
     border-radius: 4px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    will-change: transform;
+    box-shadow: 20px 20px 0px var(--secondary-color); /* Stylish offset shadow */
     /* This tells the browser to keep it stable */
 }
 
@@ -734,15 +734,18 @@ header .navbar {
     padding: 30px 15px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     /* The soft shadow from image */
     transition: all 0.3s ease;
-    border: 1px solid #f9f9f9;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
 }
 
 .why-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--secondary-color);
 }
 
 /* DELETE IF YOU FIND THIS */
@@ -754,10 +757,23 @@ header .navbar {
     object-fit: contain;
 }
 
+.why-icon-fa {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.why-card:hover .why-icon-fa {
+    transform: scale(1.1);
+}
+
 .why-card-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: "Playfair Display", serif;
 }
 
 /* --- MOBILE VIEW FIX --- */
@@ -858,6 +874,11 @@ header .navbar {
     text-transform: uppercase;
 }
 
+.contact-info {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
 /* --- Form Styling --- */
 .contact-section .contact-form {
     flex: 1;
@@ -880,7 +901,7 @@ header .navbar {
     outline: none;
     margin-bottom: 20px;
     /* Increased margin to prevent overlap */
-    font-size: var(--font-size-n);
+    font-size: 1.2rem;
     font-family: inherit;
 }
 
@@ -963,7 +984,7 @@ header .navbar {
 .footer-section :where(.copyright-text, .social-link, .policy-link) {
     color: var(--white-color);
     transition: 0.2s ease;
-
+    font-size: 1.1rem;
 }
 
 .footer-section .section-content {
@@ -1034,21 +1055,24 @@ header .navbar {
     position: absolute;
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: var(--secondary-color);
-    color: var(--white-color);
-    padding: 12px 25px;
-    border-radius: 30px;
+    transform: translate(-50%, -20%);
+    background: var(--white-color);
+    color: var(--secondary-color);
+    padding: 12px 30px;
+    border-radius: 50px;
     font-weight: 600;
     opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     pointer-events: none;
+    border: 2px solid var(--secondary-color);
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
 }
 
 .products-section .products:hover::after {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
 }
 
 .products-section .products .name {
