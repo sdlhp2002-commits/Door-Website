@@ -594,6 +594,10 @@ header .navbar {
         transition-delay: 0.5s;
     }
 
+body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
+    transition-delay: 0.6s;
+}
+
     .about-section .section-content {
         /* Mobile: Stack them vertically, details above image */
         flex-direction: column;
