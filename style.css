@@ -2238,7 +2238,14 @@ header .navbar {
     position: relative;
     border-radius: 15px;
     overflow: hidden;
-    lery-item:hover {
+    filter: drop-shadow(0 0 3px var(--secondary-color)) drop-shadow(6px 6px 9px rgba(0, 0, 0, 0.2));
+    cursor: pointer;
+    height: 400px; /* Fixed height for uniform grid */
+    transition: opacity 0.4s ease, clip-path 0.5s ease;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.gallery-item:hover {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
@@ -2255,18 +2262,20 @@ header .navbar {
 
 .gallery-overlay {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-    padding: 30px 25px;
-    transform: translateY(20px);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     opacity: 0;
     transition: all 0.4s ease;
 }
 
 .gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
     opacity: 1;
 }
 
@@ -2279,9 +2288,23 @@ header .navbar {
 }
 
 .gallery-cat {
-    color: var(--secondary-color);
-    font-size: 0.85rem;
+    display: block;
+    color: var(--white-color);
+    font-size: 1.5rem;
+    font-family: "Playfair Display", serif;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 5px;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.gallery-item:hover .gallery-cat {
+    transform: translateY(0);
+    opacity: 1;
 }
