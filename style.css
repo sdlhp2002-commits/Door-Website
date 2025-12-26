@@ -660,7 +660,10 @@ header .navbar {
 /* --- NEW WHY CHOOSE US SECTION STYLE --- */
 .why-section {
     padding: 100px 0;
-    background: linear-gradient(to bottom, #ffffff, var(--light-pink-color));
+    background-color: #ffffff;
+    /* Subtle dot pattern for texture */
+    background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+    background-size: 30px 30px;
     overflow: hidden;
 }
 
@@ -685,27 +688,33 @@ header .navbar {
 }
 
 .why-small {
-    font-size: 1rem;
+    display: inline-block;
+    font-size: 0.9rem;
     font-weight: 700;
-    color: var(--dark-color);
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+    color: var(--secondary-color);
+    background: transparent;
+    padding: 0 0 5px 0;
+    border-radius: 0;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--secondary-color);
 }
 
 .why-title {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-family: "Playfair Display", serif;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 25px;
-    color: #000;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: var(--primary-color);
 }
 
 .why-text {
-    font-size: 1.05rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 20px;
 }
 
 .why-explore-btn {
@@ -726,20 +735,19 @@ header .navbar {
 
 /* The vertical door image next to text */
 .why-main-image-container {
-    flex: 0.8;
+    flex: 1.8;
     display: flex;
     justify-content: center;
 }
 
 .why-door-img {
     width: 100%;
-    max-width: 450px;
-
-
+    max-width: 800px;
+   
+ 
     border-radius: 4px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 20px 20px 0px var(--secondary-color);
-    /* Stylish offset shadow */
+   
     animation: floatDoor 5s ease-in-out infinite;
     /* This tells the browser to keep it stable */
 }
@@ -770,18 +778,19 @@ header .navbar {
     padding: 30px 15px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     /* The soft shadow from image */
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0,0,0,0.03);
+    border-bottom: 3px solid transparent;
     position: relative;
     overflow: hidden;
 }
 
 .why-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    border-color: var(--secondary-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-bottom-color: var(--secondary-color);
 }
 
 /* DELETE IF YOU FIND THIS */
@@ -794,15 +803,22 @@ header .navbar {
 }
 
 .why-icon-fa {
-    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    background: var(--light-pink-color);
+    border-radius: 50%;
+    font-size: 1.8rem;
     color: var(--secondary-color);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     display: inline-block;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .why-card:hover .why-icon-fa {
-    transform: scale(1.1);
+    background: var(--secondary-color);
+    color: #fff;
+    transform: rotateY(360deg);
 }
 
 .why-card-title {
