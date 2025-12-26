@@ -105,17 +105,37 @@ img {
 /* navbar */
 
 header {
-    background: rgba(250, 248, 245, 0.85);
-    /* Semi-transparent */
-    backdrop-filter: blur(12px);
-    /* Glassmorphism effect */
+    background: var(--white-color);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Transparent state for top of page */
+header.transparent {
+    background: transparent;
+    box-shadow: none;
+    border-bottom: none;
+}
+
+/* Make links white when header is transparent (for dark backgrounds) */
+header.transparent .navbar .nav-menu .nav-link,
+header.transparent .navbar #menu-open-button {
+    color: var(--white-color);
+}
+
+header.transparent .navbar .nav-menu .nav-link:hover {
+    color: var(--secondary-color);
+}
+
+/* Invert logo colors when header is transparent */
+header.transparent .nav-logo .logo-image {
+    filter: invert(1);
 }
 
 header .navbar {
@@ -164,19 +184,10 @@ header .navbar {
 /* Style for the logo image element */
 /* --- 1. Resizing the Logo Image --- */
 .nav-logo .logo-image {
-    /* Set a fixed height and let the width scale proportionally */
-    height: 90px;
-    /* Adjust this value (e.g., 50px, 80px) until it looks right */
-    width: auto;
-    display: block;
-    /* Ensures the image behaves well */
-}
-
-/* --- 2. Styling the Logo Container for Zoom Effect --- */
-.nav-logo .logo-image {
     height: 80px;
     width: auto;
-    transition: transform 0.3s ease;
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .nav-logo:hover .logo-image {
@@ -498,6 +509,7 @@ header .navbar {
     .navbar .nav-menu {
         background: var(--white-color);
         /* Ensures background is solid white */
+        color: var(--dark-color);
         position: fixed;
         left: 0;
         top: 0;
@@ -524,7 +536,7 @@ header .navbar {
     }
 
     .navbar .nav-menu .nav-link {
-        color: var(--dark-color);
+        color: var(--dark-color) !important;
         font-size: var(--font-size-m);
         display: block;
         margin-top: 17px;
@@ -703,9 +715,6 @@ header .navbar {
 
 
     border-radius: 4px;
-}
-
-.why-door-img {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     will-change: transform;
     /* This tells the browser to keep it stable */
@@ -1506,7 +1515,6 @@ header .navbar {
 
 /* --- ENQUIRY BUTTON --- */
 /* --- ENQUIRY BUTTON --- */
-.enquiry-btn,
 .enquiry-button {
     align-self: flex-start;
     /* Forces the button to stay on the left */

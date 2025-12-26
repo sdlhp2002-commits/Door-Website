@@ -36,10 +36,11 @@
   <header>
     <nav class="navbar section-content">
       <a href="#" class="nav-logo">
-        <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image">
+        <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image" width="150" height="80">
 
       </a>
       <ul class="nav-menu">
+        <button id="menu-close-button" class="fas fa-times"></button>
 
         <li class="nav-item">
           <a href="index.html" class="nav-link">Home</a>
@@ -58,6 +59,7 @@
         </li>
 
       </ul>
+      <button id="menu-open-button" class="fas fa-bars"></button>
     </nav>
   </header>
 
@@ -185,6 +187,7 @@
 
   <script src="products-data.js"></script>
   <script src="product-details.js"></script>
+  <script src="script.js"></script>
 
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

@@ -29,6 +29,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload Hero Images for Faster LCP -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop" media="(max-width: 768px)">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop" media="(min-width: 769px)">
+
     <script type="application/ld+json">
     [
        
@@ -59,10 +64,10 @@
 
 <body>
 
-    <header>
+    <header class="transparent">
         <nav class="navbar section-content">
             <a href="#" class="nav-logo" id="logo-link">
-                <img src="images/logo.png" alt="Ajor Doors Manufacturer Logo Bengaluru" class="logo-image">
+                <img src="images/logo.png" alt="Ajor Doors Manufacturer Logo Bengaluru" class="logo-image" width="150" height="80">
             </a>
 
             <ul class="nav-menu">
@@ -115,7 +120,7 @@
                 </div>
 
                 <div class="about-image-wrapper fade-in-section delay-200">
-                    <img src="images/jpg100-t3-scale100.jpeg" alt="Ajor Doors Showroom Interior and Wood Samples" class="about-image" loading="lazy">
+                    <img src="images/jpg100-t3-scale100.jpeg" alt="Ajor Doors Showroom Interior and Wood Samples" class="about-image" loading="lazy" decoding="async">
                 </div>
 
             </div>
@@ -135,7 +140,7 @@
                                     <a href="product-details.html?id=solid-wood-primer">
                                         <img src="images/solid wood primer.jpg"
                                             alt="Solid Wood Primer Door Manufacturer Bangalore" class="Products-image"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                         <h3 class="name">Solid Wood Primer Doors</h3>
                                     </a>
                                 </li>
@@ -143,21 +148,21 @@
                                     <a href="product-details.html?id=exclusive-laminates">
                                         <img src="images/exclusive laminated.jpg"
                                             alt="Exclusive Laminated Interior Doors" class="Products-image"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                         <h3 class="name">Exclusive Laminate Doors</h3>
                                     </a>
                                 </li>
                                 <li class="products swiper-slide">
                                     <a href="product-details.html?id=wpc-digital">
                                         <img src="images/wpc digital.jpg" alt="Waterproof WPC Door  Bengaluru"
-                                            class="Products-image" loading="lazy">
+                                            class="Products-image" loading="lazy" decoding="async">
                                         <h3 class="name"> WPC Digital Doors</h3>
                                     </a>
                                 </li>
                                 <li class="products swiper-slide">
                                     <a href="product-details.html?id=antique-laminated">
                                         <img src="images/antique laminated.jpg" alt="Antique-laminated door"
-                                            class="Products-image" loading="lazy">
+                                            class="Products-image" loading="lazy" decoding="async">
                                         <h3 class="name">Antique Laminated Doors</h3>
                                     </a>
                                 </li>
@@ -165,14 +170,14 @@
                                     <a href="product-details.html?id=premium-digital">
                                         <img src="images/premium digital.jpg"
                                             alt="Premium Digital Korean Doors Bengaluru" class="Products-image"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                         <h3 class="name"> Premium Digital Korean Doors</h3>
                                     </a>
                                 </li>
                                 <li class="products swiper-slide">
                                     <a href="product-details.html?id=teak-veneer">
                                         <img src="images/teak wood.jpg" alt="Teak Veneer Doors" class="Products-image"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                         <h3 class="name">Teak Veneer Doors</h3>
                                     </a>
                                 </li>
@@ -180,21 +185,21 @@
                                 <li class="products swiper-slide">
                                     <a href="product-details.html?id=premium-teak-wood">
                                         <img src="images/premium teak wood door.jpg" alt="Premium Teak Wood Door"
-                                            class="Products-image" loading="lazy">
+                                            class="Products-image" loading="lazy" decoding="async">
                                         <h3 class="name">Premium Teak Wood Door</h3>
                                     </a>
                                 </li>
                                 <li class="products swiper-slide">
                                     <a href="product-details.html?id=laminate-doors">
                                         <img src="images/laminated doors.png" alt="Laminate Doors"
-                                            class="Products-image" loading="lazy">
+                                            class="Products-image" loading="lazy" decoding="async">
                                         <h3 class="name"> Laminate Doors</h3>
                                     </a>
                                 </li>
                                 <li class="products swiper-slide">
                                     <a href="product-details.html?id=wpc-door-frame">
                                         <img src="images/WPC.png" alt="WPC Door and Frame" class="Products-image"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                         <h3 class="name">WPC Door and Frame</h3>
                                     </a>
                                 </li>
@@ -222,7 +227,7 @@
                                         premium doors in Bangalore."</p>
                                     <div class="testimonial-profile">
                                         <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=random"
-                                            alt="Rajesh Kumar" class="user-image" loading="lazy">
+                                            alt="Rajesh Kumar" class="user-image" loading="lazy" decoding="async" width="50" height="50">
                                         <div class="user-info">
                                             <h3 class="user-name">Rajesh Kumar</h3>
                                             <span class="user-role">Homeowner</span>
@@ -239,7 +244,7 @@
                                         support."</p>
                                     <div class="testimonial-profile">
                                         <img src="https://ui-avatars.com/api/?name=Sneha+Reddy&background=random"
-                                            alt="Sneha Reddy" class="user-image" loading="lazy">
+                                            alt="Sneha Reddy" class="user-image" loading="lazy" decoding="async" width="50" height="50">
                                         <div class="user-info">
                                             <h3 class="user-name">Sneha Reddy</h3>
                                             <span class="user-role">Interior Designer</span>
@@ -256,7 +261,7 @@
                                         theme. Professional team and very transparent pricing."</p>
                                     <div class="testimonial-profile">
                                         <img src="https://ui-avatars.com/api/?name=Anil+Sharma&background=random"
-                                            alt="Anil Sharma" class="user-image" loading="lazy">
+                                            alt="Anil Sharma" class="user-image" loading="lazy" decoding="async" width="50" height="50">
                                         <div class="user-info">
                                             <h3 class="user-name">Anil Sharma</h3>
                                             <span class="user-role">Architect</span>
@@ -273,7 +278,7 @@
                                         solid wood primer doors is impressive."</p>
                                     <div class="testimonial-profile">
                                         <img src="https://ui-avatars.com/api/?name=Priya+Menon&background=random"
-                                            alt="Priya Menon" class="user-image" loading="lazy">
+                                            alt="Priya Menon" class="user-image" loading="lazy" decoding="async" width="50" height="50">
                                         <div class="user-info">
                                             <h3 class="user-name">Priya Menon</h3>
                                             <span class="user-role">Real Estate Developer</span>
@@ -304,33 +309,33 @@
                         </div>
 
                         <div class="why-main-image-container">
-                            <img src="images/about-door-img.png" alt="Ajor Door" class="why-door-img" loading="lazy">
+                            <img src="images/about-door-img.png" alt="Ajor Door" class="why-door-img" loading="lazy" decoding="async">
                         </div>
                     </div>
 
                     <div class="why-grid">
                         <div class="why-card">
-                            <img src="images/Best-Price.png" class="why-icon" alt="Price" loading="lazy">
+                            <img src="images/Best-Price.png" class="why-icon" alt="Price" loading="lazy" decoding="async" width="60" height="60">
                             <h3 class="why-card-title">Best Price</h3>
                         </div>
                         <div class="why-card">
-                            <img src="images/Factory-Made.png" class="why-icon" alt="Factory" loading="lazy">
+                            <img src="images/Factory-Made.png" class="why-icon" alt="Factory" loading="lazy" decoding="async" width="60" height="60">
                             <h3 class="why-card-title">Factory Made</h3>
                         </div>
                         <div class="why-card">
-                            <img src="images/Custom-Made.png" class="why-icon" alt="Custom" loading="lazy">
+                            <img src="images/Custom-Made.png" class="why-icon" alt="Custom" loading="lazy" decoding="async" width="60" height="60">
                             <h3 class="why-card-title">Custom Made</h3>
                         </div>
                         <div class="why-card">
-                            <img src="images/Wood-From-Sustainable-Forest.png" class="why-icon" alt="Wood" loading="lazy">
+                            <img src="images/Wood-From-Sustainable-Forest.png" class="why-icon" alt="Wood" loading="lazy" decoding="async" width="60" height="60">
                             <h3 class="why-card-title">Sustainable Wood</h3>
                         </div>
                         <div class="why-card">
-                            <img src="images/Natural-Wood.png" class="why-icon" alt="Natural" loading="lazy">
+                            <img src="images/Natural-Wood.png" class="why-icon" alt="Natural" loading="lazy" decoding="async" width="60" height="60">
                             <h3 class="why-card-title">100% Natural Wood</h3>
                         </div>
                         <div class="why-card">
-                            <img src="images/Quick-Delivery.png" class="why-icon" alt="Delivery" loading="lazy">
+                            <img src="images/Quick-Delivery.png" class="why-icon" alt="Delivery" loading="lazy" decoding="async" width="60" height="60">
                             <h3 class="why-card-title">Quick Delivery</h3>
                         </div>
                     </div>
@@ -416,6 +421,14 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
     <script src="script.js"></script>
+
+    <script>
+        // Navbar Scroll Effect
+        const header = document.querySelector("header");
+        window.addEventListener("scroll", function () {
+            header.classList.toggle("transparent", window.scrollY < 50);
+        });
+    </script>
 
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
