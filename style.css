@@ -401,8 +401,8 @@ header .navbar {
 /* about section */
 
 .about-section {
-    padding: 120px 0;
-    background: var(--light-pink-color);
+    padding: 60px 0;
+    background: linear-gradient(135deg, #fffbf2 0%, #ffffff 100%);
 }
 
 .about-section .section-content {
@@ -430,8 +430,9 @@ header .navbar {
     height: auto;
     object-fit: contain;
     /* Changed from cover to contain to ensure the whole image is visible */
-    border-radius: 20px;
-    box-shadow: 20px 20px 0px var(--secondary-color);
+    border-radius: 4px;
+    box-shadow: 15px 15px 0px var(--secondary-color);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     /* Stylish offset shadow */
     transition: transform 0.3s ease;
 }
@@ -462,13 +463,13 @@ header .navbar {
     /* Adjusted text styling */
     line-height: 1.7;
     /* Increased line height for readability */
-    margin: 30px 0;
+    margin: 20px 0;
     /* Reduced top and bottom margin for a tighter fit */
     text-align: left;
     /* New: Left-align the text to fit the modern layout */
-    font-size: var(--font-size-n);
+    font-size: 1.05rem;
     /* Used standard font size */
-    color: var(--dark-color);
+    color: #444;
     /* Ensure text is readable */
 }
 
@@ -737,12 +738,14 @@ header .navbar {
 
     border-radius: 4px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 20px 20px 0px var(--secondary-color); /* Stylish offset shadow */
+    box-shadow: 20px 20px 0px var(--secondary-color);
+    /* Stylish offset shadow */
     animation: floatDoor 5s ease-in-out infinite;
     /* This tells the browser to keep it stable */
 }
 
 @keyframes floatDoor {
+
     0%,
     100% {
         transform: translateY(0);
@@ -1053,10 +1056,16 @@ header .navbar {
 
 /*products-style*/
 .products-section {
-    padding: 50px 0 100px;
-    /* FIX: Added 'px' unit to 100 */
-    background: var(--light-pink-color);
+    padding: 50px 0 30px;
+    background-color: var(--light-pink-color);
+    /* Subtle dot pattern for texture */
+    background-image: radial-gradient(rgba(184, 134, 11, 0.15) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
 
+}
+
+.products-section .section-title {
+    padding-bottom: 30px;
 }
 
 .products-section .products {
@@ -1148,7 +1157,7 @@ header .navbar {
 
 .products-section .slider-wrapper {
     overflow: hidden;
-    margin: 0 60px 50px;
+    margin: 0 60px 30px;
 }
 
 /* --- Product Slider Visibility Logic --- */
@@ -2030,4 +2039,17 @@ header .navbar {
 
 .delay-200 {
     transition-delay: 0.2s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+/* Specific subtle zoom-in for About Image */
+.about-section .about-image-wrapper.fade-in-section {
+    transform: scale(0.95) translateY(30px);
+}
+
+.about-section .about-image-wrapper.fade-in-section.is-visible {
+    transform: scale(1) translateY(0);
 }
