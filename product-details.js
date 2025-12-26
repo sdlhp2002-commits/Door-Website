@@ -76,6 +76,9 @@ window.onload = function () {
     // Fill hero/breadcrumb
     document.getElementById("breadcrumb-area").innerHTML =
         `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='index.html#products' style="color:var(--secondary-color)">Products</a> / ${product.name}`;
+    
+    // Set the main page heading (H1) for SEO
+    document.getElementById("product-title").textContent = product.name;
 
     // Main Image
     const mainImg = document.getElementById("main-door-image");
@@ -353,7 +356,22 @@ function injectProductSchema(product, absoluteImageUrl) {
             "availability": "https://schema.org/InStock", // Or OutOfStock, PreOrder
             "seller": {
                 "@type": "LocalBusiness",
-                "name": "Ajor Doors"
+                "name": "Ajor Doors & Interior Solutions",
+                "image": new URL('images/logo.png', window.location.href).href,
+                "telephone": "+91 98444 43388",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village",
+                    "addressLocality": "Bengaluru",
+                    "addressRegion": "KA",
+                    "postalCode": "560043",
+                    "addressCountry": "IN"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "13.0279",
+                    "longitude": "77.6784"
+                }
             }
         }
     };
