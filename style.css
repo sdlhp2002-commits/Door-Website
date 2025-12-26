@@ -110,6 +110,8 @@ header {
     backdrop-filter: blur(12px);
     /* Glassmorphism effect */
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     z-index: 100;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
@@ -445,7 +447,7 @@ header .navbar {
 }
 
 
-@media (min-width: 900px) {
+@media (min-width: 769px) {
 
     #menu-open-button,
     #menu-close-button {
@@ -454,7 +456,7 @@ header .navbar {
 }
 
 /* responsive */
-@media screen and (max-width:900px) {
+@media screen and (max-width: 768px) {
 
     :root {
         --font-size-m: 1rem;
@@ -497,16 +499,18 @@ header .navbar {
         background: var(--white-color);
         /* Ensures background is solid white */
         position: fixed;
-        left: -300px;
+        left: 0;
         top: 0;
         width: 300px;
+        max-width: 85vw;
         height: 100vh;
         /* Use vh to cover full height */
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 100px;
-        transition: left 0.3s ease;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
 
         /* FIX: Increase z-index and ensure it is opaque */
         z-index: 1000;
@@ -516,7 +520,7 @@ header .navbar {
     }
 
     body.show-mobile-menu .navbar .nav-menu {
-        left: 0;
+        transform: translateX(0);
     }
 
     .navbar .nav-menu .nav-link {
