@@ -928,14 +928,14 @@ header .navbar {
     margin-bottom: 20px;
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .get-directions-btn:hover {
     background: var(--secondary-color);
     color: var(--white-color);
     transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* --- Google Map --- */
@@ -945,7 +945,7 @@ header .navbar {
     border-radius: 20px;
     margin-top: 40px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 /* --- Form Styling --- */
@@ -2066,7 +2066,8 @@ header .navbar {
 /* Scroll To Top Button */
 .scroll-top-btn {
     position: fixed;
-    bottom: 110px; /* Positioned above the WhatsApp button */
+    bottom: 110px;
+    /* Positioned above the WhatsApp button */
     right: 30px;
     background-color: var(--secondary-color);
     color: var(--white-color);
