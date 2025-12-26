@@ -171,3 +171,30 @@ if (scrollTopBtn) {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
+
+// 6. Google Maps Implementation (Modern)
+async function initMap() {
+    const mapElement = document.getElementById("map");
+    // Only run if map element exists and google API is loaded
+    if (!mapElement || typeof google === "undefined") return;
+
+    // Import libraries using the new method
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    const position = { lat: 13.0279, lng: 77.6784 };
+
+    const map = new Map(mapElement, {
+        center: position,
+        zoom: 15,
+        mapId: "DEMO_MAP_ID", // Replace with your actual Map ID from Google Cloud Console
+    });
+
+    new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Ajor Doors",
+    });
+}
+
+initMap();
