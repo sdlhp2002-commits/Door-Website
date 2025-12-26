@@ -153,3 +153,21 @@ const fadeObserver = new IntersectionObserver((entries, observer) => {
 document.querySelectorAll('.fade-in-section').forEach(section => {
     fadeObserver.observe(section);
 });
+
+// 5. Scroll To Top Button Logic
+const scrollTopBtn = document.getElementById("scroll-top-btn");
+
+if (scrollTopBtn) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add("show");
+        } else {
+            scrollTopBtn.classList.remove("show");
+        }
+    });
+
+    scrollTopBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}

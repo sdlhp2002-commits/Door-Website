@@ -123,6 +123,28 @@ window.onload = function () {
     // Filter catalog by product category on initial load
     // Product ID matches the category name in DOOR_CATALOG
     renderDoorCatalog(product.id); // Filter to show only doors from this product's category
+
+    // ----------------------
+    // 5. Smart Enquiry Button Logic
+    // ----------------------
+    const enquiryBtn = document.getElementById('product-enquiry-btn');
+    if (enquiryBtn) {
+        enquiryBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const contactSection = document.getElementById('contact');
+            const messageBox = document.querySelector('textarea[name="Message"]');
+            
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            if (messageBox) {
+                messageBox.value = `I am interested in ${product.name}. Please send me more details.`;
+                // Optional: Focus the box so they can type immediately
+                setTimeout(() => messageBox.focus(), 800);
+            }
+        });
+    }
 };
 
 // Global variable to track current filter
