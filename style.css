@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Miniver&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 * {
     margin: 0;
@@ -162,6 +162,10 @@ header .navbar {
     color: var(--secondary-color);
 
 
+}
+
+.navbar .nav-menu .nav-link.active {
+    color: var(--secondary-color);
 }
 
 /* FIXED: Correct ID names */
@@ -2152,4 +2156,132 @@ header .navbar {
 
 .about-section .about-image-wrapper.fade-in-section.is-visible {
     transform: scale(1) translateY(0);
+}
+
+/* ======================================================= */
+/* GALLERY PAGE STYLES                                     */
+/* ======================================================= */
+
+.gallery-section {
+    padding: 0 0 100px;
+    background: var(--white-color);
+    margin-top: 77px !important;
+    margin-bottom: 0px;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 30px;
+    color: #383838 !important;
+    clear: both;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery-brand-label {
+    color: var(--secondary-color);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.gallery-main-title {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.gallery-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 30px;
+    border: 2px solid var(--border-color);
+    background: transparent;
+    color: #555;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(184, 134, 11, 0.2);
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 0 10px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    lery-item:hover {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+    padding: 30px 25px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.gallery-title {
+    color: #fff;
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.gallery-cat {
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
