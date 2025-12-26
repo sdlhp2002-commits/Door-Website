@@ -53,12 +53,29 @@ window.onload = function () {
     // ----------------------
     // 2. Data Population
     // ----------------------
-    document.title = product.name + " | Ajor Doors";
+    const pageTitle = product.name + " | Ajor Doors";
+    const pageDescription = `Discover the ${product.name} from Ajor Doors, Bengaluru. ${product.shortDescription} View specifications, features, and designs.`;
+    const absoluteImageUrl = new URL(product.mainImage, window.location.href).href;
+
+    // Update Title & Meta Description
+    document.title = pageTitle;
+    document.getElementById('meta-description').setAttribute('content', pageDescription);
+
+    // Update Open Graph (WhatsApp/Facebook) meta tags
+    document.getElementById('og-title').setAttribute('content', pageTitle);
+    document.getElementById('og-description').setAttribute('content', pageDescription);
+    document.getElementById('og-image').setAttribute('content', absoluteImageUrl);
+    document.getElementById('og-url').setAttribute('content', window.location.href);
+
+    // Update Canonical URL
+    document.querySelector("link[rel='canonical']").setAttribute('href', window.location.href);
+
+    // Inject Product Schema for Rich Results
+    injectProductSchema(product, absoluteImageUrl);
 
     // Fill hero/breadcrumb
     document.getElementById("breadcrumb-area").innerHTML =
         `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='index.html#products' style="color:var(--secondary-color)">Products</a> / ${product.name}`;
-    document.getElementById("product-title").textContent = product.name;
 
     // Main Image
     const mainImg = document.getElementById("main-door-image");
@@ -313,4 +330,36 @@ function updateThumbnailsWithSimilarImages(category, clickedImageSrc) {
 
         thumbnailsContainer.appendChild(thumb);
     });
+}
+
+// Injects Product Schema JSON-LD into the page head for SEO
+function injectProductSchema(product, absoluteImageUrl) {
+    const schema = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": product.name,
+        "image": absoluteImageUrl,
+        "description": product.shortDescription,
+        "sku": product.id,
+        "brand": {
+            "@type": "Brand",
+            "name": "Ajor Doors"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": window.location.href,
+            "priceCurrency": "INR",
+            // You can add price here if you have it, e.g., "price": "15000",
+            "availability": "https://schema.org/InStock", // Or OutOfStock, PreOrder
+            "seller": {
+                "@type": "LocalBusiness",
+                "name": "Ajor Doors"
+            }
+        }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema, null, 2); // Pretty print for readability
+    document.head.appendChild(script);
 }
