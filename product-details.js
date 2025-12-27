@@ -45,7 +45,7 @@ window.onload = function () {
     // ----------------------
     // 1. Initial Checks
     // ----------------------
-    if (!product) {
+    if (!product || !PRODUCTS) {
         document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='index.html'>Back to Home</a></div>";
         return;
     }
@@ -53,7 +53,7 @@ window.onload = function () {
     // ----------------------
     // 2. Data Population
     // ----------------------
-    const pageTitle = product.name + " | Ajor Doors";
+    const pageTitle = `${product.name} | Ajor Doors Manufacturer in Bengaluru`;
     const pageDescription = `Discover the ${product.name} from Ajor Doors, Bengaluru. ${product.shortDescription} View specifications, features, and designs.`;
     const absoluteImageUrl = new URL(product.mainImage, window.location.href).href;
 
