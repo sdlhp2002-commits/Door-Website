@@ -2361,6 +2361,9 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     cursor: pointer;
     height: 400px; /* Fixed height for uniform grid */
     transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-item:hover {
