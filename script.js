@@ -204,13 +204,23 @@ if (filterBtns.length > 0) {
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCloseBtn = document.querySelector('.lightbox-close');
+const lightboxCaption = document.getElementById('lightbox-caption');
 const galleryImages = document.querySelectorAll('.gallery-item img');
 
-if (lightbox && lightboxImg && lightboxCloseBtn) {
+if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption) {
     galleryImages.forEach(img => {
         img.addEventListener('click', () => {
             lightbox.classList.add('active');
             lightboxImg.src = img.src;
+
+            // Find the parent gallery item to get the caption text
+            const galleryItem = img.closest('.gallery-item');
+            if (galleryItem) {
+                const captionEl = galleryItem.querySelector('.gallery-cat');
+                if (captionEl) {
+                    lightboxCaption.textContent = captionEl.textContent;
+                }
+            }
         });
     });
 
