@@ -909,7 +909,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 /* --- Base Contact Section Styling --- */
 .contact-section {
     padding: 80px 0;
-    background: #9d9c9c;
+    background: var(--light-pink-color);
     /* Matching your screenshot background */
 }
 
@@ -923,6 +923,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 
 /* Typography for the "Need Help" Area */
 .contact-info-list {
+    padding-right: 40px;
     flex: 1;
 }
 
@@ -1067,6 +1068,78 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     .contact-section {
         padding: 50px 15px;
     }
+}
+
+/* Map Section */
+.map-section {
+    padding: 60px 0 80px;
+    background-color: var(--white-color);
+}
+
+.map-section iframe {
+    height: 450px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: none;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 80px 0;
+    background-color: var(--light-pink-color);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 20px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+    border-color: var(--secondary-color);
+}
+
+.faq-question {
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    list-style: none; /* Remove default marker */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none; /* Hide for Chrome/Safari */
+}
+
+.faq-question::after {
+    content: '\f078'; /* Font Awesome down arrow */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-question::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 20px 20px;
+    color: #666;
+    line-height: 1.7;
 }
 
 /*footer section*/
@@ -2429,14 +2502,6 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 @keyframes zoomInImage {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
-
-.gallery-title {
-    color: #fff;
-    font-family: "Playfair Display", serif;
-    font-size: 1.4rem;
-    margin-bottom: 5px;
-    font-weight: 600;
 }
 
 .gallery-cat {

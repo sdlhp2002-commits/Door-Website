@@ -172,38 +172,6 @@ if (scrollTopBtn) {
     });
 }
 
-// 6. Google Maps Implementation (Modern)
-async function initMap() {
-    const mapElement = document.getElementById("map");
-    // Only run if map element exists and google API is loaded
-    if (!mapElement || typeof google === "undefined") return;
-
-    // Import libraries using the new method
-    const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-    const position = { lat: 13.0454225, lng: 77.6801548 };
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${position.lat},${position.lng}`;
-
-    const map = new Map(mapElement, {
-        center: position,
-        zoom: 15,
-    });
-
-    const marker = new AdvancedMarkerElement({
-        map: map,
-        position: position,
-        title: "Ajor Doors",
-    });
-
-    // Add click listener to the marker to open Google Maps in a new tab
-    marker.addListener('click', () => {
-        window.open(googleMapsUrl, '_blank');
-    });
-}
-
-initMap();
-
 // 7. Gallery Filter Logic
 const filterBtns = document.querySelectorAll('.filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
