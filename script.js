@@ -182,19 +182,75 @@ async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    const position = { lat: 13.0279, lng: 77.6784 };
+    const position = { lat: 13.0454225, lng: 77.6801548 };
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${position.lat},${position.lng}`;
 
     const map = new Map(mapElement, {
         center: position,
         zoom: 15,
-        mapId: "DEMO_MAP_ID", // Replace with your actual Map ID from Google Cloud Console
     });
 
-    new AdvancedMarkerElement({
+    const marker = new AdvancedMarkerElement({
         map: map,
         position: position,
         title: "Ajor Doors",
     });
+
+    // Add click listener to the marker to open Google Maps in a new tab
+    marker.addListener('click', () => {
+        window.open(googleMapsUrl, '_blank');
+    });
 }
 
 initMap();
+
+// 7. Gallery Filter Logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active to clicked
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.style.display = 'block';
+                    // Add a small fade in animation
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.opacity = '1', 50);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// 8. Lightbox Logic
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCloseBtn = document.querySelector('.lightbox-close');
+const galleryImages = document.querySelectorAll('.gallery-item img');
+
+if (lightbox && lightboxImg && lightboxCloseBtn) {
+    galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightbox.classList.add('active');
+            lightboxImg.src = img.src;
+        });
+    });
+
+    lightboxCloseBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.classList.remove('active');
+    });
+}

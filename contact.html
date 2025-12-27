@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Ajor Doors</title>
+    <meta name="description" content="Get in touch with Ajor Doors in Bengaluru for a free quote on our premium Teak, WPC, and Laminate doors. Visit our showroom or call us today.">
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar section-content">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image" width="150" height="80">
+            </a>
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="product.html" class="nav-link">Product</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+
+    <main class="main-content-padding">
+        <!-- Page Hero -->
+        <section class="product-detail-hero">
+            <div class="section-content">
+                <div class="hero-title-box">
+                    <h1 class="hero-main-title">Contact Us</h1>
+                    <nav class="breadcrumbs-container">
+                        <a href="index.html">Home</a> / Contact
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">
+                Get in Touch: +91 98444 43388
+            </h2>
+            <div class="section-content">
+                <ul class="contact-info-list">
+                    <li class="contact-info">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <p>SHREE DHANALAXMI HARDWARE AND PLY
+                            Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village, Bengaluru, Karnataka
+                            560043</p>
+                    </li>
+                    <li>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=13.0454225,77.6801548" target="_blank" class="get-directions-btn"><i class="fa-solid fa-map-location-dot"></i> Get Directions</a>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>sdlhp2002@gmail.com</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Monday-Saturday : 9:00 AM - 7:00 PM</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>Sunday : closed</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-globe"></i>
+                        <p>doors.ajormart.in</p>
+                    </li>
+                </ul>
+
+                <form id="ajor-contact-form" class="contact-form">
+                    <input type="text" placeholder="Your Name" name="Name" class="form-input" required>
+                    <input type="email" placeholder="Your Email" name="Email" class="form-input" required>
+                    <input type="number" placeholder="Phone Number" name="Number" class="form-input" required>
+                    <textarea placeholder="Message" name="Message" class="form-input" required></textarea>
+                    <button type="submit" id="submit-btn" class="submit-button">Get Free Quote</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Map Section -->
+        <section class="map-section" style="padding: 60px 0 80px;">
+             <div class="section-content">
+                <h2 class="section-title" style="padding: 0 0 40px 0;">Visit Our Showroom</h2>
+                <div id="map" style="height: 450px; width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></div>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="section-content">
+            <p class="copyright-text"> ©2002 Ajor Door's Manufacturer</p>
+            <div class="social-link-list">
+                <a href="https://www.facebook.com/sdlhp2002" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/Sdlhp2002" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+            <p class="policy-text">
+                <a href="index.html" class="policy-link">Home</a>
+                <span class="separator"></span>
+                <a href="about.html" class="policy-link">About</a>
+                <span class="separator"></span>
+                <a href="contact.html" class="policy-link">Contact</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Script to pre-fill message box from URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productName = urlParams.get('product');
+            const messageBox = document.querySelector('textarea[name="Message"]');
+            if (productName && messageBox) {
+                messageBox.value = `I am interested in ${productName}. Please send me more details.`;
+            }
+        });
+    </script>
+    <!-- 
+        ================================================================
+        GOOGLE MAPS API SCRIPT
+        IMPORTANT: You must replace 'YOUR_GOOGLE_MAPS_API_KEY' below with your actual API key from the Google Cloud Console.
+        The map will not work without a valid API key.
+        ================================================================
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap&libraries=maps,marker&v=weekly" async></script>
+</body>
+</html>

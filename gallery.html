@@ -23,16 +23,16 @@
             <ul class="nav-menu">
                 <button id="menu-close-button" class="fas fa-times"></button>
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="index.html#products" class="nav-link">Products</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="product.html" class="nav-link">Product</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
-                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <button id="menu-open-button" class="fas fa-bars"></button>
         </nav>
     </header>
 
-    <main>
+    <main class="main-content-padding">
         <!-- Page Header -->
         <section class="product-detail-hero">
             <div class="section-content">
@@ -52,11 +52,12 @@
                     <span class="gallery-brand-label">Ajor Door's</span>
                     <h2 class="gallery-main-title">Wood Species Material</h2>
                 </div>
+
                 <!-- Filter Buttons -->
                 <div class="gallery-filters">
-                    <button class="filter-btn active" data-filter="all">All Designs</button>
+                    <button class="filter-btn active" data-filter="all">All</button>
                     <button class="filter-btn" data-filter="teak">Teak Wood</button>
-                    <button class="filter-btn" data-filter="wpc">WPC Doors</button>
+                    <button class="filter-btn" data-filter="wpc">WPC</button>
                     <button class="filter-btn" data-filter="laminate">Laminates</button>
                 </div>
 
@@ -167,46 +168,73 @@
                 </div>
             </div>
         </section>
+
+        <!-- Process Section -->
+        <section class="process-section">
+            <div class="section-content">
+                <h2 class="section-title">Our Working Process</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <i class="fa-solid fa-comments process-icon"></i>
+                        <h3>Consultation</h3>
+                        <p>We meet to understand your vision, style preferences, and specific requirements for your space.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <i class="fa-solid fa-pencil-ruler process-icon"></i>
+                        <h3>Design & Measure</h3>
+                        <p>Our experts take precise measurements and create custom designs tailored to your interior.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <i class="fa-solid fa-hammer process-icon"></i>
+                        <h3>Crafting</h3>
+                        <p>Skilled artisans manufacture your doors using premium materials and advanced technology.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <i class="fa-solid fa-door-open process-icon"></i>
+                        <h3>Installation</h3>
+                        <p>Our professional team ensures a perfect fit and finish, transforming your home instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="gallery-cta">
+            <h2>Found Your Perfect Material?</h2>
+            <p>Contact us today to get a custom quote for your dream doors.</p>
+            <a href="contact.html" class="cta-btn">Get a Quote</a>
+        </section>
     </main>
 
-    <!-- Footer (Simplified for brevity, matches index) -->
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="">
+    </div>
+
+    <!-- Footer -->
     <footer class="footer-section">
         <div class="section-content">
             <p class="copyright-text"> ©2002 Ajor Door's Manufacturer</p>
             <div class="social-link-list">
-                <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/sdlhp2002" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/Sdlhp2002" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
             </div>
+            <p class="policy-text">
+                <a href="index.html" class="policy-link">Home</a>
+                <span class="separator"></span>
+                <a href="about.html" class="policy-link">About</a>
+                <span class="separator"></span>
+                <a href="contact.html" class="policy-link">Contact</a>
+            </p>
         </div>
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Simple Filter Logic
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active to clicked
-                btn.classList.add('active');
-
-                const filterValue = btn.getAttribute('data-filter');
-
-                galleryItems.forEach(item => {
-                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                        item.style.display = 'block';
-                        // Add a small fade in animation
-                        item.style.opacity = '0';
-                        setTimeout(() => item.style.opacity = '1', 50);
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

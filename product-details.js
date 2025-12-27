@@ -75,7 +75,7 @@ window.onload = function () {
 
     // Fill hero/breadcrumb
     document.getElementById("breadcrumb-area").innerHTML =
-        `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='index.html#products' style="color:var(--secondary-color)">Products</a> / ${product.name}`;
+        `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
     
     // Set the main page heading (H1) for SEO
     document.getElementById("product-title").textContent = product.name;
@@ -93,6 +93,10 @@ window.onload = function () {
 
     // Features
     document.getElementById("product-features").innerHTML = renderFeatures(product.features);
+
+    // Warranty & Maintenance (New)
+    if(product.warranty) document.getElementById("product-warranty").textContent = product.warranty;
+    if(product.maintenance) document.getElementById("product-maintenance").textContent = product.maintenance;
 
     // ----------------------
     // 3. Thumbnail Rendering & Event Handling
@@ -151,18 +155,8 @@ window.onload = function () {
     if (enquiryBtn) {
         enquiryBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            const contactSection = document.getElementById('contact');
-            const messageBox = document.querySelector('textarea[name="Message"]');
-            
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            if (messageBox) {
-                messageBox.value = `I am interested in ${product.name}. Please send me more details.`;
-                // Optional: Focus the box so they can type immediately
-                setTimeout(() => messageBox.focus(), 800);
-            }
+            // Redirect to contact page with product name as a parameter
+            window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
         });
     }
 };

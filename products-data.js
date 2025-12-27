@@ -19,7 +19,9 @@ const PRODUCTS = [
       "Designs can be customised with different shades of colour or texture to create elegant effects.",
       "They're cost-effective & offer a good value alternative to traditional doors.",
       "Laminate doors with antibacterial property increases the durability & strength."
-    ]
+    ],
+    warranty: "5 Years Warranty against manufacturing defects and peeling.",
+    maintenance: "Wipe with a soft, damp cloth. Avoid abrasive cleaners to maintain the laminate finish."
   },
 
   {
@@ -42,7 +44,9 @@ const PRODUCTS = [
       "Customizable finish to match your interior style.",
       "Highly durable and classic look.",
       "Can be painted or polished."
-    ]
+    ],
+    warranty: "10 Years Warranty on structural integrity.",
+    maintenance: "Periodic polishing recommended every 3-5 years to maintain the wood's natural luster."
   },
   {
     id: "wpc-digital",
@@ -65,7 +69,9 @@ const PRODUCTS = [
       "Waterproof and termite resistant.",
       "eco-friendly and low maintenance",
       "durable and long"
-    ]
+    ],
+    warranty: "Lifetime Warranty against termites and water damage.",
+    maintenance: "Zero maintenance required. Washable with water and mild soap."
   },
   {
     id: "antique-laminated",
@@ -214,9 +220,9 @@ const PRODUCTS = [
 // Each door has a category to group similar doors together
 const DOOR_CATALOG = [
   // Category 1: Exclusive Laminates (codes starting with 1)
-  { code: "AJ-103", image: "images/exclusive laminated.jpg", category: "exclusive-laminates" },
-  { code: "AJ-101", image: "images/1001.jpg", category: "exclusive-laminates" },
-  { code: "AJ-102", image: "images/1002.jpg", category: "exclusive-laminates" },
+  { code: "AJ-101", image: "images/exclusive laminated.jpg", category: "exclusive-laminates" },
+  { code: "AJ-102", image: "images/1001.jpg", category: "exclusive-laminates" },
+  { code: "AJ-103", image: "images/1002.jpg", category: "exclusive-laminates" },
   { code: "AJ-104", image: "images/e1.jpg", category: "exclusive-laminates" },
   { code: "AJ-105", image: "images/e2.jpg", category: "exclusive-laminates" },
   { code: "AJ-106", image: "images/e3.jpg", category: "exclusive-laminates" },
