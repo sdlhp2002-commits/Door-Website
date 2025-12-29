@@ -84,6 +84,9 @@ window.onload = function () {
     const mainImg = document.getElementById("main-door-image");
     mainImg.src = product.mainImage || product.similarImages[0];
     mainImg.alt = product.name;
+    // Optimization: Prioritize loading the main image for LCP
+    mainImg.setAttribute('fetchpriority', 'high');
+    mainImg.setAttribute('loading', 'eager');
 
     // Short desc
     document.getElementById("short-description").textContent = product.shortDescription;
@@ -104,12 +107,12 @@ window.onload = function () {
     const simDiv = document.getElementById("similar-images");
 
     // Combine mainImage and similarImages for the gallery
-    const galleryImages = [product.mainImage, ...product.similarImages].filter((value, index, self) => self.indexOf(value) === index);
+    const galleryImages = [product.mainImage, ...(product.similarImages || [])].filter((value, index, self) => self.indexOf(value) === index);
 
     simDiv.innerHTML = galleryImages
         .map((img, index) =>
             // We use 'product-thumb' class for targeting in JS, and 'selected' for styling the first one
-            `<img src="${img}" data-src="${img}" class="product-thumb ${index === 0 ? 'selected' : ''}" alt="${product.name} thumbnail ${index + 1}">`
+            `<img src="${img}" data-src="${img}" class="product-thumb ${index === 0 ? 'selected' : ''}" alt="${product.name} thumbnail ${index + 1}" loading="lazy" decoding="async" width="100" height="120">`
         )
         .join('');
 
@@ -159,6 +162,9 @@ window.onload = function () {
             window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
         });
     }
+
+    // 6. Render Frequently Bought Together
+    renderFrequentlyBoughtTogether();
 };
 
 // Global variable to track current filter
@@ -207,6 +213,8 @@ function renderDoorCatalog(categoryFilter = null) {
                      alt="Door Design ${door.code}" 
                      class="door-catalog-image lazy-load" 
                      loading="lazy"
+                     decoding="async"
+                     width="250" height="280"
                      onerror="this.src='images/logo.png'; this.alt='Image not available'; this.classList.add('error');">
                 <div class="image-loading-spinner" aria-hidden="true"></div>
             </div>
@@ -308,6 +316,10 @@ function updateThumbnailsWithSimilarImages(category, clickedImageSrc) {
         thumb.setAttribute('data-src', imgSrc);
         thumb.className = 'product-thumb';
         thumb.alt = `Similar Door Design ${index + 1}`;
+        thumb.loading = "lazy";
+        thumb.decoding = "async";
+        thumb.width = 100;
+        thumb.height = 120;
         thumb.setAttribute('role', 'button');
         thumb.setAttribute('tabindex', '0');
         thumb.setAttribute('aria-label', `View similar door design ${index + 1}`);
@@ -374,4 +386,43 @@ function injectProductSchema(product, absoluteImageUrl) {
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(schema, null, 2); // Pretty print for readability
     document.head.appendChild(script);
+}
+
+// Function to render "Frequently Bought Together" section
+function renderFrequentlyBoughtTogether() {
+    const mainElement = document.querySelector('main');
+    if (!mainElement) return;
+
+    // List of common accessories to recommend
+    const accessories = [
+        { name: "Premium Handles", image: "images/handle g.webp", url: "contact.html?product=Premium Handles" },
+        { name: "Smart Digital Locks", image: "images/lock_g-removebg-preview.png", url: "contact.html?product=Digital Locks" },
+        { name: "Door Stoppers", image: "images/stoper.avif", url: "contact.html?product=Door Stoppers" },
+        { name: "Heavy Duty Hinges", image: "images/hings.jpg", url: "contact.html?product=Door Hinges" },
+        { name: "Door Closers", image: "images/door_closer-removebg-preview.png", url: "contact.html?product=Door Closers" },
+        { name: "Tower Bolts", image: "images/tower bolt.webp", url: "contact.html?product=Tower Bolts" }
+    ];
+
+    // Randomly select 3 items to display
+    const selected = accessories.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    const section = document.createElement('section');
+    section.className = 'products-section freq-bought-section';
+    section.innerHTML = `
+        <div class="section-content">
+            <h2 class="section-title">Frequently Bought Together</h2>
+            <div class="products-grid">
+                ${selected.map(item => `
+                    <div class="products">
+                        <a href="${item.url}">
+                            <img src="${item.image}" alt="${item.name}" class="Products-image" loading="lazy" onerror="this.src='images/logo.png'">
+                            <h3 class="name">${item.name}</h3>
+                        </a>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    mainElement.appendChild(section);
 }

@@ -463,28 +463,6 @@
 
 
     <script>
-        // Navbar Scroll Effect
-        const header = document.querySelector("header");
-        window.addEventListener("scroll", function () {
-            header.classList.toggle("transparent", window.scrollY < 50);
-        });
-
-        // WhatsApp Form Handler
-        document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = this.querySelector('input[name="Name"]').value;
-            const email = this.querySelector('input[name="Email"]').value;
-            const number = this.querySelector('input[name="Number"]').value;
-            const message = this.querySelector('textarea[name="Message"]').value;
-            
-            const whatsappMessage = `*New Enquiry from Website*\n\nName: ${name}\nEmail: ${email}\nPhone: ${number}\nMessage: ${message}`;
-            
-            window.open(`https://wa.me/919844443388?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-        });
-    </script>
-
-    <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>

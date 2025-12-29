@@ -231,3 +231,53 @@ if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption && galleryCon
         if (e.target === lightbox) lightbox.classList.remove('active');
     });
 }
+
+// 9. Navbar Scroll Effect
+const navbarHeader = document.querySelector("header");
+const heroSection = document.querySelector(".hero-section");
+
+if (navbarHeader && heroSection) {
+    navbarHeader.classList.toggle("transparent", window.scrollY < 50);
+    window.addEventListener("scroll", function () {
+        navbarHeader.classList.toggle("transparent", window.scrollY < 50);
+    });
+} else if (navbarHeader) {
+    navbarHeader.classList.remove("transparent");
+}
+
+// 10. WhatsApp Form Handler
+const whatsappForm = document.getElementById('ajor-contact-form');
+if (whatsappForm) {
+    whatsappForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = this.querySelector('input[name="Name"]').value;
+        const email = this.querySelector('input[name="Email"]').value;
+        const number = this.querySelector('input[name="Number"]').value;
+        const message = this.querySelector('textarea[name="Message"]').value;
+        
+        const whatsappMessage = `*New Enquiry from Website*\n\nName: ${name}\nEmail: ${email}\nPhone: ${number}\nMessage: ${message}`;
+        
+        window.open(`https://wa.me/919844443388?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+    });
+}
+
+// 11. Hardware Search Functionality
+const hardwareSearchInput = document.getElementById('hardware-search');
+const hardwareItems = document.querySelectorAll('.hardware-grid .products');
+
+if (hardwareSearchInput && hardwareItems.length > 0) {
+    hardwareSearchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase().trim();
+
+        hardwareItems.forEach(item => {
+            const name = item.querySelector('.name').textContent.toLowerCase();
+            if (name.includes(searchTerm)) {
+                item.style.display = '';
+                // Optional: Add a subtle fade-in animation here if desired
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+}
