@@ -281,3 +281,24 @@ if (hardwareSearchInput && hardwareItems.length > 0) {
         });
     });
 }
+
+// 12. Cookie Consent Banner
+if (!localStorage.getItem("cookieConsent")) {
+    const banner = document.createElement("div");
+    banner.className = "cookie-banner";
+    banner.innerHTML = `
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <button id="accept-cookies" class="cookie-btn">Accept</button>
+        </div>
+    `;
+    document.body.appendChild(banner);
+
+    const acceptBtn = document.getElementById("accept-cookies");
+    if (acceptBtn) {
+        acceptBtn.addEventListener("click", function() {
+            localStorage.setItem("cookieConsent", "true");
+            banner.remove();
+        });
+    }
+}

@@ -221,9 +221,6 @@ function renderDoorCatalog(categoryFilter = null) {
         </div>
     `).join('');
 
-    // Add "Show All" button if filtered, or remove it if showing all
-    
-
     // Attach click and keyboard event listeners to catalog items
     document.querySelectorAll('.door-catalog-item').forEach(item => {
         // Click handler
