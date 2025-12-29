@@ -39,7 +39,7 @@
         href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop"
         media="(max-width: 768px)">
     <link rel="preload" as="image"
-        href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
+        href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=60&w=1200&auto=format&fit=crop"
         media="(min-width: 769px)">
 
     <script type="application/ld+json">
@@ -105,7 +105,7 @@
     <main>
         <section class="hero-section">
             <video autoplay muted loop playsinline class="hero-video"
-                poster="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop">
+                poster="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=60&w=1200&auto=format&fit=crop">
                 <!-- Replace 'images/hero-video.mp4' with your actual video file path -->
                 <source src="images/hero-video.mp4" type="video/mp4">
             </video>
@@ -467,6 +467,20 @@
         const header = document.querySelector("header");
         window.addEventListener("scroll", function () {
             header.classList.toggle("transparent", window.scrollY < 50);
+        });
+
+        // WhatsApp Form Handler
+        document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = this.querySelector('input[name="Name"]').value;
+            const email = this.querySelector('input[name="Email"]').value;
+            const number = this.querySelector('input[name="Number"]').value;
+            const message = this.querySelector('textarea[name="Message"]').value;
+            
+            const whatsappMessage = `*New Enquiry from Website*\n\nName: ${name}\nEmail: ${email}\nPhone: ${number}\nMessage: ${message}`;
+            
+            window.open(`https://wa.me/919844443388?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
         });
     </script>
 

@@ -188,7 +188,7 @@ if (filterBtns.length > 0) {
 
             galleryItems.forEach(item => {
                 if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                    item.style.display = 'block';
+                    item.style.display = '';
                     // Add a small fade in animation
                     item.style.opacity = '0';
                     setTimeout(() => item.style.opacity = '1', 50);
@@ -205,23 +205,22 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCloseBtn = document.querySelector('.lightbox-close');
 const lightboxCaption = document.getElementById('lightbox-caption');
-const galleryImages = document.querySelectorAll('.gallery-item img');
+const galleryContainer = document.querySelector('.gallery-container');
 
-if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption) {
-    galleryImages.forEach(img => {
-        img.addEventListener('click', () => {
-            lightbox.classList.add('active');
-            lightboxImg.src = img.src;
-
-            // Find the parent gallery item to get the caption text
-            const galleryItem = img.closest('.gallery-item');
-            if (galleryItem) {
-                const captionEl = galleryItem.querySelector('.gallery-cat');
-                if (captionEl) {
-                    lightboxCaption.textContent = captionEl.textContent;
-                }
+if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption && galleryContainer) {
+    // Use Event Delegation: Listen for clicks on the container, then check if a gallery-item was clicked
+    galleryContainer.addEventListener('click', (e) => {
+        const item = e.target.closest('.gallery-item');
+        if (item) {
+            const img = item.querySelector('img');
+            if (img && img.src) {
+                lightbox.classList.add('active');
+                lightboxImg.src = img.src;
+                
+                const captionEl = item.querySelector('.gallery-cat');
+                lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
             }
-        });
+        }
     });
 
     lightboxCloseBtn.addEventListener('click', () => {

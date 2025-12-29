@@ -2405,7 +2405,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 .lightbox {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 9999999;
     top: 0;
     left: 0;
     width: 100%;
@@ -2421,7 +2421,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 }
 
 .lightbox.active {
-    display: flex;
+    display: flex !important;
     animation: fadeIn 0.3s;
 }
 
@@ -2432,6 +2432,8 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     border: 6px solid var(--white-color);
     animation: zoomInImage 0.4s ease-out;
+    object-fit: contain;
+    background-color: var(--white-color);
 }
 
 .lightbox-caption {
@@ -2818,4 +2820,34 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     .products-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ======================================================= */
+/* HARDWARE PAGE STYLES                                    */
+/* ======================================================= */
+
+.hardware-item {
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Add hover zoom effect for hardware items */
+.products:hover .hardware-item {
+    transform: scale(1.05);
+}
+
+/* Hardware page specific mobile styles */
+@media screen and (max-width: 600px) {
+    .hardware-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Hide "View Details" overlay for hardware items */
+.hardware-grid .products::after {
+    display: none;
 }
