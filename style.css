@@ -745,11 +745,11 @@ header .navbar {
 .why-door-img {
     width: 100%;
     max-width: 800px;
-   
- 
+
+
     border-radius: 4px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-   
+
     animation: floatDoor 5s ease-in-out infinite;
     /* This tells the browser to keep it stable */
 }
@@ -783,7 +783,7 @@ header .navbar {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     /* The soft shadow from image */
     transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     border-bottom: 3px solid transparent;
     position: relative;
     overflow: hidden;
@@ -1073,7 +1073,8 @@ header .navbar {
     height: 450px;
     width: 100%;
     border: none;
-    display: block; /* Removes any default bottom margin */
+    display: block;
+    /* Removes any default bottom margin */
 }
 
 /* FAQ Section */
@@ -1107,18 +1108,21 @@ header .navbar {
     font-weight: 600;
     color: var(--primary-color);
     cursor: pointer;
-    list-style: none; /* Remove default marker */
+    list-style: none;
+    /* Remove default marker */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .faq-question::-webkit-details-marker {
-    display: none; /* Hide for Chrome/Safari */
+    display: none;
+    /* Hide for Chrome/Safari */
 }
 
 .faq-question::after {
-    content: '\f078'; /* Font Awesome down arrow */
+    content: '\f078';
+    /* Font Awesome down arrow */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     transition: transform 0.3s ease;
@@ -1760,7 +1764,8 @@ header .navbar {
 
 @media screen and (max-width: 480px) {
     .extra-info-grid {
-        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        grid-template-columns: 1fr;
+        /* Stack vertically on mobile */
     }
 }
 
@@ -2025,7 +2030,8 @@ header .navbar {
     letter-spacing: 1px;
 }
 
-.filter-btn.active, .filter-btn:hover {
+.filter-btn.active,
+.filter-btn:hover {
     background: var(--secondary-color);
     border-color: var(--secondary-color);
     color: #fff;
@@ -2046,7 +2052,8 @@ header .navbar {
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    height: 400px; /* Fixed height for uniform grid */
+    height: 400px;
+    /* Fixed height for uniform grid */
     transition: all 0.4s ease;
     display: flex;
     align-items: center;
@@ -2062,7 +2069,8 @@ header .navbar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower zoom for a premium feel */
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Slower zoom for a premium feel */
 }
 
 .gallery-item:hover img {
@@ -2103,7 +2111,8 @@ header .navbar {
     background-position: center;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Stack image and caption vertically */
+    flex-direction: column;
+    /* Stack image and caption vertically */
     backdrop-filter: blur(5px);
 }
 
@@ -2132,8 +2141,9 @@ header .navbar {
     font-weight: 600;
     text-transform: capitalize;
     text-align: center;
-    animation: fadeIn 0.5s 0.2s backwards; /* Fade in after image */
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    animation: fadeIn 0.5s 0.2s backwards;
+    /* Fade in after image */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-close {
@@ -2156,7 +2166,8 @@ header .navbar {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=1920&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* This creates the parallax effect */
+    background-attachment: fixed;
+    /* This creates the parallax effect */
     padding: 80px 20px;
     text-align: center;
     color: var(--white-color);
@@ -2215,13 +2226,25 @@ header .navbar {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes zoomInImage {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .gallery-cat {
@@ -2249,7 +2272,8 @@ header .navbar {
 /* Process Section Styles */
 .process-section {
     padding: 80px 0;
-    background-color: #f9f9f9; /* Light gray background to separate from white gallery */
+    background-color: #f9f9f9;
+    /* Light gray background to separate from white gallery */
 }
 
 .process-grid {
@@ -2268,7 +2292,7 @@ header .navbar {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .process-step:hover {
@@ -2465,12 +2489,12 @@ header .navbar {
     border-radius: 15px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .value-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .value-icon {
@@ -2570,7 +2594,7 @@ header .navbar {
 .hardware-grid .products {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     border: 1px solid #eaeaea;
@@ -2578,7 +2602,7 @@ header .navbar {
 
 .hardware-grid .products:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
 .hardware-grid .products a {
@@ -2609,7 +2633,7 @@ header .navbar {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    
+
     .Products-image.hardware-item {
         height: 160px;
     }
@@ -2624,7 +2648,7 @@ header .navbar {
     .hardware-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .Products-image.hardware-item {
         height: 220px;
     }
@@ -2646,7 +2670,7 @@ header .navbar {
     font-size: 1.1rem;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
 }
 
 .hardware-search-input:focus {
@@ -2709,7 +2733,7 @@ header .navbar {
     color: var(--white-color);
     padding: 15px 20px;
     z-index: 1000000;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2749,8 +2773,13 @@ header .navbar {
 }
 
 @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 768px) {
@@ -2775,11 +2804,13 @@ header .navbar {
     overflow-x: auto;
     padding: 1rem 0.5rem;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .hardware-slider::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
+    /* Chrome/Safari */
 }
 
 .slide-item {
@@ -2787,16 +2818,16 @@ header .navbar {
     scroll-snap-align: center;
     background: var(--white-color);
     border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     padding: 1rem;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .slide-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .slide-item img {
@@ -2827,7 +2858,7 @@ header .navbar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     z-index: 10;
     color: var(--secondary-color);
@@ -2843,8 +2874,13 @@ header .navbar {
     color: var(--white-color);
 }
 
-.prev-btn { left: -20px; }
-.next-btn { right: -20px; }
+.prev-btn {
+    left: -20px;
+}
+
+.next-btn {
+    right: -20px;
+}
 
 /* Interactive Grid Cards (Gallery Specific) */
 .grid-card {
@@ -2852,7 +2888,7 @@ header .navbar {
     overflow: hidden;
     border-radius: 12px;
     aspect-ratio: 1 / 1;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     cursor: zoom-in;
 }
 
@@ -2885,7 +2921,7 @@ header .navbar {
 }
 
 /* Force hide unwanted sections that might be injected by JS */
-.freq-bought-section, 
+.freq-bought-section,
 .door-catalog-section {
     display: none !important;
 }
