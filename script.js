@@ -77,36 +77,6 @@ if (document.querySelector('.testimonial-slider')) {
     });
 }
 
-// 3. Auto Play Video on Scroll
-const video = document.getElementById('aboutIntroVideo');
-const fullScreenBtn = document.getElementById('fullScreenBtn');
-
-// 1. Auto play/pause on scroll
-if (video) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        });
-    }, { threshold: 0.5 });
-    observer.observe(video);
-}
-
-// 2. Full Screen Functionality
-if (fullScreenBtn && video) {
-    fullScreenBtn.addEventListener('click', () => {
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) { /* Safari */
-            video.webkitRequestFullscreen();
-        } else if (video.msRequestFullscreen) { /* IE11 */
-            video.msRequestFullscreen();
-        }
-    });
-}
 // --- FIXED FORM SECTION ---
 const form = document.getElementById('ajor-contact-form');
 const btn = document.getElementById('submit-btn');

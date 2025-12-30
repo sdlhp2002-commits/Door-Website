@@ -206,23 +206,15 @@ header .navbar {
 /* hero section */
 
 .hero-section {
-    /* Background handled by video and overlay */
     background-color: var(--primary-color);
+    background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=60&w=1200&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
     min-height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
-}
-
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
 }
 
 /* Dark Overlay for Video */
@@ -1852,71 +1844,6 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
         width: 100%;
         /* Full width button is easier to tap on phones */
         text-align: center;
-    }
-}
-
-/* Video Section */
-.full-video-section {
-    width: 100%;
-    background: #000;
-    margin: 40px 0;
-}
-
-.full-video-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    /* Limits width so it doesn't look stretched on huge monitors */
-    margin: 0 auto;
-    overflow: hidden;
-    background: #000;
-}
-
-#aboutIntroVideo {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    /* Shows full original video frame */
-    transform: none;
-    /* Removes any previous zooming/scaling */
-    pointer-events: none;
-    /* Prevents the user from pausing it by accident */
-}
-
-/* Hide default play/pause/controls */
-
-/* Custom Full Screen Button Styling */
-.video-control-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(179, 139, 89, 0.8);
-    /* Your brand gold */
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 20;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-}
-
-.video-control-btn:hover {
-    background: #b38b59;
-    transform: scale(1.1);
-}
-
-@media (max-width: 768px) {
-    .video-control-btn {
-        width: 40px;
-        height: 40px;
-        top: 10px;
-        right: 10px;
     }
 }
 
