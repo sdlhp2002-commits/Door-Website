@@ -2198,6 +2198,21 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     box-shadow: 0 15px 30px rgba(184, 134, 11, 0.4);
 }
 
+/* Hardware Promo Button Specific Style */
+.hardware-promo .cta-btn.hardware-btn {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white-color);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hardware-promo .cta-btn.hardware-btn:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--white-color);
+    box-shadow: 0 15px 30px rgba(184, 134, 11, 0.4);
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
