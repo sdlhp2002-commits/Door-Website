@@ -173,7 +173,7 @@ if (scrollTopBtn) {
 }
 
 // 7. Gallery Filter Logic
-const filterBtns = document.querySelectorAll('.filter-btn');
+const filterBtns = document.querySelectorAll('.gallery-filters .filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
 
 if (filterBtns.length > 0) {
@@ -206,22 +206,28 @@ const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCloseBtn = document.querySelector('.lightbox-close');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const galleryContainer = document.querySelector('.gallery-container');
+const hardwareGrid = document.querySelector('.hardware-grid');
 
-if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption && galleryContainer) {
-    // Use Event Delegation: Listen for clicks on the container, then check if a gallery-item was clicked
-    galleryContainer.addEventListener('click', (e) => {
-        const item = e.target.closest('.gallery-item');
+if (lightbox && lightboxImg && lightboxCloseBtn) {
+    const openLightbox = (e) => {
+        const item = e.target.closest('.gallery-item, .products, .slide-item, .grid-card');
         if (item) {
+            // Prevent default link behavior if clicking the image directly
+            if(e.target.tagName === 'IMG') e.preventDefault();
+            
             const img = item.querySelector('img');
             if (img && img.src) {
                 lightbox.classList.add('active');
                 lightboxImg.src = img.src;
                 
-                const captionEl = item.querySelector('.gallery-cat');
+                const captionEl = item.querySelector('.gallery-cat, .name, h3, strong');
                 lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
             }
         }
-    });
+    };
+
+    if (galleryContainer) galleryContainer.addEventListener('click', openLightbox);
+    if (hardwareGrid) hardwareGrid.addEventListener('click', openLightbox);
 
     lightboxCloseBtn.addEventListener('click', () => {
         lightbox.classList.remove('active');
@@ -282,6 +288,30 @@ if (hardwareSearchInput && hardwareItems.length > 0) {
     });
 }
 
+// 12. Hardware Filter Logic
+const hardwareFilterBtns = document.querySelectorAll('.hardware-filters .filter-btn');
+const hardwareItemsGrid = document.querySelectorAll('.hardware-grid .products');
+
+if (hardwareFilterBtns.length > 0) {
+    hardwareFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            hardwareFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+            
+            hardwareItemsGrid.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.style.display = '';
+                    item.style.opacity = 0;
+                    setTimeout(() => item.style.opacity = 1, 50);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
 // 12. Cookie Consent Banner
 if (!localStorage.getItem("cookieConsent")) {
     const banner = document.createElement("div");
@@ -301,4 +331,18 @@ if (!localStorage.getItem("cookieConsent")) {
             banner.remove();
         });
     }
+}
+
+// 13. Hardware Gallery Slider Logic (Manual Scroll)
+const hwSlider = document.querySelector('.hardware-slider');
+const hwPrevBtn = document.querySelector('.prev-btn');
+const hwNextBtn = document.querySelector('.next-btn');
+
+if (hwSlider && hwPrevBtn && hwNextBtn) {
+    hwNextBtn.addEventListener('click', () => {
+        hwSlider.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+    hwPrevBtn.addEventListener('click', () => {
+        hwSlider.scrollBy({ left: -300, behavior: 'smooth' });
+    });
 }

@@ -65,10 +65,19 @@
                     <i class="fas fa-search search-icon"></i>
                 </div>
 
+                <!-- Filter Buttons -->
+                <div class="gallery-filters hardware-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="handles">Handles</button>
+                    <button class="filter-btn" data-filter="locks">Locks</button>
+                    <button class="filter-btn" data-filter="security">Security</button>
+                    <button class="filter-btn" data-filter="accessories">Accessories</button>
+                </div>
+
                 <div class="products-grid hardware-grid">
 
                     <!-- Hardware 1 -->
-                    <div class="products">
+                    <div class="products" data-category="handles">
                         <a href="contact.html?product=Premium Handles">
                             <img src="images/handle g.webp" alt="Premium Door Handles" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Premium Handles</h3>
@@ -76,7 +85,7 @@
                     </div>
 
                     <!-- Hardware 2 -->
-                    <div class="products">
+                    <div class="products" data-category="accessories">
                         <a href="contact.html?product=Door Stoppers">
                             <img src="images/stoper.avif" alt="Magnetic Door Stoppers" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Door Stoppers</h3>
@@ -84,7 +93,7 @@
                     </div>
 
                     <!-- Hardware 3 -->
-                    <div class="products">
+                    <div class="products" data-category="locks">
                         <a href="contact.html?product=Digital Locks">
                             <img src="images/lock_g-removebg-preview.png" alt="Smart Digital Locks" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Smart Digital Locks</h3>
@@ -92,7 +101,7 @@
                     </div>
 
                     <!-- Hardware 4 -->
-                    <div class="products">
+                    <div class="products" data-category="accessories">
                         <a href="contact.html?product=Door Hinges">
                             <img src="images/hings.jpg" alt="Heavy Duty Hinges" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Heavy Duty Hinges</h3>
@@ -100,7 +109,7 @@
                     </div>
 
                     <!-- Hardware 5 -->
-                    <div class="products">
+                    <div class="products" data-category="accessories">
                         <a href="contact.html?product=Door Closers">
                             <img src="images/door_closer-removebg-preview.png" alt="Door Closers" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Door Closers</h3>
@@ -108,7 +117,7 @@
                     </div>
 
                     <!-- Hardware 6 -->
-                    <div class="products">
+                    <div class="products" data-category="security">
                         <a href="contact.html?product=Tower Bolts">
                             <img src="images/tower bolt.webp" alt="SS Tower Bolts" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Tower Bolts</h3>
@@ -116,7 +125,7 @@
                     </div>
 
                     <!-- Hardware 7 -->
-                    <div class="products">
+                    <div class="products" data-category="security">
                         <a href="contact.html?product=Door Eye">
                             <img src="images/door eye viewer.webp" alt="Security Door Eye" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Door Eye Viewer</h3>
@@ -124,7 +133,7 @@
                     </div>
 
                     <!-- Hardware 8 -->
-                    <div class="products">
+                    <div class="products" data-category="handles">
                         <a href="contact.html?product=Pull Handles">
                             <img src="images/pull_handle-removebg-preview.png" alt="Designer Pull Handles" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Designer Pull Handles</h3>
@@ -132,7 +141,7 @@
                     </div>
 
                     <!-- Hardware 9 -->
-                    <div class="products">
+                    <div class="products" data-category="accessories">
                         <a href="contact.html?product=Door Knockers">
                             <img src="images/door knower.jpg" alt="Antique Door Knockers" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Antique Door Knockers</h3>
@@ -140,7 +149,7 @@
                     </div>
 
                     <!-- Hardware 10 -->
-                    <div class="products">
+                    <div class="products" data-category="security">
                         <a href="contact.html?product=Security Chains">
                             <img src="images/security chain.jpg" alt="Door Security Chains" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Security Chains</h3>
@@ -148,7 +157,7 @@
                     </div>
 
                     <!-- Hardware 11 -->
-                    <div class="products">
+                    <div class="products" data-category="locks">
                         <a href="contact.html?product=Mortise Locks">
                             <img src="images/mortige lock.jpg" alt="Mortise Lock Sets" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Mortise Lock Sets</h3>
@@ -156,7 +165,7 @@
                     </div>
 
                     <!-- Hardware 12 -->
-                    <div class="products">
+                    <div class="products" data-category="accessories">
                         <a href="contact.html?product=Door Seals">
                             <img src="images/wood-door-bottom-seal-500x500.webp" alt="Bottom Door Seals" class="Products-image hardware-item" loading="lazy" onerror="this.src='images/logo.png'">
                             <h3 class="name">Bottom Door Seals</h3>
@@ -184,6 +193,13 @@
             <i class="fa-brands fa-whatsapp"></i>
         </a>
     </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Fullscreen">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer-section">
