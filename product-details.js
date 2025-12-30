@@ -373,6 +373,9 @@ function injectProductSchema(product, imageUrl) {
                 "@type": "Offer",
                 "url": window.location.href,
                 "priceCurrency": "INR",
+                "price": "0",
+                "priceValidUntil": "2025-12-31",
+                "itemCondition": "https://schema.org/NewCondition",
                 "availability": "https://schema.org/InStock",
                 "seller": { "@type": "LocalBusiness", "name": "Shree Dhanlaxmi Hardware and Plywood" }
             }
