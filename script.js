@@ -221,23 +221,6 @@ if (navbarHeader && heroSection) {
     navbarHeader.classList.remove("transparent");
 }
 
-// 10. WhatsApp Form Handler
-const whatsappForm = document.getElementById('ajor-contact-form');
-if (whatsappForm) {
-    whatsappForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = this.querySelector('input[name="Name"]').value;
-        const email = this.querySelector('input[name="Email"]').value;
-        const number = this.querySelector('input[name="Number"]').value;
-        const message = this.querySelector('textarea[name="Message"]').value;
-        
-        const whatsappMessage = `*New Enquiry from Website*\n\nName: ${name}\nEmail: ${email}\nPhone: ${number}\nMessage: ${message}`;
-        
-        window.open(`https://wa.me/919844443388?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-    });
-}
-
 // 11. Hardware Search Functionality
 const hardwareSearchInput = document.getElementById('hardware-search');
 const hardwareItems = document.querySelectorAll('.hardware-grid .products');
