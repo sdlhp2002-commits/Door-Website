@@ -349,8 +349,9 @@ function injectProductSchema(product, imageUrl) {
             "telephone": "+91 98444 43388",
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Sy No. 107, 108 & 109, Rampura Main Road",
+                "streetAddress": "Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village",
                 "addressLocality": "Bengaluru",
+                "addressRegion": "KA",
                 "postalCode": "560043",
                 "addressCountry": "IN"
             },
