@@ -1,6 +1,6 @@
 param(
     [string]$RepoUrl = 'https://github.com/sdlhp2002-commits/Door-Website.git',
-    [string]$CommitMessage = 'Deploy: add README, .gitignore and GH Pages workflow'
+    [string]$CommitMessage = 'Update website content'
 )
 
 function ExitWith($msg) {
