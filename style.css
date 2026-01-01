@@ -111,31 +111,13 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Transparent state for top of page */
-header.transparent {
-    background: transparent;
-    box-shadow: none;
-    border-bottom: none;
-}
-
-/* Make links white when header is transparent (for dark backgrounds) */
-header.transparent .navbar .nav-menu .nav-link,
-header.transparent .navbar #menu-open-button {
-    color: var(--white-color);
-}
-
-header.transparent .navbar .nav-menu .nav-link:hover {
-    color: var(--secondary-color);
-}
-
-/* Invert logo colors when header is transparent */
-header.transparent .nav-logo .logo-image {
-    filter: invert(1);
+header.scrolled {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 header .navbar {
@@ -191,7 +173,7 @@ header .navbar {
     height: 80px;
     width: auto;
     display: block;
-    transition: transform 0.3s ease, filter 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .nav-logo:hover .logo-image {

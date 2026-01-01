@@ -206,19 +206,6 @@ if (lightbox && lightboxImg && lightboxCloseBtn) {
     });
 }
 
-// 9. Navbar Scroll Effect
-const navbarHeader = document.querySelector("header");
-const heroSection = document.querySelector(".hero-section");
-
-if (navbarHeader && heroSection) {
-    navbarHeader.classList.toggle("transparent", window.scrollY < 50);
-    window.addEventListener("scroll", function () {
-        navbarHeader.classList.toggle("transparent", window.scrollY < 50);
-    });
-} else if (navbarHeader) {
-    navbarHeader.classList.remove("transparent");
-}
-
 // 12. Cookie Consent Banner
 if (!localStorage.getItem("cookieConsent")) {
     const banner = document.createElement("div");
