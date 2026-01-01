@@ -117,3 +117,4 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 Write-Host "Done. Check GitHub Actions in the repo to monitor deployment."
+Write-Host "Your Sitemap URL for Google Search Console: https://doors.ajormart.in/sitemap.xml" -ForegroundColor Cyan
