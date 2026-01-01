@@ -82,8 +82,8 @@ if (-not (Test-Path ".\robots.txt")) {
 # Check for CNAME if sitemap uses custom domain (Prevents broken SEO links)
 $sitemapContent = Get-Content ".\sitemap.xml" -Raw
 if ($sitemapContent -match "doors.ajormart.in" -and -not (Test-Path ".\CNAME")) {
-    Write-Host "⚠️  WARNING: Sitemap uses 'doors.ajormart.in' but no 'CNAME' file found." -ForegroundColor Yellow
-    Write-Host "   Please go to GitHub Repo Settings > Pages > Custom Domain and save 'doors.ajormart.in'." -ForegroundColor Yellow
+    Write-Host "Creating CNAME file for custom domain 'doors.ajormart.in'..."
+    Set-Content -Path ".\CNAME" -Value "doors.ajormart.in" -Encoding UTF8
 }
 
 # Stage and commit
