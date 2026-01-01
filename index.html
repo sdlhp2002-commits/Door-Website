@@ -434,7 +434,7 @@
                     <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
                 </div>
                 <p class="policy-text">
-                    <a href="index.html" class="policy-link">Home</a>
+                    <a href="./" class="policy-link">Home</a>
                     <span class="separator"></span>
                     <a href="about.html" class="policy-link">About</a>
                     <span class="separator"></span>
@@ -463,6 +463,13 @@
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script>
+        // Handle form submission and redirect to Thank You page
+        document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = 'thank-you.html';
+        });
+    </script>
 
 </body>
 

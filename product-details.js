@@ -46,7 +46,7 @@ window.onload = function () {
     // 1. Initial Checks
     // ----------------------
     if (!product || !PRODUCTS) {
-        document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='index.html'>Back to Home</a></div>";
+        document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='./'>Back to Home</a></div>";
         return;
     }
 
@@ -75,7 +75,7 @@ window.onload = function () {
 
     // Fill hero/breadcrumb
     document.getElementById("breadcrumb-area").innerHTML =
-        `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
+        `<a href='./' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
     
     // Set the main page heading (H1) for SEO
     document.getElementById("product-title").textContent = product.name;
