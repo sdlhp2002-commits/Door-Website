@@ -72,6 +72,20 @@ if (-not (Test-Path ".\.nojekyll")) {
     New-Item -Path ".\.nojekyll" -ItemType File -Force | Out-Null
 }
 
+# Ensure robots.txt exists (Crucial for SEO)
+if (-not (Test-Path ".\robots.txt")) {
+    Write-Host "Creating robots.txt for SEO..."
+    $robotsContent = "User-agent: *`r`nAllow: /`r`nSitemap: https://doors.ajormart.in/sitemap.xml"
+    [System.IO.File]::WriteAllText((Resolve-Path .).Path + "\robots.txt", $robotsContent, [System.Text.Encoding]::UTF8)
+}
+
+# Check for CNAME if sitemap uses custom domain (Prevents broken SEO links)
+$sitemapContent = Get-Content ".\sitemap.xml" -Raw
+if ($sitemapContent -match "doors.ajormart.in" -and -not (Test-Path ".\CNAME")) {
+    Write-Host "⚠️  WARNING: Sitemap uses 'doors.ajormart.in' but no 'CNAME' file found." -ForegroundColor Yellow
+    Write-Host "   Please go to GitHub Repo Settings > Pages > Custom Domain and save 'doors.ajormart.in'." -ForegroundColor Yellow
+}
+
 # Stage and commit
 Write-Host "Staging files..."
 & git add .
