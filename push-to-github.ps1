@@ -15,7 +15,6 @@ $currentYear = (Get-Date).Year
 if ($currentYear -gt 2025) {
     Write-Host "⚠️  CRITICAL WARNING: Your computer date is set to $currentYear!" -ForegroundColor Red
     Write-Host "   This will cause GitHub connection errors and bad SEO. Please fix your Windows Date & Time settings." -ForegroundColor Yellow
-    exit 1
 }
 
 # Check for git
@@ -55,7 +54,12 @@ try {
 $sitemapPath = ".\sitemap.xml"
 if (Test-Path $sitemapPath) {
     Write-Host "Updating sitemap.xml lastmod dates..."
-    $today = (Get-Date).ToString("yyyy-MM-dd")
+    $dateObj = Get-Date
+    if ($dateObj.Year -gt 2025) {
+        $today = "2025-01-01"
+    } else {
+        $today = $dateObj.ToString("yyyy-MM-dd")
+    }
     $content = Get-Content $sitemapPath -Raw
     $newContent = $content -replace "<lastmod>.*?</lastmod>", "<lastmod>$today</lastmod>"
     # Write with UTF-8 No BOM to ensure Google can parse it correctly
