@@ -15,6 +15,7 @@ $currentYear = (Get-Date).Year
 if ($currentYear -gt 2025) {
     Write-Host "⚠️  CRITICAL WARNING: Your computer date is set to $currentYear!" -ForegroundColor Red
     Write-Host "   This will cause GitHub connection errors and bad SEO. Please fix your Windows Date & Time settings." -ForegroundColor Yellow
+    exit 1
 }
 
 # Check for git

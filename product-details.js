@@ -53,8 +53,8 @@ window.onload = function () {
     // ----------------------
     // 2. Data Population
     // ----------------------
-    const pageTitle = `${product.name} | Shree Dhanlaxmi Hardware and Plywood Manufacturer in Bengaluru`;
-    const pageDescription = `Discover the ${product.name} from Shree Dhanlaxmi Hardware and Plywood, Bengaluru. ${product.shortDescription} View specifications, features, and designs.`;
+    const pageTitle = `${product.name} | Ajor Doors Manufacturer in Bengaluru`;
+    const pageDescription = `Discover the ${product.name} from Ajor Doors, Bengaluru. ${product.shortDescription} View specifications, features, and designs.`;
     const absoluteImageUrl = new URL(product.mainImage, window.location.href).href;
 
     // Update Title & Meta Description
@@ -76,7 +76,7 @@ window.onload = function () {
     // Fill hero/breadcrumb
     document.getElementById("breadcrumb-area").innerHTML =
         `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
-
+    
     // Set the main page heading (H1) for SEO
     document.getElementById("product-title").textContent = product.name;
 
@@ -98,8 +98,8 @@ window.onload = function () {
     document.getElementById("product-features").innerHTML = renderFeatures(product.features);
 
     // Warranty & Maintenance (New)
-    if (product.warranty) document.getElementById("product-warranty").textContent = product.warranty;
-    if (product.maintenance) document.getElementById("product-maintenance").textContent = product.maintenance;
+    if(product.warranty) document.getElementById("product-warranty").textContent = product.warranty;
+    if(product.maintenance) document.getElementById("product-maintenance").textContent = product.maintenance;
 
     // ----------------------
     // 3. Thumbnail Rendering & Event Handling
@@ -126,7 +126,7 @@ window.onload = function () {
         // Add accessibility attributes
         thumb.setAttribute('role', 'button');
         thumb.setAttribute('tabindex', '0');
-
+        
         // Click handler
         thumb.addEventListener('click', function () {
             // Use the data-src attribute for the high-res image source
@@ -135,7 +135,7 @@ window.onload = function () {
         });
 
         // Keyboard navigation support
-        thumb.addEventListener('keydown', function (e) {
+        thumb.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 const newSrc = this.getAttribute('data-src');
@@ -156,15 +156,12 @@ window.onload = function () {
     // ----------------------
     const enquiryBtn = document.getElementById('product-enquiry-btn');
     if (enquiryBtn) {
-        enquiryBtn.addEventListener('click', function (e) {
+        enquiryBtn.addEventListener('click', function(e) {
             e.preventDefault();
             // Redirect to contact page with product name as a parameter
             window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
         });
     }
-
-    // 6. Render Frequently Bought Together
-    renderFrequentlyBoughtTogether();
 };
 
 // Global variable to track current filter
@@ -234,15 +231,15 @@ function renderDoorCatalog(categoryFilter = null) {
             if (mainImg && imageSrc) {
                 // Add loading class to main image
                 mainImg.classList.add('loading');
-
+                
                 // Create new image to preload
                 const imgPreload = new Image();
-                imgPreload.onload = function () {
+                imgPreload.onload = function() {
                     mainImg.src = imageSrc;
                     mainImg.alt = `Door Design ${doorCode}`;
                     mainImg.classList.remove('loading');
                 };
-                imgPreload.onerror = function () {
+                imgPreload.onerror = function() {
                     mainImg.classList.remove('loading');
                     mainImg.alt = `Door Design ${doorCode} - Image unavailable`;
                 };
@@ -278,9 +275,9 @@ function renderDoorCatalog(categoryFilter = null) {
         };
 
         item.addEventListener('click', handleCatalogClick);
-
+        
         // Keyboard navigation support (Enter and Space keys)
-        item.addEventListener('keydown', function (e) {
+        item.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 handleCatalogClick.call(this);
@@ -327,7 +324,7 @@ function updateThumbnailsWithSimilarImages(category, clickedImageSrc) {
         });
 
         // Keyboard navigation for thumbnails
-        thumb.addEventListener('keydown', function (e) {
+        thumb.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 swapMainImage(imgSrc, this);
@@ -339,98 +336,48 @@ function updateThumbnailsWithSimilarImages(category, clickedImageSrc) {
 }
 
 // Injects Product Schema JSON-LD into the page head for SEO
-function injectProductSchema(product, imageUrl) {
-    const schemaData = [
-        {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Shree Dhanlaxmi Hardware and Plywood",
-            "image": "https://doors.ajormart.in/images/logo.png",
-            "telephone": "+91 98444 43388",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village",
-                "addressLocality": "Bengaluru",
-                "addressRegion": "KA",
-                "postalCode": "560043",
-                "addressCountry": "IN"
-            },
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "13.0454225",
-                "longitude": "77.6801548"
-            },
-            "url": "https://doors.ajormart.in"
+function injectProductSchema(product, absoluteImageUrl) {
+    const schema = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": product.name,
+        "image": absoluteImageUrl,
+        "description": product.shortDescription,
+        "sku": product.id,
+        "brand": {
+            "@type": "Brand",
+            "name": "Ajor Doors"
         },
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": product.name,
-            "image": imageUrl,
-            "description": product.shortDescription,
-            "sku": product.id,
-            "brand": { "@type": "Brand", "name": "Shree Dhanlaxmi Hardware and Plywood" },
-            "offers": {
-                "@type": "Offer",
-                "url": window.location.href,
-                "priceCurrency": "INR",
-                "price": "0",
-                "priceValidUntil": "2025-12-31",
-                "itemCondition": "https://schema.org/NewCondition",
-                "availability": "https://schema.org/InStock",
-                "seller": { "@type": "LocalBusiness", "name": "Shree Dhanlaxmi Hardware and Plywood" }
+        "offers": {
+            "@type": "Offer",
+            "url": window.location.href,
+            "priceCurrency": "INR",
+            // You can add price here if you have it, e.g., "price": "15000",
+            "availability": "https://schema.org/InStock", // Or OutOfStock, PreOrder
+            "seller": {
+                "@type": "LocalBusiness",
+                "name": "Ajor Doors & Interior Solutions",
+                "image": new URL('images/logo.png', window.location.href).href,
+                "telephone": "+91 98444 43388",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Sy No. 107, 108 & 109, Rampura Main Road, K.channasandra Village",
+                    "addressLocality": "Bengaluru",
+                    "addressRegion": "KA",
+                    "postalCode": "560043",
+                    "addressCountry": "IN"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "13.0279",
+                    "longitude": "77.6784"
+                }
             }
         }
-    ];
-
-    // Remove any existing dynamic schema to prevent duplicates when switching products
-    const existingSchema = document.getElementById('dynamic-schema');
-    if (existingSchema) existingSchema.remove();
+    };
 
     const script = document.createElement('script');
-    script.id = 'dynamic-schema';
     script.type = 'application/ld+json';
-    script.text = JSON.stringify(schemaData);
+    script.textContent = JSON.stringify(schema, null, 2); // Pretty print for readability
     document.head.appendChild(script);
-    console.log("✅ SEO Schema successfully injected for: " + product.name);
-    console.log("📍 Google will see this location for 'Near Me' searches:", schemaData[0].geo.latitude, ",", schemaData[0].geo.longitude);
-}
-
-// Function to render "Frequently Bought Together" section
-function renderFrequentlyBoughtTogether() {
-    const mainElement = document.querySelector('main');
-    if (!mainElement) return;
-
-    // List of common accessories to recommend
-    const accessories = [
-        { name: "Premium Handles", image: "images/handle g.webp", url: "contact.html?product=Premium Handles" },
-        { name: "Smart Digital Locks", image: "images/lock_g-removebg-preview.png", url: "contact.html?product=Digital Locks" },
-        { name: "Door Stoppers", image: "images/stoper.avif", url: "contact.html?product=Door Stoppers" },
-        { name: "Heavy Duty Hinges", image: "images/hings.jpg", url: "contact.html?product=Door Hinges" },
-        { name: "Door Closers", image: "images/door_closer-removebg-preview.png", url: "contact.html?product=Door Closers" },
-        { name: "Tower Bolts", image: "images/tower bolt.webp", url: "contact.html?product=Tower Bolts" }
-    ];
-
-    // Randomly select 3 items to display
-    const selected = accessories.sort(() => 0.5 - Math.random()).slice(0, 3);
-
-    const section = document.createElement('section');
-    section.className = 'products-section freq-bought-section';
-    section.innerHTML = `
-        <div class="section-content">
-            <h2 class="section-title">Frequently Bought Together</h2>
-            <div class="products-grid">
-                ${selected.map(item => `
-                    <div class="products">
-                        <a href="${item.url}">
-                            <img src="${item.image}" alt="${item.name}" class="Products-image" loading="lazy" onerror="this.src='images/logo.png'">
-                            <h3 class="name">${item.name}</h3>
-                        </a>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-
-    mainElement.appendChild(section);
 }

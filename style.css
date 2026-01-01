@@ -206,15 +206,23 @@ header .navbar {
 /* hero section */
 
 .hero-section {
+    /* Background handled by video and overlay */
     background-color: var(--primary-color);
-    background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=60&w=1200&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
     min-height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
 /* Dark Overlay for Video */
@@ -310,7 +318,6 @@ header .navbar {
 @media screen and (max-width: 768px) {
     .hero-section {
         /* Optional: You can set a fallback image here if you want to hide video on mobile */
-        background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop');
     }
 }
 
@@ -537,7 +544,6 @@ header .navbar {
         height: 100vh;
         /* Use vh to cover full height */
         display: flex;
-        overflow-y: auto;
         flex-direction: column;
         align-items: center;
         padding-top: 100px;
@@ -588,9 +594,9 @@ header .navbar {
         transition-delay: 0.5s;
     }
 
-    body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
-        transition-delay: 0.6s;
-    }
+body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
+    transition-delay: 0.6s;
+}
 
     .about-section .section-content {
         /* Mobile: Stack them vertically, details above image */
@@ -746,11 +752,11 @@ header .navbar {
 .why-door-img {
     width: 100%;
     max-width: 800px;
-
-
+   
+ 
     border-radius: 4px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-
+   
     animation: floatDoor 5s ease-in-out infinite;
     /* This tells the browser to keep it stable */
 }
@@ -784,7 +790,7 @@ header .navbar {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     /* The soft shadow from image */
     transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0,0,0,0.03);
     border-bottom: 3px solid transparent;
     position: relative;
     overflow: hidden;
@@ -1074,8 +1080,7 @@ header .navbar {
     height: 450px;
     width: 100%;
     border: none;
-    display: block;
-    /* Removes any default bottom margin */
+    display: block; /* Removes any default bottom margin */
 }
 
 /* FAQ Section */
@@ -1109,21 +1114,18 @@ header .navbar {
     font-weight: 600;
     color: var(--primary-color);
     cursor: pointer;
-    list-style: none;
-    /* Remove default marker */
+    list-style: none; /* Remove default marker */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .faq-question::-webkit-details-marker {
-    display: none;
-    /* Hide for Chrome/Safari */
+    display: none; /* Hide for Chrome/Safari */
 }
 
 .faq-question::after {
-    content: '\f078';
-    /* Font Awesome down arrow */
+    content: '\f078'; /* Font Awesome down arrow */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     transition: transform 0.3s ease;
@@ -1286,7 +1288,6 @@ header .navbar {
 .products-section .slider-wrapper {
     overflow: hidden;
     margin: 0 60px 30px;
-    position: relative;
 }
 
 /* --- Product Slider Visibility Logic --- */
@@ -1727,96 +1728,8 @@ header .navbar {
     text-align: left;
 }
 
-/* ======================================================= */
-/* DOOR CATALOG STYLES                                     */
-/* ======================================================= */
-
-.door-catalog-section {
-    padding: 60px 0;
-    background-color: #fff;
-    border-top: 1px solid #eee;
-    display: block;
-}
-
-.door-catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 15px;
-    margin-top: 30px;
-    transition: opacity 0.3s ease;
-}
-
-.door-catalog-grid.filtering {
-    opacity: 0.5;
-}
-
-.door-catalog-item {
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    background: #fff;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.door-catalog-item:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-}
-
-.door-catalog-label {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 6px 15px;
-    text-align: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--white-color);
-    background: #0056b3;
-    border-radius: 30px;
-    z-index: 2;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.door-catalog-item:hover .door-catalog-label {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    color: #0056b3;
-}
-
-.door-catalog-image-wrapper {
-    height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #fcfcfc;
-}
-
-.door-catalog-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.door-catalog-item:hover .door-catalog-image {
-    transform: scale(1.05);
-}
-
-/* Ensure freq-bought is also visible */
-.freq-bought-section {
-    display: block;
-    padding: 60px 0;
-    background-color: #f9f9f9;
-}
+/* Removed the complex list-item pseudo-element styling */
+/* .description-list li:before { ... } */
 
 
 /* --- EXTRA INFO GRID (Warranty & Maintenance) --- */
@@ -1854,38 +1767,33 @@ header .navbar {
 
 @media screen and (max-width: 480px) {
     .extra-info-grid {
-        grid-template-columns: 1fr;
-        /* Stack vertically on mobile */
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
     }
 }
 
 /* --- ENQUIRY BUTTON --- */
 /* --- ENQUIRY BUTTON --- */
-.enquiry-btn,
 .enquiry-button {
     align-self: flex-start;
     /* Forces the button to stay on the left */
     background: transparent;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     padding: 12px 38px;
     border-radius: var(--border-radius-m);
-    font-size: 1.1rem;
+    font-size: var(--font-size-l);
     font-weight: var(--font-weight-semibold);
     border: 2px solid var(--secondary-color);
     transition: all 0.2s ease;
     margin-top: 10px;
     display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .enquiry-btn:hover,
 .enquiry-button:hover {
     background: var(--secondary-color);
-    color: var(--white-color);
+    color: var(--primary-color);
     border: 2px solid var(--secondary-color);
-    box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
-    transform: translateY(-3px);
+    box-shadow: 0 4px 24px rgba(160, 85, 30, 0.11);
 }
 
 /* --- MOBILE OPTIMIZATION FOR PRODUCT PAGE --- */
@@ -1935,11 +1843,337 @@ header .navbar {
         height: 95px;
     }
 
-    .enquiry-btn,
-    .enquiry-button {
+    .enquiry-btn {
         width: 100%;
         /* Full width button is easier to tap on phones */
         text-align: center;
+    }
+}
+
+/* ======================================================= */
+/* DOOR CATALOG GALLERY SECTION STYLING                   */
+/* ======================================================= */
+
+.door-catalog-section {
+    background: #f8f9fa;
+    padding: 80px 0 100px;
+}
+
+.catalog-section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-family: "Playfair Display", serif;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 50px;
+    padding: 0 20px;
+    line-height: 1.6;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.door-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: opacity 0.3s ease;
+}
+
+.door-catalog-grid.filtering {
+    opacity: 0.7;
+}
+
+.door-catalog-item {
+    position: relative;
+    background: var(--white-color);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    /* Remove default outline, we'll add custom focus styles */
+}
+
+/* Accessibility: Focus styles for keyboard navigation */
+.door-catalog-item:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+    border-color: var(--secondary-color);
+}
+
+/* Accessibility: Focus visible for keyboard users only */
+.door-catalog-item:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.door-catalog-item:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+    border-color: var(--secondary-color);
+}
+
+.door-catalog-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+}
+
+.door-catalog-image-wrapper {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    overflow: hidden;
+    background: transparent;
+    position: relative;
+    border-radius: 8px;
+}
+
+/* Loading spinner for images */
+.image-loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.door-catalog-image.lazy-load:not([src])~.image-loading-spinner,
+.door-catalog-image.loading~.image-loading-spinner {
+    opacity: 1;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Hide spinner when image is loaded */
+.door-catalog-image:not(.loading):not(.lazy-load)~.image-loading-spinner {
+    opacity: 0;
+}
+
+.door-catalog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    max-width: 320px;
+    max-height: 280px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Loading state */
+.door-catalog-image.loading {
+    opacity: 0.5;
+}
+
+/* Error state */
+.door-catalog-image.error {
+    opacity: 0.7;
+    filter: grayscale(50%);
+}
+
+/* Smooth fade-in when loaded */
+.door-catalog-image:not(.loading) {
+    opacity: 1;
+}
+
+.door-catalog-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 30px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    min-width: auto;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.door-catalog-label:hover {
+    background: var(--secondary-color);
+    color: var(--white-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(184, 134, 11, 0.3);
+}
+
+/* Responsive adjustments for catalog grid */
+@media screen and (max-width: 1024px) {
+    .door-catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .door-catalog-section {
+        padding: 60px 0 80px;
+    }
+
+    .catalog-section-title {
+        font-size: var(--font-size-m);
+        margin-bottom: 40px;
+    }
+
+    .door-catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 18px;
+        padding: 0 15px;
+    }
+
+    .door-catalog-item {
+        min-height: 240px;
+        padding: 6px 4px;
+    }
+
+    .door-catalog-image-wrapper {
+        height: 200px;
+        margin-bottom: 5px;
+    }
+
+    .door-catalog-image {
+        max-width: 250px;
+        max-height: 220px;
+    }
+
+    .door-catalog-label {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        top: 6px;
+        left: 6px;
+        min-width: 40px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .door-catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 10px;
+    }
+
+    .catalog-section-title {
+        font-size: var(--font-size-s);
+        padding: 0 15px;
+    }
+
+    .door-catalog-item {
+        min-height: 200px;
+        padding: 6px 4px;
+    }
+
+    .door-catalog-image-wrapper {
+        height: 160px;
+        margin-bottom: 5px;
+    }
+
+    .door-catalog-image {
+        max-width: 180px;
+        max-height: 170px;
+    }
+
+    .door-catalog-label {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+        top: 5px;
+        left: 5px;
+        min-width: 35px;
+    }
+}
+
+/* Video Section */
+.full-video-section {
+    width: 100%;
+    background: #000;
+    margin: 40px 0;
+}
+
+.full-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    /* Limits width so it doesn't look stretched on huge monitors */
+    margin: 0 auto;
+    overflow: hidden;
+    background: #000;
+}
+
+#aboutIntroVideo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Shows full original video frame */
+    transform: none;
+    /* Removes any previous zooming/scaling */
+    pointer-events: none;
+    /* Prevents the user from pausing it by accident */
+}
+
+/* Hide default play/pause/controls */
+
+/* Custom Full Screen Button Styling */
+.video-control-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(179, 139, 89, 0.8);
+    /* Your brand gold */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.video-control-btn:hover {
+    background: #b38b59;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .video-control-btn {
+        width: 40px;
+        height: 40px;
+        top: 10px;
+        right: 10px;
     }
 }
 
@@ -2120,8 +2354,7 @@ header .navbar {
     letter-spacing: 1px;
 }
 
-.filter-btn.active,
-.filter-btn:hover {
+.filter-btn.active, .filter-btn:hover {
     background: var(--secondary-color);
     border-color: var(--secondary-color);
     color: #fff;
@@ -2142,8 +2375,7 @@ header .navbar {
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    height: 400px;
-    /* Fixed height for uniform grid */
+    height: 400px; /* Fixed height for uniform grid */
     transition: all 0.4s ease;
     display: flex;
     align-items: center;
@@ -2159,8 +2391,7 @@ header .navbar {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    /* Slower zoom for a premium feel */
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower zoom for a premium feel */
 }
 
 .gallery-item:hover img {
@@ -2201,8 +2432,7 @@ header .navbar {
     background-position: center;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    /* Stack image and caption vertically */
+    flex-direction: column; /* Stack image and caption vertically */
     backdrop-filter: blur(5px);
 }
 
@@ -2231,9 +2461,8 @@ header .navbar {
     font-weight: 600;
     text-transform: capitalize;
     text-align: center;
-    animation: fadeIn 0.5s 0.2s backwards;
-    /* Fade in after image */
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s 0.2s backwards; /* Fade in after image */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .lightbox-close {
@@ -2256,8 +2485,7 @@ header .navbar {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=1920&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    /* This creates the parallax effect */
+    background-attachment: fixed; /* This creates the parallax effect */
     padding: 80px 20px;
     text-align: center;
     color: var(--white-color);
@@ -2301,25 +2529,13 @@ header .navbar {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes zoomInImage {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .gallery-cat {
@@ -2347,8 +2563,7 @@ header .navbar {
 /* Process Section Styles */
 .process-section {
     padding: 80px 0;
-    background-color: #f9f9f9;
-    /* Light gray background to separate from white gallery */
+    background-color: #f9f9f9; /* Light gray background to separate from white gallery */
 }
 
 .process-grid {
@@ -2367,7 +2582,7 @@ header .navbar {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
 .process-step:hover {
@@ -2564,12 +2779,12 @@ header .navbar {
     border-radius: 15px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .value-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 .value-icon {
@@ -2623,6 +2838,180 @@ header .navbar {
     }
 }
 
+/* ======================================================= */
+/* HARDWARE PAGE STYLES                                    */
+/* ======================================================= */
+
+.hardware-item {
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Add hover zoom effect for hardware items */
+.products:hover .hardware-item {
+    transform: scale(1.05);
+}
+
+/* Hardware page specific mobile styles */
+@media screen and (max-width: 600px) {
+    .hardware-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Hide "View Details" overlay for hardware items */
+.hardware-grid .products::after {
+    display: none;
+}
+
+/* Hardware Page Styling */
+.products-section.hardware-section {
+    background-color: #f4f6f8;
+    background-image: none;
+}
+
+.hardware-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    padding-bottom: 20px;
+}
+
+.hardware-grid .products {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #eaeaea;
+}
+
+.hardware-grid .products:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+.hardware-grid .products a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.Products-image.hardware-item {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    background-color: #fff;
+}
+
+.hardware-grid .products .name {
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .hardware-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .Products-image.hardware-item {
+        height: 160px;
+    }
+
+    .hardware-grid .products .name {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hardware-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .Products-image.hardware-item {
+        height: 220px;
+    }
+}
+
+/* Hardware Search Bar */
+.hardware-search-container {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    position: relative;
+}
+
+.hardware-search-input {
+    width: 100%;
+    padding: 15px 25px;
+    padding-right: 50px;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.hardware-search-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 8px 20px rgba(184, 134, 11, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.2rem;
+}
+
+/* WhatsApp Share Button */
+.whatsapp-share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #25D366;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: var(--border-radius-m);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid #25D366;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.whatsapp-share-btn:hover {
+    background-color: #128C7E;
+    border-color: #128C7E;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    color: #ffffff;
+}
+
+@media screen and (max-width: 480px) {
+    .whatsapp-share-btn {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
 /* Cookie Consent Banner */
 .cookie-banner {
     position: fixed;
@@ -2633,7 +3022,7 @@ header .navbar {
     color: var(--white-color);
     padding: 15px 20px;
     z-index: 1000000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2673,13 +3062,8 @@ header .navbar {
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
