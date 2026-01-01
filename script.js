@@ -176,7 +176,6 @@ const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCloseBtn = document.querySelector('.lightbox-close');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const galleryContainer = document.querySelector('.gallery-container');
-const hardwareGrid = document.querySelector('.hardware-grid');
 
 if (lightbox && lightboxImg && lightboxCloseBtn) {
     const openLightbox = (e) => {
@@ -197,7 +196,6 @@ if (lightbox && lightboxImg && lightboxCloseBtn) {
     };
 
     if (galleryContainer) galleryContainer.addEventListener('click', openLightbox);
-    if (hardwareGrid) hardwareGrid.addEventListener('click', openLightbox);
 
     lightboxCloseBtn.addEventListener('click', () => {
         lightbox.classList.remove('active');
@@ -221,50 +219,6 @@ if (navbarHeader && heroSection) {
     navbarHeader.classList.remove("transparent");
 }
 
-// 11. Hardware Search Functionality
-const hardwareSearchInput = document.getElementById('hardware-search');
-const hardwareItems = document.querySelectorAll('.hardware-grid .products');
-
-if (hardwareSearchInput && hardwareItems.length > 0) {
-    hardwareSearchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase().trim();
-
-        hardwareItems.forEach(item => {
-            const name = item.querySelector('.name').textContent.toLowerCase();
-            if (name.includes(searchTerm)) {
-                item.style.display = '';
-                // Optional: Add a subtle fade-in animation here if desired
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-}
-
-// 12. Hardware Filter Logic
-const hardwareFilterBtns = document.querySelectorAll('.hardware-filters .filter-btn');
-const hardwareItemsGrid = document.querySelectorAll('.hardware-grid .products');
-
-if (hardwareFilterBtns.length > 0) {
-    hardwareFilterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            hardwareFilterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            
-            hardwareItemsGrid.forEach(item => {
-                if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                    item.style.display = '';
-                    item.style.opacity = 0;
-                    setTimeout(() => item.style.opacity = 1, 50);
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    });
-}
-
 // 12. Cookie Consent Banner
 if (!localStorage.getItem("cookieConsent")) {
     const banner = document.createElement("div");
@@ -284,18 +238,4 @@ if (!localStorage.getItem("cookieConsent")) {
             banner.remove();
         });
     }
-}
-
-// 13. Hardware Gallery Slider Logic (Manual Scroll)
-const hwSlider = document.querySelector('.hardware-slider');
-const hwPrevBtn = document.querySelector('.prev-btn');
-const hwNextBtn = document.querySelector('.next-btn');
-
-if (hwSlider && hwPrevBtn && hwNextBtn) {
-    hwNextBtn.addEventListener('click', () => {
-        hwSlider.scrollBy({ left: 300, behavior: 'smooth' });
-    });
-    hwPrevBtn.addEventListener('click', () => {
-        hwSlider.scrollBy({ left: -300, behavior: 'smooth' });
-    });
 }
