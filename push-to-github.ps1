@@ -90,12 +90,16 @@ try {
     Write-Host "Rename branch failed (may already be main)."
 }
 
+Write-Host "Syncing with remote (pull --rebase)..."
+& git pull origin main --rebase
+
 Write-Host "Pushing to origin main (you may be prompted to authenticate)..."
-try {
-    & git push -u origin main
-    Write-Host "Push complete."
-} catch {
-    ExitWith "Push failed. Check git remote, authentication, and network. For auth, create a GitHub Personal Access Token (repo scope) and set remote url with token."
+& git push -u origin main
+
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Push complete." -ForegroundColor Green
+} else {
+    ExitWith "Push failed. Check git remote, authentication, and network."
 }
 
 Write-Host "Done. Check GitHub Actions in the repo to monitor deployment."
