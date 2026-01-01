@@ -10,6 +10,13 @@ function ExitWith($msg) {
 
 Write-Host "push-to-github.ps1 starting..."
 
+# Check for incorrect system clock (Common cause of SSL errors)
+$currentYear = (Get-Date).Year
+if ($currentYear -gt 2025) {
+    Write-Host "⚠️  CRITICAL WARNING: Your computer date is set to $currentYear!" -ForegroundColor Red
+    Write-Host "   This will cause GitHub connection errors and bad SEO. Please fix your Windows Date & Time settings." -ForegroundColor Yellow
+}
+
 # Check for git
 try {
     $gv = & git --version 2>$null
