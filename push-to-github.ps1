@@ -53,45 +53,15 @@ try {
 
 # Generate dynamic sitemap.xml
 $sitemapPath = ".\sitemap.xml"
-Write-Host "Generating sitemap.xml..."
-$baseUrl = "https://doors.ajormart.in"
-$dateObj = Get-Date
-if ($dateObj.Year -gt 2025) { $today = "2025-01-01" } else { $today = $dateObj.ToString("yyyy-MM-dd") }
-
-$xmlContent = "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n"
-$xmlContent += "<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n"
-
-# 1. Add Static Pages
-$staticPages = @("", "about.html", "product.html", "gallery.html", "contact.html")
-foreach ($page in $staticPages) {
-    $prio = if ($page -eq "") { "1.0" } else { "0.8" }
-    $loc = if ($page -eq "") { "$baseUrl/" } else { "$baseUrl/$page" }
-    $xmlContent += "  <url><loc>$loc</loc><lastmod>$today</lastmod><priority>$prio</priority></url>`n"
-}
-
-# 2. Extract Products from index.html (and product.html if available)
-$productIds = @{}
-$filesToScan = @("index.html", "product.html")
-foreach ($file in $filesToScan) {
-    if (Test-Path $file) {
-        $content = Get-Content $file -Raw
-        $matches = [regex]::Matches($content, 'href=["'']product-details\.html\?id=([^"''\s>]+)["'']')
-        foreach ($m in $matches) {
-            $id = $m.Groups[1].Value
-            if (-not $productIds.ContainsKey($id)) {
-                $productIds[$id] = $true
-                $xmlContent += "  <url><loc>$baseUrl/product-details.html?id=$id</loc><lastmod>$today</lastmod><priority>0.8</priority></url>`n"
-            }
-        }
-    }
-}
-
-$xmlContent += "</urlset>"
-
-# Write with UTF-8 No BOM
-$utf8NoBom = New-Object System.Text.UTF8Encoding $false
-[System.IO.File]::WriteAllText("$PWD\sitemap.xml", $xmlContent, $utf8NoBom)
-Write-Host "Sitemap generated with $($productIds.Count) products."
+if (Test-Path $sitemapPath) {
+    Write-Host "Updating sitemap.xml lastmod dates..."
+    $today = (Get-Date).ToString("yyyy-MM-dd")
+    $content = Get-Content $sitemapPath -Raw
+    $newContent = $content -replace "<lastmod>.*?</lastmod>", "<lastmod>$today</lastmod>"
+    # Write with UTF-8 No BOM to ensure Google can parse it correctly
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText((Resolve-Path $sitemapPath).Path, $newContent, $utf8NoBom)
+    Write-Host "Sitemap updated to $today"
 
 # Validate XML syntax locally
 try {
@@ -107,25 +77,6 @@ try {
 if (-not (Test-Path ".\.nojekyll")) {
     Write-Host "Creating .nojekyll file..."
     New-Item -Path ".\.nojekyll" -ItemType File -Force | Out-Null
-}
-
-# Ensure robots.txt exists and points to Sitemap (Crucial for SEO)
-$robotsPath = ".\robots.txt"
-$sitemapLine = "Sitemap: https://doors.ajormart.in/sitemap.xml"
-if (-not (Test-Path $robotsPath)) {
-    Write-Host "Creating robots.txt for SEO..."
-    $robotsContent = "User-agent: *`r`nAllow: /`r`n$sitemapLine"
-    [System.IO.File]::WriteAllText((Resolve-Path .).Path + "\robots.txt", $robotsContent, [System.Text.Encoding]::UTF8)
-} elseif ((Get-Content $robotsPath -Raw) -notmatch "Sitemap:") {
-    Add-Content -Path $robotsPath -Value "`r`n$sitemapLine"
-    Write-Host "Updated robots.txt with Sitemap link."
-}
-
-# Check for CNAME if sitemap uses custom domain (Prevents broken SEO links)
-$sitemapContent = Get-Content ".\sitemap.xml" -Raw
-if ($sitemapContent -match "doors.ajormart.in" -and -not (Test-Path ".\CNAME")) {
-    Write-Host "Creating CNAME file for custom domain 'doors.ajormart.in'..."
-    Set-Content -Path ".\CNAME" -Value "doors.ajormart.in" -Encoding UTF8
 }
 
 # Stage and commit
