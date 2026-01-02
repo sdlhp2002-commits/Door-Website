@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <title>Door Details | Ajor Door's</title>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5TMG8NTF9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-B5TMG8NTF9');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="meta-description" name="description"
@@ -25,6 +25,7 @@
     content="View detailed specifications and features of our premium doors. Ajor Doors offers high-quality Teak, WPC, and Laminate doors in Bengaluru.">
   <meta id="og-image" property="og:image" content="https://doors.ajormart.in/images/logo.png">
   <meta property="og:site_name" content="Ajor Doors">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="images/logo.png">
@@ -42,14 +43,14 @@
   <header>
     <nav class="navbar section-content">
       <a href="#" class="nav-logo">
-        <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image" width="150" height="80">
+        <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image" width="150" height="80" fetchpriority="high">
 
       </a>
       <ul class="nav-menu">
         <button id="menu-close-button" class="fas fa-times"></button>
 
         <li class="nav-item">
-          <a href="index.html" class="nav-link">Home</a>
+          <a href="./" class="nav-link">Home</a>
         </li>
 
         <li class="nav-item">
@@ -92,7 +93,7 @@
       <div class="product-details-wrapper">
         <!-- LEFT COLUMN: MAIN IMAGE & THUMBNAILS -->
         <aside class="product-preview">
-          <img src="" id="main-door-image" class="product-main-image" alt="Door Product">
+          <img src="" id="main-door-image" class="product-main-image" alt="Door Product" fetchpriority="high" decoding="async">
           <div id="similar-images" class="product-thumbnails"></div>
         </aside>
         <!-- RIGHT COLUMN: TEXT & SPECS -->
@@ -187,7 +188,7 @@
           <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
         </div>
         <p class="policy-text">
-          <a href="index.html" class="policy-link">Home</a>
+          <a href="./" class="policy-link">Home</a>
           <span class="separator"></span>
           <a href="about.html" class="policy-link">About</a>
           <span class="separator"></span>
@@ -217,6 +218,21 @@
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script>
+    // Handle form submission and redirect to Thank You page
+    document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        window.location.href = 'thank-you.html';
+    });
+
+    // Add shadow to header on scroll
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (header) {
+            header.classList.toggle('scrolled', window.scrollY > 0);
+        }
+    });
+  </script>
 </body>
 
 </html>

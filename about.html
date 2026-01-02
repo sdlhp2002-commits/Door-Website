@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Ajor Doors | Leading Door Manufacturer in Bengaluru</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5TMG8NTF9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-B5TMG8NTF9');
+    </script>
+
     <meta name="description"
         content="Learn more about Ajor Doors, a leading manufacturer of premium Teak, WPC, and Laminate doors in Bengaluru.">
 
@@ -219,6 +229,15 @@
 
         <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
         <script src="script.js"></script>
+        <script>
+            // Add shadow to header on scroll
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (header) {
+                    header.classList.toggle('scrolled', window.scrollY > 0);
+                }
+            });
+        </script>
 </body>
 
 </html>

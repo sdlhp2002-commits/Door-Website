@@ -77,36 +77,6 @@ if (document.querySelector('.testimonial-slider')) {
     });
 }
 
-// 3. Auto Play Video on Scroll
-const video = document.getElementById('aboutIntroVideo');
-const fullScreenBtn = document.getElementById('fullScreenBtn');
-
-// 1. Auto play/pause on scroll
-if (video) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        });
-    }, { threshold: 0.5 });
-    observer.observe(video);
-}
-
-// 2. Full Screen Functionality
-if (fullScreenBtn && video) {
-    fullScreenBtn.addEventListener('click', () => {
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) { /* Safari */
-            video.webkitRequestFullscreen();
-        } else if (video.msRequestFullscreen) { /* IE11 */
-            video.msRequestFullscreen();
-        }
-    });
-}
 // --- FIXED FORM SECTION ---
 const form = document.getElementById('ajor-contact-form');
 const btn = document.getElementById('submit-btn');
@@ -173,7 +143,7 @@ if (scrollTopBtn) {
 }
 
 // 7. Gallery Filter Logic
-const filterBtns = document.querySelectorAll('.filter-btn');
+const filterBtns = document.querySelectorAll('.gallery-filters .filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
 
 if (filterBtns.length > 0) {
@@ -207,21 +177,26 @@ const lightboxCloseBtn = document.querySelector('.lightbox-close');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const galleryContainer = document.querySelector('.gallery-container');
 
-if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption && galleryContainer) {
-    // Use Event Delegation: Listen for clicks on the container, then check if a gallery-item was clicked
-    galleryContainer.addEventListener('click', (e) => {
-        const item = e.target.closest('.gallery-item');
+if (lightbox && lightboxImg && lightboxCloseBtn) {
+    const openLightbox = (e) => {
+        const item = e.target.closest('.gallery-item, .products, .slide-item, .grid-card');
         if (item) {
+            // Prevent default link behavior if clicking the image directly
+            if(e.target.tagName === 'IMG') e.preventDefault();
+            
             const img = item.querySelector('img');
             if (img && img.src) {
                 lightbox.classList.add('active');
+                lightboxImg.decoding = "async"; // Optimize decoding for large images
                 lightboxImg.src = img.src;
                 
-                const captionEl = item.querySelector('.gallery-cat');
+                const captionEl = item.querySelector('.gallery-cat, .name, h3, strong');
                 lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
             }
         }
-    });
+    };
+
+    if (galleryContainer) galleryContainer.addEventListener('click', openLightbox);
 
     lightboxCloseBtn.addEventListener('click', () => {
         lightbox.classList.remove('active');
@@ -229,56 +204,6 @@ if (lightbox && lightboxImg && lightboxCloseBtn && lightboxCaption && galleryCon
 
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) lightbox.classList.remove('active');
-    });
-}
-
-// 9. Navbar Scroll Effect
-const navbarHeader = document.querySelector("header");
-const heroSection = document.querySelector(".hero-section");
-
-if (navbarHeader && heroSection) {
-    navbarHeader.classList.toggle("transparent", window.scrollY < 50);
-    window.addEventListener("scroll", function () {
-        navbarHeader.classList.toggle("transparent", window.scrollY < 50);
-    });
-} else if (navbarHeader) {
-    navbarHeader.classList.remove("transparent");
-}
-
-// 10. WhatsApp Form Handler
-const whatsappForm = document.getElementById('ajor-contact-form');
-if (whatsappForm) {
-    whatsappForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = this.querySelector('input[name="Name"]').value;
-        const email = this.querySelector('input[name="Email"]').value;
-        const number = this.querySelector('input[name="Number"]').value;
-        const message = this.querySelector('textarea[name="Message"]').value;
-        
-        const whatsappMessage = `*New Enquiry from Website*\n\nName: ${name}\nEmail: ${email}\nPhone: ${number}\nMessage: ${message}`;
-        
-        window.open(`https://wa.me/919844443388?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-    });
-}
-
-// 11. Hardware Search Functionality
-const hardwareSearchInput = document.getElementById('hardware-search');
-const hardwareItems = document.querySelectorAll('.hardware-grid .products');
-
-if (hardwareSearchInput && hardwareItems.length > 0) {
-    hardwareSearchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase().trim();
-
-        hardwareItems.forEach(item => {
-            const name = item.querySelector('.name').textContent.toLowerCase();
-            if (name.includes(searchTerm)) {
-                item.style.display = '';
-                // Optional: Add a subtle fade-in animation here if desired
-            } else {
-                item.style.display = 'none';
-            }
-        });
     });
 }
 
@@ -302,3 +227,20 @@ if (!localStorage.getItem("cookieConsent")) {
         });
     }
 }
+
+// 13. Image Performance Optimization
+document.addEventListener("DOMContentLoaded", () => {
+    // Optimize static gallery images that lack lazy loading (Fixes gallery.html)
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    galleryImages.forEach(img => {
+        img.setAttribute('loading', 'eager');
+        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    });
+
+    // Optimize Logo for LCP (Largest Contentful Paint)
+    const logo = document.querySelector('.logo-image');
+    if (logo) {
+        logo.setAttribute('fetchpriority', 'high');
+        logo.setAttribute('decoding', 'async');
+    }
+});

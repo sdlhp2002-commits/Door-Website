@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Ajor Doors | Door Manufacturer in Bengaluru</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5TMG8NTF9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-B5TMG8NTF9');
+    </script>
+
     <meta name="description" content="Get in touch with Ajor Doors in Bengaluru for a free quote on our premium Teak, WPC, and Laminate doors. Visit our showroom or call us today.">
     
     <!-- SEO Meta Tags -->
@@ -183,6 +193,21 @@
             const messageBox = document.querySelector('textarea[name="Message"]');
             if (productName && messageBox) {
                 messageBox.value = `I am interested in ${productName}. Please send me more details.`;
+            }
+        });
+
+        // Handle form submission and redirect to Thank You page
+        document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Redirect to thank you page to track conversion
+            window.location.href = 'thank-you.html';
+        });
+
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                header.classList.toggle('scrolled', window.scrollY > 0);
             }
         });
     </script>

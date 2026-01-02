@@ -5,8 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Door Gallery | Teak, WPC & Laminate Installations in Bengaluru</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5TMG8NTF9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-B5TMG8NTF9');
+    </script>
+
     <meta name="description" content="Explore our gallery of premium Teak, WPC, and Laminate doors installed in beautiful homes across Bengaluru.">
     
+    <link rel="canonical" href="https://doors.ajormart.in/gallery.html">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://doors.ajormart.in/gallery.html">
+    <meta property="og:title" content="Door Gallery | Teak, WPC & Laminate Installations in Bengaluru">
+    <meta property="og:description" content="Explore our gallery of premium Teak, WPC, and Laminate doors installed in beautiful homes across Bengaluru.">
+    <meta property="og:image" content="https://doors.ajormart.in/images/logo.png">
+    <meta property="og:site_name" content="Ajor Doors">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="./style.css">
@@ -17,12 +38,12 @@
     <!-- Header (Same as Index) -->
     <header>
         <nav class="navbar section-content">
-            <a href="index.html" class="nav-logo">
+            <a href="./" class="nav-logo">
                 <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image" width="150" height="80">
             </a>
             <ul class="nav-menu">
                 <button id="menu-close-button" class="fas fa-times"></button>
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="./" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="product.html" class="nav-link">Product</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
@@ -39,7 +60,7 @@
                 <div class="hero-title-box">
                     <h1 class="hero-main-title">Our Masterpieces</h1>
                     <nav class="breadcrumbs-container">
-                        <a href="index.html">Home</a> / Gallery
+                        <a href="./">Home</a> / Gallery
                     </nav>
                 </div>
             </div>
@@ -215,7 +236,7 @@
                 <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
             </div>
             <p class="policy-text">
-                <a href="index.html" class="policy-link">Home</a>
+                <a href="./" class="policy-link">Home</a>
                 <span class="separator"></span>
                 <a href="about.html" class="policy-link">About</a>
                 <span class="separator"></span>
@@ -225,5 +246,14 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                header.classList.toggle('scrolled', window.scrollY > 0);
+            }
+        });
+    </script>
 </body>
 </html>

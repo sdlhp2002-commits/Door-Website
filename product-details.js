@@ -46,7 +46,7 @@ window.onload = function () {
     // 1. Initial Checks
     // ----------------------
     if (!product || !PRODUCTS) {
-        document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='index.html'>Back to Home</a></div>";
+        document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='./'>Back to Home</a></div>";
         return;
     }
 
@@ -75,7 +75,7 @@ window.onload = function () {
 
     // Fill hero/breadcrumb
     document.getElementById("breadcrumb-area").innerHTML =
-        `<a href='index.html' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
+        `<a href='./' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
     
     // Set the main page heading (H1) for SEO
     document.getElementById("product-title").textContent = product.name;
@@ -112,7 +112,7 @@ window.onload = function () {
     simDiv.innerHTML = galleryImages
         .map((img, index) =>
             // We use 'product-thumb' class for targeting in JS, and 'selected' for styling the first one
-            `<img src="${img}" data-src="${img}" class="product-thumb ${index === 0 ? 'selected' : ''}" alt="${product.name} thumbnail ${index + 1}" loading="lazy" decoding="async" width="100" height="120">`
+            `<img src="${img}" data-src="${img}" class="product-thumb ${index === 0 ? 'selected' : ''}" alt="${product.name} thumbnail ${index + 1}" loading="eager" decoding="async" width="100" height="120">`
         )
         .join('');
 
@@ -162,9 +162,6 @@ window.onload = function () {
             window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
         });
     }
-
-    // 6. Render Frequently Bought Together
-    renderFrequentlyBoughtTogether();
 };
 
 // Global variable to track current filter
@@ -212,7 +209,7 @@ function renderDoorCatalog(categoryFilter = null) {
                      data-src="${door.image}"
                      alt="Door Design ${door.code}" 
                      class="door-catalog-image lazy-load" 
-                     loading="lazy"
+                     loading="eager"
                      decoding="async"
                      width="250" height="280"
                      onerror="this.src='images/logo.png'; this.alt='Image not available'; this.classList.add('error');">
@@ -237,6 +234,7 @@ function renderDoorCatalog(categoryFilter = null) {
                 
                 // Create new image to preload
                 const imgPreload = new Image();
+                imgPreload.decoding = "async";
                 imgPreload.onload = function() {
                     mainImg.src = imageSrc;
                     mainImg.alt = `Door Design ${doorCode}`;
@@ -313,7 +311,7 @@ function updateThumbnailsWithSimilarImages(category, clickedImageSrc) {
         thumb.setAttribute('data-src', imgSrc);
         thumb.className = 'product-thumb';
         thumb.alt = `Similar Door Design ${index + 1}`;
-        thumb.loading = "lazy";
+        thumb.loading = "eager";
         thumb.decoding = "async";
         thumb.width = 100;
         thumb.height = 120;
@@ -344,7 +342,11 @@ function injectProductSchema(product, absoluteImageUrl) {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": product.name,
-        "image": absoluteImageUrl,
+        "image": [
+            absoluteImageUrl,
+            ...(product.similarImages || []).map(img => new URL(img, window.location.href).href)
+        ],
+        "url": window.location.href,
         "description": product.shortDescription,
         "sku": product.id,
         "brand": {
@@ -383,43 +385,4 @@ function injectProductSchema(product, absoluteImageUrl) {
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(schema, null, 2); // Pretty print for readability
     document.head.appendChild(script);
-}
-
-// Function to render "Frequently Bought Together" section
-function renderFrequentlyBoughtTogether() {
-    const mainElement = document.querySelector('main');
-    if (!mainElement) return;
-
-    // List of common accessories to recommend
-    const accessories = [
-        { name: "Premium Handles", image: "images/handle g.webp", url: "contact.html?product=Premium Handles" },
-        { name: "Smart Digital Locks", image: "images/lock_g-removebg-preview.png", url: "contact.html?product=Digital Locks" },
-        { name: "Door Stoppers", image: "images/stoper.avif", url: "contact.html?product=Door Stoppers" },
-        { name: "Heavy Duty Hinges", image: "images/hings.jpg", url: "contact.html?product=Door Hinges" },
-        { name: "Door Closers", image: "images/door_closer-removebg-preview.png", url: "contact.html?product=Door Closers" },
-        { name: "Tower Bolts", image: "images/tower bolt.webp", url: "contact.html?product=Tower Bolts" }
-    ];
-
-    // Randomly select 3 items to display
-    const selected = accessories.sort(() => 0.5 - Math.random()).slice(0, 3);
-
-    const section = document.createElement('section');
-    section.className = 'products-section freq-bought-section';
-    section.innerHTML = `
-        <div class="section-content">
-            <h2 class="section-title">Frequently Bought Together</h2>
-            <div class="products-grid">
-                ${selected.map(item => `
-                    <div class="products">
-                        <a href="${item.url}">
-                            <img src="${item.image}" alt="${item.name}" class="Products-image" loading="lazy" onerror="this.src='images/logo.png'">
-                            <h3 class="name">${item.name}</h3>
-                        </a>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-    
-    mainElement.appendChild(section);
 }
