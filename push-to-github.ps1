@@ -1,6 +1,7 @@
 param(
     [string]$RepoUrl = 'https://github.com/sdlhp2002-commits/Door-Website.git',
-    [string]$CommitMessage = 'Update website content'
+    [string]$CommitMessage = 'Update website content',
+    [switch]$Force = $false
 )
 
 function ExitWith($msg) {
@@ -97,11 +98,24 @@ try {
     Write-Host "Rename branch failed (may already be main)."
 }
 
-Write-Host "Syncing with remote (pull --rebase)..."
-& git pull origin main --rebase
+if ($Force) {
+    Write-Host "Force mode enabled: Skipping pull to overwrite remote." -ForegroundColor Yellow
+} else {
+    Write-Host "Syncing with remote (pull --rebase)..."
+    & git pull origin main --rebase
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "⚠️  Pull failed! Aborting rebase to prevent conflict lock..." -ForegroundColor Red
+        & git rebase --abort 2>$null
+        ExitWith "Git pull failed. If you want to overwrite the remote version, run: .\push-to-github.ps1 -Force"
+    }
+}
 
 Write-Host "Pushing to origin main (you may be prompted to authenticate)..."
-& git push -u origin main
+if ($Force) {
+    & git push -u origin main --force
+} else {
+    & git push -u origin main
+}
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Push complete." -ForegroundColor Green
