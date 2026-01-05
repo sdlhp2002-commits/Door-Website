@@ -63,6 +63,7 @@ if (Test-Path $sitemapPath) {
     $utf8NoBom = New-Object System.Text.UTF8Encoding $false
     [System.IO.File]::WriteAllText((Resolve-Path $sitemapPath).Path, $newContent, $utf8NoBom)
     Write-Host "Sitemap updated to $today"
+}
 
 # Validate XML syntax locally
 try {
