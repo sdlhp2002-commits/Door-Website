@@ -4,7 +4,6 @@ const PRODUCTS = [
     name: "Exclusive Laminates",
     mainImage: "images/exclusive laminated.jpg",
     similarImages: [
-      "images/exclusive laminated.jpg",
       "images/e1.jpg",
       "images/e2.jpg",
       "images/e3.jpg"
@@ -29,7 +28,6 @@ const PRODUCTS = [
     name: "Solid Wood Primer Door",
     mainImage: "images/solid wood primer.jpg",
     similarImages: [
-      "images/solid wood primer.jpg",
       "images/s1.jpg",
       "images/s2.jpg",
       "images/s3.jpg"
@@ -53,7 +51,6 @@ const PRODUCTS = [
     name: "WPC Digital Doors",
     mainImage: "images/wpc digital.jpg",
     similarImages: [
-      "images/wpc digital.jpg",
       "images/w1.jpg",
       "images/w2.jpg",
       "images/w3.jpg"
@@ -78,7 +75,6 @@ const PRODUCTS = [
     name: "Antique Laminated Doors",
     mainImage: "images/antique laminated.jpg",
     similarImages: [
-      "images/antique laminated.jpg",
       "images/a1.jpg",
       "images/a2.jpg",
       "images/a3.jpg"
@@ -100,7 +96,6 @@ const PRODUCTS = [
     name: "Premium Digital Korean Doors",
     mainImage: "images/premium digital.jpg",
     similarImages: [
-      "images/premium digital.jpg",
       "images/p1.jpg",
       "images/p2.jpg",
       "images/p3.jpg"
@@ -123,7 +118,6 @@ const PRODUCTS = [
     name: "Teak Veneer Doors",
     mainImage: "images/teak wood.jpg",
     similarImages: [
-      "images/teak wood.jpg",
       "images/t1.jpg",
       "images/t2.jpg",
       "images/t3.jpg"
@@ -146,7 +140,6 @@ const PRODUCTS = [
     name: "Premium Teak Wood Door",
     mainImage: "images/premium teak wood door.jpg",
     similarImages: [
-      "images/premium teak wood door.jpg",
       "images/tw1.jpg",
       "images/tw2.jpg",
       "images/tw3.jpg"
@@ -170,7 +163,6 @@ const PRODUCTS = [
     name: "Laminate Doors",
     mainImage: "images/laminated doors.png",
     similarImages: [
-      "images/laminated doors.png",
       "images/l1.png",
       "images/l2.png",
       "images/l3.png"
@@ -194,7 +186,6 @@ const PRODUCTS = [
     name: "WPC Door and Frame",
     mainImage: "images/WPC.png",
     similarImages: [
-      "images/WPC.png",
       "images/wpc1.png",
 
     ],

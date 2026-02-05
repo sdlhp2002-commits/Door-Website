@@ -464,21 +464,6 @@
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
-    <script>
-        // Handle form submission and redirect to Thank You page
-        document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            window.location.href = 'thank-you.html';
-        });
-
-        // Add shadow to header on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (header) {
-                header.classList.toggle('scrolled', window.scrollY > 0);
-            }
-        });
-    </script>
 
 </body>
 

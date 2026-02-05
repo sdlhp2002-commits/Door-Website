@@ -195,21 +195,6 @@
                 messageBox.value = `I am interested in ${productName}. Please send me more details.`;
             }
         });
-
-        // Handle form submission and redirect to Thank You page
-        document.getElementById('ajor-contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Redirect to thank you page to track conversion
-            window.location.href = 'thank-you.html';
-        });
-
-        // Add shadow to header on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (header) {
-                header.classList.toggle('scrolled', window.scrollY > 0);
-            }
-        });
     </script>
 </body>
 </html>

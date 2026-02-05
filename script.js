@@ -285,3 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('theme', theme);
     });
 });
+
+// 15. Header Scroll Effect
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 0);
+    }
+});
