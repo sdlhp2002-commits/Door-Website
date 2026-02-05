@@ -2341,14 +2341,11 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower zoom for a premium feel */
-    filter: grayscale(100%); /* Start as grayscale */
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease; /* Add filter to transition */
 }
 
 .gallery-item:hover img {
     transform: scale(1.1);
     transform: scale(1.15); /* Increased zoom from 1.1 to 1.15 for better visibility */
-    filter: grayscale(0%); /* Transition to color on hover */
 }
 
 .gallery-overlay {
