@@ -1200,18 +1200,8 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 .products-section .products .name {
     margin-bottom: 16px;
     font-size: var(--font-size-l);
-}
-
-.products-section .products .name,
-.products-section .products-list .name,
-.products-section .products .Products-image+.name {
-    color: var(--primary-color) !important;
-    /* or use: color: #3b141c;  if you prefer hex */
+    color: var(--primary-color);
     font-weight: var(--font-weight-bold, 700);
-}
-
-.products-section .products a .name {
-    color: var(--primary-color) !important;
 }
 
 .products-section .swiper-pagination-bullet {
