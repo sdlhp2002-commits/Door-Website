@@ -100,7 +100,7 @@
                 <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
-            <button id="menu-open-button" class="fas fa-bars" aria-label="Open menu"></button>
+            <button id="menu-open-button" class="fas fa-bars" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu-list"></button>
         </nav>
     </header>
 
@@ -401,12 +401,17 @@
 
 
                 <form id="ajor-contact-form" class="contact-form">
-
-                    <input type="text" placeholder="Your Name" name="Name" class="form-input" required>
-                    <input type="email" placeholder="Your Email" name="Email" class="form-input" required>
-                    <input type="number" placeholder="Phone Number" name="Number" class="form-input" required>
-                    <textarea placeholder="Message" name="Message" class="form-input" required></textarea>
-
+                    <label for="home-name-input" class="visually-hidden">Your Name</label>
+                    <input type="text" id="home-name-input" placeholder="Your Name" name="Name" class="form-input" required>
+                    
+                    <label for="home-email-input" class="visually-hidden">Your Email</label>
+                    <input type="email" id="home-email-input" placeholder="Your Email" name="Email" class="form-input" required>
+                    
+                    <label for="home-phone-input" class="visually-hidden">Phone Number</label>
+                    <input type="tel" id="home-phone-input" placeholder="Phone Number" name="Number" class="form-input" required>
+                    
+                    <label for="home-message-input" class="visually-hidden">Message</label>
+                    <textarea id="home-message-input" placeholder="Message" name="Message" class="form-input" required></textarea>
                     <button type="submit" id="submit-btn" class="submit-button">Get Free Quote</button>
                 </form>
 

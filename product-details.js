@@ -23,7 +23,18 @@ function renderFeatures(features) {
 // Function to handle the image swap and 'selected' styling
 function swapMainImage(newSrc, clickedThumbnail) {
     const mainImage = document.getElementById('main-door-image');
-    mainImage.src = newSrc;
+    if (!mainImage || !newSrc) return;
+
+    mainImage.classList.add('loading');
+    const imgPreload = new Image();
+    imgPreload.onload = () => {
+        mainImage.src = newSrc;
+        mainImage.classList.remove('loading');
+    };
+    imgPreload.onerror = () => {
+        mainImage.classList.remove('loading'); // Still remove loading on error
+    };
+    imgPreload.src = newSrc;
 
     // Remove 'selected' class from all thumbnails
     document.querySelectorAll('.product-thumb').forEach(img => {
@@ -37,7 +48,7 @@ function swapMainImage(newSrc, clickedThumbnail) {
 }
 
 // Product lookup & rendering
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function () {
     const productId = getProductId();
     // Assuming PRODUCTS is defined in products-data.js
     const product = PRODUCTS.find(p => p.id === productId);
@@ -46,6 +57,12 @@ window.onload = function () {
     // 1. Initial Checks
     // ----------------------
     if (!product || !PRODUCTS) {
+        // A check for the data files is also good practice
+        if (typeof PRODUCTS === 'undefined' || typeof DOOR_CATALOG === 'undefined') {
+            console.error("Product data scripts (products-data.js) are not loaded.");
+            document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Error: Product data could not be loaded.</h2><a href='./'>Back to Home</a></div>";
+            return;
+        }
         document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='./'>Back to Home</a></div>";
         return;
     }
@@ -148,193 +165,14 @@ window.onload = function () {
     // 4. Door Catalog Gallery Rendering
     // ----------------------
     // Filter catalog by product category on initial load
-    // Product ID matches the category name in DOOR_CATALOG
     renderDoorCatalog(product.id); // Filter to show only doors from this product's category
 
     // ----------------------
-    // 5. Smart Enquiry Button Logic
+    // 5. Event Listener Setup
     // ----------------------
-    const enquiryBtn = document.getElementById('product-enquiry-btn');
-    if (enquiryBtn) {
-        enquiryBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Redirect to contact page with product name as a parameter
-            window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
-        });
-    }
-};
-
-// Global variable to track current filter
-let currentCategoryFilter = null;
-
-// Function to render the door catalog gallery with optional category filter
-function renderDoorCatalog(categoryFilter = null) {
-    const catalogGrid = document.getElementById('door-catalog-grid');
-    const catalogSection = document.querySelector('.door-catalog-section');
-
-    if (!catalogGrid || typeof DOOR_CATALOG === 'undefined') {
-        return; // Exit if catalog grid doesn't exist or DOOR_CATALOG is not defined
-    }
-
-    // Add filtering animation
-    catalogGrid.classList.add('filtering');
-
-    // Filter doors by category if filter is provided
-    let doorsToShow = DOOR_CATALOG;
-    if (categoryFilter) {
-        doorsToShow = DOOR_CATALOG.filter(door => door.category === categoryFilter);
-    }
-
-    // Update current filter
-    currentCategoryFilter = categoryFilter;
-
-    // Remove filtering class after a short delay for smooth transition
-    setTimeout(() => {
-        catalogGrid.classList.remove('filtering');
-    }, 300);
-
-    // Generate HTML for each door in the catalog with lazy loading and accessibility
-    catalogGrid.innerHTML = doorsToShow.map(door => `
-        <div class="door-catalog-item" 
-             data-image="${door.image}" 
-             data-code="${door.code}" 
-             data-category="${door.category}"
-             role="button"
-             tabindex="0"
-             aria-label="View door design ${door.code}"
-             aria-pressed="false">
-            <div class="door-catalog-label">${door.code}</div>
-            <div class="door-catalog-image-wrapper">
-                <img src="${door.image}" 
-                     data-src="${door.image}"
-                     alt="Door Design ${door.code}" 
-                     class="door-catalog-image lazy-load" 
-                     loading="eager"
-                     decoding="async"
-                     width="250" height="280"
-                     onerror="this.src='images/logo.png'; this.alt='Image not available'; this.classList.add('error');">
-                <div class="image-loading-spinner" aria-hidden="true"></div>
-            </div>
-        </div>
-    `).join('');
-
-    // Attach click and keyboard event listeners to catalog items
-    document.querySelectorAll('.door-catalog-item').forEach(item => {
-        // Click handler
-        const handleCatalogClick = function () {
-            const imageSrc = this.getAttribute('data-image');
-            const doorCode = this.getAttribute('data-code');
-            const doorCategory = this.getAttribute('data-category');
-
-            // Update main product image with loading state
-            const mainImg = document.getElementById('main-door-image');
-            if (mainImg && imageSrc) {
-                // Add loading class to main image
-                mainImg.classList.add('loading');
-                
-                // Create new image to preload
-                const imgPreload = new Image();
-                imgPreload.decoding = "async";
-                imgPreload.onload = function() {
-                    mainImg.src = imageSrc;
-                    mainImg.alt = `Door Design ${doorCode}`;
-                    mainImg.classList.remove('loading');
-                };
-                imgPreload.onerror = function() {
-                    mainImg.classList.remove('loading');
-                    mainImg.alt = `Door Design ${doorCode} - Image unavailable`;
-                };
-                imgPreload.src = imageSrc;
-
-                // Update thumbnails to show only 4 similar images from the same category (excluding clicked image)
-                updateThumbnailsWithSimilarImages(doorCategory, imageSrc);
-
-                // Filter to show only similar doors (same category)
-                renderDoorCatalog(doorCategory);
-
-                // Update ARIA pressed state
-                document.querySelectorAll('.door-catalog-item').forEach(catalogItem => {
-                    catalogItem.setAttribute('aria-pressed', 'false');
-                });
-                this.setAttribute('aria-pressed', 'true');
-
-                // Highlight the clicked catalog item after re-render
-                setTimeout(() => {
-                    document.querySelectorAll('.door-catalog-item').forEach(catalogItem => {
-                        catalogItem.style.borderColor = '#f9f9f9';
-                        catalogItem.style.borderWidth = '1px';
-                        if (catalogItem.getAttribute('data-code') === doorCode) {
-                            catalogItem.style.borderColor = 'var(--secondary-color)';
-                            catalogItem.style.borderWidth = '2px';
-                        }
-                    });
-                }, 100);
-
-                // Scroll to main image for better UX
-                mainImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        };
-
-        item.addEventListener('click', handleCatalogClick);
-        
-        // Keyboard navigation support (Enter and Space keys)
-        item.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleCatalogClick.call(this);
-            }
-        });
-    });
-}
-
-// Helper function to update thumbnails with 4 similar images from the same category (excluding clicked image)
-function updateThumbnailsWithSimilarImages(category, clickedImageSrc) {
-    const thumbnailsContainer = document.getElementById('similar-images');
-    if (!thumbnailsContainer || typeof DOOR_CATALOG === 'undefined') return;
-
-    // Get all images from the same category, excluding the clicked image
-    const categoryImages = DOOR_CATALOG
-        .filter(door => door.category === category && door.image !== clickedImageSrc)
-        .map(door => door.image)
-        .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
-
-    // Limit to 4 images maximum
-    const imagesToShow = categoryImages.slice(0, 4);
-
-    // Clear existing thumbnails
-    thumbnailsContainer.innerHTML = '';
-
-    // Create thumbnails for the 4 similar images with lazy loading
-    imagesToShow.forEach((imgSrc, index) => {
-        const thumb = document.createElement('img');
-        thumb.src = imgSrc;
-        thumb.setAttribute('data-src', imgSrc);
-        thumb.className = 'product-thumb';
-        thumb.alt = `Similar Door Design ${index + 1}`;
-        thumb.loading = "eager";
-        thumb.decoding = "async";
-        thumb.width = 100;
-        thumb.height = 120;
-        thumb.setAttribute('role', 'button');
-        thumb.setAttribute('tabindex', '0');
-        thumb.setAttribute('aria-label', `View similar door design ${index + 1}`);
-
-        // Add click handler
-        thumb.addEventListener('click', function () {
-            swapMainImage(imgSrc, this);
-        });
-
-        // Keyboard navigation for thumbnails
-        thumb.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                swapMainImage(imgSrc, this);
-            }
-        });
-
-        thumbnailsContainer.appendChild(thumb);
-    });
-}
+    initializeCatalogListeners();
+    initializeEnquiryButton(product);
+});
 
 // Injects Product Schema JSON-LD into the page head for SEO
 function injectProductSchema(product, absoluteImageUrl) {
@@ -385,4 +223,97 @@ function injectProductSchema(product, absoluteImageUrl) {
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(schema, null, 2); // Pretty print for readability
     document.head.appendChild(script);
+}
+
+// Function to render the door catalog gallery with optional category filter
+function renderDoorCatalog(categoryFilter = null) {
+    const catalogGrid = document.getElementById('door-catalog-grid');
+    if (!catalogGrid || typeof DOOR_CATALOG === 'undefined') return;
+
+    catalogGrid.classList.add('filtering');
+    const doorsToShow = DOOR_CATALOG.filter(door => door.category === categoryFilter);
+
+    catalogGrid.innerHTML = doorsToShow.map(door => `
+        <div class="door-catalog-item" 
+             data-image="${door.image}" 
+             data-code="${door.code}" 
+             role="button"
+             tabindex="0"
+             aria-label="View door design ${door.code}">
+            <div class="door-catalog-label">${door.code}</div>
+            <div class="door-catalog-image-wrapper">
+                <img src="${door.image}" 
+                     alt="Door Design ${door.code}" 
+                     class="door-catalog-image" 
+                     loading="lazy"
+                     decoding="async"
+                     onerror="this.src='images/logo.png'; this.classList.add('error');">
+                <div class="image-loading-spinner" aria-hidden="true"></div>
+            </div>
+        </div>
+    `).join('');
+
+    setTimeout(() => catalogGrid.classList.remove('filtering'), 300);
+}
+
+/**
+ * Uses event delegation to handle clicks and keydowns on the catalog.
+ */
+function initializeCatalogListeners() {
+    const catalogGrid = document.getElementById('door-catalog-grid');
+    if (!catalogGrid) return;
+
+    const handleInteraction = (item) => {
+        if (!item) return;
+
+        const imageSrc = item.dataset.image;
+        const doorCode = item.dataset.code;
+        const mainImg = document.getElementById('main-door-image');
+        const thumbnailsContainer = document.getElementById('similar-images');
+
+        // Update main image and its alt text
+        swapMainImage(imageSrc);
+        mainImg.alt = `Door Design ${doorCode}`;
+
+        // Simplify thumbnails to show only the selected design
+        thumbnailsContainer.innerHTML = `<img src="${imageSrc}" class="product-thumb selected" alt="${mainImg.alt}" loading="lazy" decoding="async">`;
+
+        // Highlight the selected item in the catalog
+        catalogGrid.querySelectorAll('.door-catalog-item.selected').forEach(selected => selected.classList.remove('selected'));
+        item.classList.add('selected');
+
+        // Scroll to main image for better UX and manage focus
+        mainImg.setAttribute('tabindex', -1); // Make it programmatically focusable
+        mainImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        mainImg.focus();
+    };
+
+    catalogGrid.addEventListener('click', function (e) {
+        const item = e.target.closest('.door-catalog-item');
+        handleInteraction(item);
+    });
+
+    catalogGrid.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const item = e.target.closest('.door-catalog-item');
+            if (item) {
+                e.preventDefault();
+                handleInteraction(item);
+            }
+        }
+    });
+}
+
+/**
+ * Sets up the smart enquiry button to pass the product name.
+ * @param {object} product The product data object.
+ */
+function initializeEnquiryButton(product) {
+    const enquiryBtn = document.getElementById('product-enquiry-btn');
+    if (enquiryBtn) {
+        enquiryBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
+        });
+    }
 }

@@ -5,18 +5,27 @@ const navLinks = document.querySelectorAll(".nav-menu .nav-link"); // Select all
 
 // Open menu
 if (menuOpenButton) {
-    menuOpenButton.addEventListener("click", () => document.body.classList.add("show-mobile-menu"));
+    menuOpenButton.addEventListener("click", () => {
+        document.body.classList.add("show-mobile-menu");
+        menuOpenButton.setAttribute('aria-expanded', 'true');
+    });
 }
 
 // Close menu via X button
 if (menuCloseButton) {
-    menuCloseButton.addEventListener("click", () => document.body.classList.remove("show-mobile-menu"));
+    menuCloseButton.addEventListener("click", () => {
+        document.body.classList.remove("show-mobile-menu");
+        if (menuOpenButton) menuOpenButton.setAttribute('aria-expanded', 'false');
+    });
 }
 
 // Close menu when any link is clicked
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
         document.body.classList.remove("show-mobile-menu");
+        if (menuOpenButton) {
+            menuOpenButton.setAttribute('aria-expanded', 'false');
+        }
     });
 });
 
@@ -195,39 +204,132 @@ if (filterBtns.length > 0) {
 
 // 8. Lightbox Logic
 const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxCloseBtn = document.querySelector('.lightbox-close');
-const lightboxCaption = document.getElementById('lightbox-caption');
 const galleryContainer = document.querySelector('.gallery-container');
 
-if (lightbox && lightboxImg && lightboxCloseBtn) {
-    const openLightbox = (e) => {
-        const item = e.target.closest('.gallery-item, .products, .slide-item, .grid-card');
-        if (item) {
-            // Prevent default link behavior if clicking the image directly
-            if(e.target.tagName === 'IMG') e.preventDefault();
+if (lightbox && galleryContainer) {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCloseBtn = document.querySelector('.lightbox-close');
+    const lightboxPrevBtn = document.getElementById('lightbox-prev');
+    const lightboxNextBtn = document.getElementById('lightbox-next');
+
+    let currentImageIndex;
+    let visibleGalleryItems = [];
+    let lastFocusedElement; // To store the element that opened the lightbox
+
+    // All focusable elements in the lightbox
+    const focusableElements = [lightboxCloseBtn, lightboxPrevBtn, lightboxNextBtn];
+
+    function showImage(index) {
+        if (index < 0 || index >= visibleGalleryItems.length) return;
+
+        currentImageIndex = index;
+        const item = visibleGalleryItems[index];
+        const img = item.querySelector('img');
+        const captionEl = item.querySelector('.gallery-cat');
+
+        if (img) {
+            // Use the high-res image from the picture element if available
+            const sourceEl = item.querySelector('source[srcset*="large"]');
+            let largeImageSrc = img.src; // Fallback to the img src
+            if (sourceEl) {
+                const srcset = sourceEl.getAttribute('srcset');
+                // Get the last (largest) image from the srcset
+                const sources = srcset.split(',').map(s => s.trim().split(' '));
+                largeImageSrc = sources[sources.length - 1][0];
+            }
             
-            const img = item.querySelector('img');
-            if (img && img.src) {
-                lightbox.classList.add('active');
-                lightboxImg.decoding = "async"; // Optimize decoding for large images
-                lightboxImg.src = img.src;
-                
-                const captionEl = item.querySelector('.gallery-cat, .name, h3, strong');
-                lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
+            lightboxImg.src = largeImageSrc;
+            lightboxImg.alt = img.alt;
+            lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
+        }
+        
+        // Update button visibility
+        lightboxPrevBtn.style.display = (index > 0) ? 'block' : 'none';
+        lightboxNextBtn.style.display = (index < visibleGalleryItems.length - 1) ? 'block' : 'none';
+    }
+
+    function openLightbox(clickedItem) {
+        // Store the element that was focused before opening the lightbox
+        lastFocusedElement = document.activeElement;
+
+        // Get all gallery items that are currently visible
+        visibleGalleryItems = Array.from(document.querySelectorAll('.gallery-item')).filter(
+            item => item.style.display !== 'none'
+        );
+        const clickedIndex = visibleGalleryItems.findIndex(item => item === clickedItem);
+
+        if (clickedIndex !== -1) {
+            lightbox.classList.add('active');
+            document.addEventListener('keydown', handleLightboxKeys);
+            showImage(clickedIndex);
+            // Move focus into the lightbox
+            lightboxCloseBtn.focus();
+        }
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.removeEventListener('keydown', handleLightboxKeys);
+        // Return focus to the element that opened the lightbox
+        if (lastFocusedElement) {
+            lastFocusedElement.focus();
+        }
+    }
+
+    function showNextImage() {
+        if (currentImageIndex < visibleGalleryItems.length - 1) {
+            showImage(currentImageIndex + 1);
+        }
+    }
+
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            showImage(currentImageIndex - 1);
+        }
+    }
+
+    function handleLightboxKeys(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowRight') {
+            showNextImage();
+        } else if (e.key === 'ArrowLeft') {
+            showPrevImage();
+        } else if (e.key === 'Tab') {
+            // Focus trap logic
+            const visibleFocusableElements = focusableElements.filter(el => el.style.display !== 'none');
+            const firstElement = visibleFocusableElements[0];
+            const lastElement = visibleFocusableElements[visibleFocusableElements.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    lastElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === lastElement) {
+                    firstElement.focus();
+                    e.preventDefault();
+                }
             }
         }
-    };
+    }
 
-    if (galleryContainer) galleryContainer.addEventListener('click', openLightbox);
-
-    lightboxCloseBtn.addEventListener('click', () => {
-        lightbox.classList.remove('active');
+    galleryContainer.addEventListener('click', (e) => {
+        const item = e.target.closest('.gallery-item');
+        if (item) {
+            e.preventDefault();
+            openLightbox(item);
+        }
     });
 
+    lightboxCloseBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) lightbox.classList.remove('active');
+        if (e.target === lightbox) closeLightbox();
     });
+    lightboxNextBtn.addEventListener('click', showNextImage);
+    lightboxPrevBtn.addEventListener('click', showPrevImage);
 }
 
 // 12. Cookie Consent Banner

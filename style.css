@@ -1863,6 +1863,12 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     border-color: var(--secondary-color);
 }
 
+.door-catalog-item.selected {
+    border-color: var(--secondary-color);
+    border-width: 2px;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.2);
+}
+
 .door-catalog-item:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
@@ -2403,6 +2409,32 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
+.lightbox-prev,
+.lightbox-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.3s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-prev {
+    left: 15px;
+}
+
+.lightbox-next {
+    right: 15px;
+    border-radius: 3px 0 0 3px;
+}
+
 .lightbox-close {
     position: absolute;
     top: 20px;
@@ -2413,6 +2445,8 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     transition: 0.3s;
 }
 
+.lightbox-prev:hover,
+.lightbox-next:hover,
 .lightbox-close:hover {
     color: var(--secondary-color);
 }
