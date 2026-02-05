@@ -79,14 +79,14 @@ if (document.querySelector('.testimonial-slider')) {
 
 // --- FIXED FORM SECTION ---
 const form = document.getElementById('ajor-contact-form');
-const btn = document.getElementById('submit-btn');
 
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        btn.innerText = "Sending...";
-        btn.disabled = true;
+        
+        const btn = document.getElementById('submit-btn');
+        if (btn) btn.innerText = "Sending...";
+        if (btn) btn.disabled = true;
 
         // FIX: We define the URL directly as a string here
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz824FphQ38vAY1Q2qeJt9ZFYtq1rMWCZBjm7-E7IjnSdcPkXCHLsMChiVcaaWYilv2/exec';
@@ -104,8 +104,8 @@ if (form) {
             .catch(error => {
                 console.error('Error!', error.message);
                 alert("There was a connection error. Please try again.");
-                btn.innerText = "Get Free Quote";
-                btn.disabled = false;
+                if (btn) btn.innerText = "Get Free Quote";
+                if (btn) btn.disabled = false;
             });
     });
 }
@@ -124,18 +124,41 @@ document.querySelectorAll('.fade-in-section').forEach(section => {
     fadeObserver.observe(section);
 });
 
-// 5. Scroll To Top Button Logic
+// 5. Scroll Logic (Throttled for Performance)
 const scrollTopBtn = document.getElementById("scroll-top-btn");
+const header = document.querySelector('header');
 
-if (scrollTopBtn) {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
+// Throttle helper to prevent scroll events from firing too often
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+window.addEventListener("scroll", throttle(() => {
+    const scrollY = window.scrollY;
+
+    // Header Effect
+    if (header) header.classList.toggle('scrolled', scrollY > 0);
+
+    // Scroll To Top Button
+    if (scrollTopBtn) {
+        if (scrollY > 300) {
             scrollTopBtn.classList.add("show");
         } else {
             scrollTopBtn.classList.remove("show");
         }
-    });
+    }
+}, 100));
 
+if (scrollTopBtn) {
     scrollTopBtn.addEventListener("click", (e) => {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -219,7 +242,7 @@ if (!localStorage.getItem("cookieConsent")) {
     `;
     document.body.appendChild(banner);
 
-    const acceptBtn = document.getElementById("accept-cookies");
+    const acceptBtn = banner.querySelector("#accept-cookies");
     if (acceptBtn) {
         acceptBtn.addEventListener("click", function() {
             localStorage.setItem("cookieConsent", "true");
@@ -230,13 +253,6 @@ if (!localStorage.getItem("cookieConsent")) {
 
 // 13. Image Performance Optimization
 document.addEventListener("DOMContentLoaded", () => {
-    // Optimize static gallery images that lack lazy loading (Fixes gallery.html)
-    const galleryImages = document.querySelectorAll('.gallery-item img');
-    galleryImages.forEach(img => {
-        img.setAttribute('loading', 'eager');
-        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
-    });
-
     // Optimize Logo for LCP (Largest Contentful Paint)
     const logo = document.querySelector('.logo-image');
     if (logo) {
@@ -284,12 +300,4 @@ document.addEventListener("DOMContentLoaded", () => {
         
         localStorage.setItem('theme', theme);
     });
-});
-
-// 15. Header Scroll Effect
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (header) {
-        header.classList.toggle('scrolled', window.scrollY > 0);
-    }
 });
