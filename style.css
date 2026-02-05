@@ -3058,3 +3058,181 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
         text-align: center;
     }
 }
+
+/* ======================================================= */
+/* DARK MODE STYLES (Mobile Only)                          */
+/* ======================================================= */
+
+/* Theme Toggle Button - Hidden on Desktop */
+.theme-toggle-nav-item {
+    display: none;
+}
+
+.theme-toggle-btn {
+    background: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    margin-left: 10px;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--secondary-color);
+    color: var(--white-color);
+    transform: rotate(15deg);
+}
+
+@media screen and (max-width: 768px) {
+    .theme-toggle-nav-item {
+        display: block;
+        margin-top: 15px;
+    }
+
+    .theme-toggle-btn {
+        margin: 0 auto;
+        border-color: var(--dark-color);
+        color: var(--dark-color);
+    }
+
+    /* Dark Mode Variables Override based on user request */
+    body.dark-mode {
+        --white-color: #121212; /* --bg-color */
+        --light-pink-color: #121212;
+        --dark-color: #e0e0e0; /* --text-main */
+        --primary-color: #ffffff;
+        --secondary-color: #d4af37; /* --accent-gold */
+        --border-color: #333333;
+        --medium-gray-color: #444444;
+        
+        background-color: var(--white-color);
+        color: var(--dark-color);
+    }
+
+    /* Dark Mode Specific Overrides */
+    body.dark-mode header {
+        background: rgba(18, 18, 18, 0.95);
+        border-bottom-color: #333;
+    }
+
+    body.dark-mode .navbar .nav-menu {
+        background: #121212;
+        border-right-color: var(--secondary-color);
+    }
+
+    body.dark-mode .nav-link {
+        color: var(--dark-color) !important;
+    }
+
+    body.dark-mode .logo-image {
+        filter: brightness(0) invert(1);
+    }
+
+    /* Reset backgrounds for sections */
+    body.dark-mode .products-section,
+    body.dark-mode .why-section,
+    body.dark-mode .about-section,
+    body.dark-mode .contact-section,
+    body.dark-mode .gallery-section,
+    body.dark-mode .product-section,
+    body.dark-mode .map-section,
+    body.dark-mode .faq-section,
+    body.dark-mode .hardware-section {
+        background-color: var(--white-color);
+        background-image: none;
+    }
+
+    /* Card Styles using --card-color (#1e1e1e) */
+    body.dark-mode .why-card,
+    body.dark-mode .testimonial-card,
+    body.dark-mode .value-card,
+    body.dark-mode .process-step,
+    body.dark-mode .timeline-content,
+    body.dark-mode .faq-item,
+    body.dark-mode .product-details-wrapper,
+    body.dark-mode .door-catalog-item,
+    body.dark-mode .contact-form,
+    body.dark-mode .hardware-grid .products,
+    body.dark-mode .info-card,
+    body.dark-mode .review-card,
+    body.dark-mode .related-card,
+    body.dark-mode .products-section .products {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        color: var(--dark-color);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Text Adjustments */
+    body.dark-mode .why-text,
+    body.dark-mode .text,
+    body.dark-mode .description,
+    body.dark-mode .faq-answer,
+    body.dark-mode .contact-info p,
+    body.dark-mode .product-description,
+    body.dark-mode .spec-table td,
+    body.dark-mode .description-list li {
+        color: #b0b0b0;
+    }
+
+    body.dark-mode .why-title,
+    body.dark-mode .section-title,
+    body.dark-mode .hero-main-title,
+    body.dark-mode .gallery-main-title,
+    body.dark-mode .value-card h3,
+    body.dark-mode .process-step h3,
+    body.dark-mode .timeline-content h3,
+    body.dark-mode .faq-question,
+    body.dark-mode .spec-table th,
+    body.dark-mode .hardware-grid .products .name {
+        color: #ffffff;
+    }
+
+    /* Table Styles */
+    body.dark-mode .spec-table th {
+        background-color: #1e1e1e;
+        border-right: 1px solid #333;
+        color: var(--secondary-color);
+    }
+
+    body.dark-mode .spec-table,
+    body.dark-mode .spec-table td {
+        border-color: #333;
+        background-color: transparent;
+    }
+
+    /* Image Containers */
+    body.dark-mode .product-main-image,
+    body.dark-mode .product-thumbnails img {
+        background: #ffffff; /* Keep white for product visibility */
+        border-color: #444;
+        filter: brightness(0.95);
+    }
+
+    /* Form Inputs */
+    body.dark-mode input,
+    body.dark-mode textarea,
+    body.dark-mode .form-input {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        color: #fff;
+    }
+
+    body.dark-mode input:focus,
+    body.dark-mode textarea:focus {
+        border-color: var(--secondary-color);
+        background-color: #252525;
+    }
+    
+    body.dark-mode .theme-toggle-btn {
+        border-color: var(--dark-color);
+        color: var(--dark-color);
+    }
+}

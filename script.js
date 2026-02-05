@@ -244,3 +244,44 @@ document.addEventListener("DOMContentLoaded", () => {
         logo.setAttribute('decoding', 'async');
     }
 });
+
+// 14. Dark Mode Toggle Logic (Mobile Only)
+document.addEventListener("DOMContentLoaded", () => {
+    // Create the toggle button
+    const themeToggleBtn = document.createElement('button');
+    themeToggleBtn.id = 'theme-toggle';
+    themeToggleBtn.className = 'theme-toggle-btn';
+    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+    themeToggleBtn.setAttribute('aria-label', 'Toggle Dark Mode');
+    
+    // Find the nav menu to inject the button
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu) {
+        const li = document.createElement('li');
+        li.className = 'nav-item theme-toggle-nav-item';
+        li.appendChild(themeToggleBtn);
+        navMenu.appendChild(li);
+    }
+
+    // Check for saved user preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Handle click event
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        let theme = 'light';
+        if (document.body.classList.contains('dark-mode')) {
+            theme = 'dark';
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        localStorage.setItem('theme', theme);
+    });
+});
