@@ -165,13 +165,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // 4. Door Catalog Gallery Rendering
     // ----------------------
     // Filter catalog by product category on initial load
-    renderDoorCatalog(product.id); // Filter to show only doors from this product's category
+    renderDoorCatalog(product.category); // Filter to show only doors from this product's category
 
     // ----------------------
     // 5. Event Listener Setup
     // ----------------------
     initializeCatalogListeners();
     initializeEnquiryButton(product);
+    initializeLightbox();
 });
 
 // Injects Product Schema JSON-LD into the page head for SEO
@@ -316,4 +317,40 @@ function initializeEnquiryButton(product) {
             window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
         });
     }
+}
+
+/**
+ * Initializes a lightbox to view the main image in full screen.
+ */
+function initializeLightbox() {
+    const mainImg = document.getElementById('main-door-image');
+    if (!mainImg) return;
+
+    // Create Lightbox DOM elements
+    const overlay = document.createElement('div');
+    overlay.id = 'product-lightbox';
+    overlay.style.cssText = 'display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:zoom-out;';
+    
+    const img = document.createElement('img');
+    img.style.cssText = 'max-width:90%; max-height:90%; object-fit:contain;';
+    
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+
+    // Event Listeners
+    mainImg.style.cursor = 'zoom-in';
+    mainImg.addEventListener('click', function() {
+        img.src = this.src;
+        overlay.style.display = 'flex';
+    });
+
+    overlay.addEventListener('click', function() {
+        overlay.style.display = 'none';
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') {
+            overlay.style.display = 'none';
+        }
+    });
 }

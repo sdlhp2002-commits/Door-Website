@@ -203,10 +203,26 @@ if (filterBtns.length > 0) {
 }
 
 // 8. Lightbox Logic
-const lightbox = document.getElementById('lightbox');
 const galleryContainer = document.querySelector('.gallery-container');
 
-if (lightbox && galleryContainer) {
+if (galleryContainer) {
+    let lightbox = document.getElementById('lightbox');
+
+    // Dynamically create lightbox if it doesn't exist
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'lightbox';
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <span class="lightbox-close">&times;</span>
+            <button id="lightbox-prev" class="lightbox-prev">&#10094;</button>
+            <img id="lightbox-img" class="lightbox-content" src="" alt="Gallery Image">
+            <button id="lightbox-next" class="lightbox-next">&#10095;</button>
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        `;
+        document.body.appendChild(lightbox);
+    }
+
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
     const lightboxCloseBtn = document.querySelector('.lightbox-close');
