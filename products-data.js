@@ -281,9 +281,6 @@ const DOOR_CATALOG = [
 
 
   // Category 6: Teak Veneer (codes starting with 6)
-  
-
-  
   { code: "AJ-601", image: "images/premium teak wood door.jpg", category: "premium-teak-wood" },
   { code: "AJ-602", image: "images/tw1.jpg", category: "premium-teak-wood" },
   { code: "AJ-603", image: "images/tw2.jpg", category: "premium-teak-wood" },
