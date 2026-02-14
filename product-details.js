@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 4. Door Catalog Gallery Rendering
     // ----------------------
     // Filter catalog by product category on initial load
-    renderDoorCatalog(product.category); // Filter to show only doors from this product's category
+    renderDoorCatalog(product.id); // Filter to show only doors from this product's category
 
     // ----------------------
     // 5. Event Listener Setup
