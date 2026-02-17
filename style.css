@@ -1162,7 +1162,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 
 /*products-style*/
 .products-section {
-    padding: 50px 0 30px;
+    padding: 30px 0 30px;
     background-color: var(--light-pink-color);
     /* Subtle dot pattern for texture */
     background-image: radial-gradient(rgba(184, 134, 11, 0.15) 1.5px, transparent 1.5px);
