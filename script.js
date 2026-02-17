@@ -86,6 +86,27 @@ if (document.querySelector('.testimonial-slider')) {
     });
 }
 
+// 2.2 Hero Section Slider (Mikasa Style)
+if (document.querySelector('.hero-slider')) {
+    new Swiper('.hero-slider', {
+        loop: true,
+        effect: 'slide', // Smooth slide effect
+        speed: 1000, // Slower transition for elegance
+        autoplay: {
+            delay: 6000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+}
+
 // --- FIXED FORM SECTION ---
 const form = document.getElementById('ajor-contact-form');
 
