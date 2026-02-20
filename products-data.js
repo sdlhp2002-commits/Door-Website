@@ -187,6 +187,7 @@ const PRODUCTS = [
     mainImage: "images/WPC.png",
     similarImages: [
       "images/wpc1.png",
+    
 
     ],
 
@@ -202,6 +203,30 @@ const PRODUCTS = [
       "Low maintenance.",
       "Waterproof."
 
+    ]
+  },
+  {
+    id: "pooja-door",
+    name: "Pooja Door",
+    mainImage: "images/pooja-1.jpg",
+    similarImages: [
+      "images/pooja-1.jpg",
+      "images/pooja-2.jpg",
+      "images/pooja-3.jpg",
+      "images/pooja-4.jpg"
+    ],
+
+    shortDescription: "AJOR presents Beautifully crafted Pooja doors made of solid teakwood (Tanzania & Ghana Teak), veneer, Primer Coated  & UV COATED WPC Doors.",
+    specifications: {
+      "Thickness": "25 mm | 28 mm | 30 mm",
+      "Height": '78", 81", 84"',
+      "Width": '30", 42", 33", 36", 38" ,45"'
+    },
+    features: [
+      "anti termite.",
+      "anti corrosion.",
+      "low maintenance.",
+      "waterproof."
     ]
   },
   // Add other products as needed...
@@ -369,4 +394,23 @@ const DOOR_CATALOG = [
   // Category 9: WPC Door Frame (codes starting with 9)
   { code: "AJ-901", image: "images/WPC.png", category: "wpc-door-frame" },
   { code: "AJ-902", image: "images/wpc1.png", category: "wpc-door-frame" },
+   // Category 10: Pooja  Door  (codes starting with 10)
+  { code: "AJ-1001", image: "images/pooja-1.jpg", category: "pooja-door" },
+  { code: "AJ-1002", image: "images/pooja-2.jpg", category: "pooja-door" },
+  { code: "AJ-1003", image: "images/pooja-3.jpg", category: "pooja-door" },
+  { code: "AJ-1004", image: "images/pooja-4.jpg", category: "pooja-door" },
+  { code: "AJ-1005", image: "images/pooja-5.jpg", category: "pooja-door" },
+  { code: "AJ-1006", image: "images/pooja-6.jpg", category: "pooja-door" },
+  { code: "AJ-1007", image: "images/pooja-7.jpg", category: "pooja-door" },
+  { code: "AJ-1008", image: "images/pooja-8.jpg", category: "pooja-door" },
+  { code: "AJ-1009", image: "images/pooja-9.jpg", category: "pooja-door" },
+  { code: "AJ-1010", image: "images/pooja-10.jpg", category: "pooja-door" },
+  { code: "AJ-1011", image: "images/pooja-11.jpg", category: "pooja-door" },
+  { code: "AJ-1012", image: "images/pooja-12.jpg", category: "pooja-door" },
+  { code: "AJ-1013", image: "images/pooja-13.jpg", category: "pooja-door" },
+  { code: "AJ-1014", image: "images/pooja-14.jpg", category: "pooja-door" },
+  { code: "AJ-1015", image: "images/pooja-15.jpg", category: "pooja-door" },
+  { code: "AJ-1016", image: "images/pooja-16.jpg", category: "pooja-door" },
+  { code: "AJ-1017", image: "images/pooja-17.jpg", category: "pooja-door" },
+  
 ]
