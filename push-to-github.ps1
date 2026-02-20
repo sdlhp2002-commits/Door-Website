@@ -94,6 +94,17 @@ if (-not (Test-Path ".\.nojekyll")) {
     New-Item -Path ".\.nojekyll" -ItemType File -Force | Out-Null
 }
 
+# Ensure robots.txt exists for SEO
+if (-not (Test-Path ".\robots.txt")) {
+    Write-Host "Creating robots.txt file..."
+    $robotsContent = @"
+User-agent: *
+Allow: /
+Sitemap: https://doors.ajormart.in/sitemap.xml
+"@
+    Set-Content -Path ".\robots.txt" -Value $robotsContent
+}
+
 # Stage and commit
 Write-Host "Staging files..."
 & git add .
