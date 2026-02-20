@@ -82,6 +82,7 @@
                             <li>Hinge & lock installation</li>
                             <li>Door hanging & testing</li>
                         </ul>
+                        <button class="service-btn book-service-btn" data-service="Professional Installation">Book Now</button>
                     </div>
 
                     <!-- Service 2 -->
@@ -96,6 +97,7 @@
                             <li>Lock & handle replacement</li>
                             <li>Scratch & dent repair</li>
                         </ul>
+                        <button class="service-btn book-service-btn" data-service="Repair & Maintenance">Book Now</button>
                     </div>
 
                     <!-- Service 3 -->
@@ -110,6 +112,7 @@
                             <li>Design modifications</li>
                             <li>Glass & grill integration</li>
                         </ul>
+                        <button class="service-btn book-service-btn" data-service="Customization">Book Now</button>
                     </div>
 
                     <!-- Service 4 -->
@@ -124,6 +127,7 @@
                             <li>Color matching</li>
                             <li>Protective coating application</li>
                         </ul>
+                        <button class="service-btn book-service-btn" data-service="Polishing & Finishing">Book Now</button>
                     </div>
 
                 </div>
@@ -158,7 +162,7 @@
                             <li>Basic Alignment</li>
                             <li>1 Month Service Warranty</li>
                         </ul>
-                        <a href="contact.html?plan=basic" class="pricing-btn">Choose Basic</a>
+                        <button class="pricing-btn book-service-btn" data-service="Basic Installation Plan">Choose Basic</button>
                     </div>
 
                     <!-- Standard Plan -->
@@ -175,7 +179,7 @@
                             <li>Door Stopper Installation</li>
                             <li>6 Months Service Warranty</li>
                         </ul>
-                        <a href="contact.html?plan=premium" class="pricing-btn">Choose Premium</a>
+                        <button class="pricing-btn book-service-btn" data-service="Premium Fitting Plan">Choose Premium</button>
                     </div>
 
                     <!-- Maintenance Plan -->
@@ -191,7 +195,7 @@
                             <li>Priority Support</li>
                             <li>1 Year Comprehensive Warranty</li>
                         </ul>
-                        <a href="contact.html?plan=maintenance" class="pricing-btn">Choose AMC</a>
+                        <button class="pricing-btn book-service-btn" data-service="Annual Maintenance Plan">Choose AMC</button>
                     </div>
                 </div>
             </div>
@@ -230,5 +234,27 @@
     </a>
 
     <script src="script.js"></script>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Book a Service</h2>
+            <p id="modal-service-name" style="color: var(--secondary-color); font-weight: 600; margin-bottom: 20px;"></p>
+            <form id="booking-form" class="contact-form" style="box-shadow: none; padding: 0;">
+                <input type="hidden" id="service-type" name="Service_Type">
+                <label for="book-name" class="visually-hidden">Name</label>
+                <input type="text" id="book-name" placeholder="Your Name" name="Name" class="form-input" required>
+                
+                <label for="book-phone" class="visually-hidden">Phone</label>
+                <input type="tel" id="book-phone" placeholder="Phone Number" name="Number" class="form-input" required>
+                
+                <label for="book-message" class="visually-hidden">Message</label>
+                <textarea id="book-message" placeholder="Address / Specific Requirements" name="Message" class="form-input" rows="3"></textarea>
+                
+                <button type="submit" class="submit-button" style="width: 100%;">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

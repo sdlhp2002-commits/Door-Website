@@ -465,3 +465,64 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// 16. Booking Modal Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("booking-modal");
+    const closeBtn = document.querySelector(".close-modal");
+    const bookBtns = document.querySelectorAll(".book-service-btn");
+    const serviceInput = document.getElementById("service-type");
+    const serviceNameDisplay = document.getElementById("modal-service-name");
+    const bookingForm = document.getElementById("booking-form");
+
+    if (modal && bookBtns.length > 0) {
+        // Open Modal
+        bookBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const service = btn.getAttribute("data-service");
+                if (serviceInput) serviceInput.value = service;
+                if (serviceNameDisplay) serviceNameDisplay.textContent = `Booking for: ${service}`;
+                modal.classList.add("active");
+            });
+        });
+
+        // Close Modal
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                modal.classList.remove("active");
+            });
+        }
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("active");
+            }
+        });
+
+        // Handle Form Submission
+        if (bookingForm) {
+            bookingForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const btn = bookingForm.querySelector("button[type='submit']");
+                const originalText = btn.innerText;
+                btn.innerText = "Booking...";
+                btn.disabled = true;
+
+                // Reuse the existing scriptURL logic or define it here
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbz824FphQ38vAY1Q2qeJt9ZFYtq1rMWCZBjm7-E7IjnSdcPkXCHLsMChiVcaaWYilv2/exec';
+
+                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: new FormData(bookingForm) })
+                    .then(() => {
+                        window.location.href = 'thank-you.html';
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert("Something went wrong. Please try again.");
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                    });
+            });
+        }
+    }
+});
