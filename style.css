@@ -1265,7 +1265,11 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     .products-section .swiper-pagination {
         display: block !important;
         bottom: 10px;
-        /* Adjust position if needed */
+    }
+
+    .products-section .slider-wrapper {
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }
 
@@ -2834,9 +2838,15 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .service-card {
