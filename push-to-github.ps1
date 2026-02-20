@@ -56,23 +56,36 @@ try {
 $sitemapPath = ".\sitemap.xml"
 if (Test-Path $sitemapPath) {
     Write-Host "Updating sitemap.xml lastmod dates..."
-    $today = (Get-Date).ToString("yyyy-MM-dd")
-    $content = Get-Content $sitemapPath -Raw
-    $newContent = $content -replace "<lastmod>.*?</lastmod>", "<lastmod>$today</lastmod>"
-    # Write with UTF-8 No BOM to ensure Google can parse it correctly
-    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
-    [System.IO.File]::WriteAllText((Resolve-Path $sitemapPath).Path, $newContent, $utf8NoBom)
-    Write-Host "Sitemap updated to $today"
-}
+    try {
+        $today = (Get-Date).ToString("yyyy-MM-dd")
 
-# Validate XML syntax locally
-try {
-    [xml]$check = Get-Content $sitemapPath
-    Write-Host "✅ Sitemap XML syntax is valid." -ForegroundColor Green
-} catch {
-    Write-Host "❌ Sitemap XML syntax is INVALID!" -ForegroundColor Red
-    Write-Host $_.Exception.Message -ForegroundColor Red
-    exit 1 # Stop deployment if sitemap is broken
+        # Load the XML document
+        $xmlDoc = New-Object System.Xml.XmlDocument
+        $xmlDoc.Load((Resolve-Path $sitemapPath).Path)
+
+        # Create a namespace manager to handle the default sitemap namespace
+        $nsmgr = New-Object System.Xml.XmlNamespaceManager($xmlDoc.NameTable)
+        $nsmgr.AddNamespace("s", "http://www.sitemaps.org/schemas/sitemap/0.9")
+
+        # Select all <lastmod> nodes and update their content
+        $nodes = $xmlDoc.SelectNodes("//s:lastmod", $nsmgr)
+        foreach ($node in $nodes) {
+            $node.InnerText = $today
+        }
+
+        # Save the modified XML with proper formatting and UTF-8 (No BOM) encoding
+        $writerSettings = New-Object System.Xml.XmlWriterSettings
+        $writerSettings.Indent = $true
+        $writerSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
+        $writer = [System.Xml.XmlWriter]::Create((Resolve-Path $sitemapPath).Path, $writerSettings)
+        $xmlDoc.Save($writer)
+        $writer.Close()
+
+        Write-Host "✅ Sitemap updated to $today and validated successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "❌ Error processing sitemap.xml! Deployment stopped." -ForegroundColor Red
+        ExitWith $_.Exception.Message
+    }
 }
 
 # Ensure .nojekyll exists to prevent 404s on GitHub Pages
