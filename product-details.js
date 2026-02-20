@@ -91,8 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     injectProductSchema(product, absoluteImageUrl);
 
     // Fill hero/breadcrumb
-    document.getElementById("breadcrumb-area").innerHTML =
-        `<a href='./' style="color:var(--secondary-color)">Home</a> / <a href='product.html' style="color:var(--secondary-color)">Product</a> / ${product.name}`;
+    document.getElementById("breadcrumb-area").innerHTML = `<a href='./'>Home</a> / <a href='product.html'>Product</a> / ${product.name}`;
     
     // Set the main page heading (H1) for SEO
     document.getElementById("product-title").textContent = product.name;
@@ -321,6 +320,10 @@ function initializeEnquiryButton(product) {
 
 /**
  * Initializes a lightbox to view the main image in full screen.
+ * @review This is a simple lightbox implementation. The main `script.js` contains a more
+ * feature-rich lightbox for the gallery page. To reduce code duplication and maintain
+ * a consistent user experience, consider creating a single, reusable lightbox utility
+ * that both this page and the gallery page can use.
  */
 function initializeLightbox() {
     const mainImg = document.getElementById('main-door-image');

@@ -55,7 +55,7 @@ const PRODUCTS = [
       "images/w2.jpg",
       "images/w3.jpg"
     ],
-    shortDescription: " We endeavour to design these products with specific parameters of the customers demand and current market..",
+    shortDescription: "We endeavour to design these products with specific parameters of the customers demand and current market.",
     specifications: {
       "Thickness": "25 mm | 28 mm",
       "Height": '78", 81", 84"',
@@ -64,8 +64,8 @@ const PRODUCTS = [
     features: [
       "Customizable finish to match your interior style.",
       "Waterproof and termite resistant.",
-      "eco-friendly and low maintenance",
-      "durable and long"
+      "Eco-friendly and low maintenance.",
+      "Durable and long-lasting."
     ],
     warranty: "Lifetime Warranty against termites and water damage.",
     maintenance: "Zero maintenance required. Washable with water and mild soap."
@@ -79,17 +79,19 @@ const PRODUCTS = [
       "images/a2.jpg",
       "images/a3.jpg"
     ],
-    shortDescription: " Antique word itself has its meaning these are limited hence antique with high grade laminate in either textured  or glossy sheet according to the clients recommendation.",
+    shortDescription: "Antique word itself has its meaning these are limited hence antique with high grade laminate in either textured or glossy sheet according to the clients recommendation.",
     specifications: {
       "Thickness": "30 mm | 38 mm",
-      "Height": '78", 81", 84",96"',
-      "Width": '30", 32", 33", 36", 38",42",48",45"'
+      "Height": '78", 81", 84", 96"',
+      "Width": '30", 32", 33", 36", 38", 42", 45", 48"'
     },
     features: [
       "Designs can be customised with different shades of colour or texture to create elegant effects.",
       "They're cost-effective & offer a good value alternative to traditional doors.",
       "Laminate doors with antibacterial property increases the durability & strength."
-    ]
+    ],
+    warranty: "5 Years Warranty against manufacturing defects.",
+    maintenance: "Wipe with a soft, damp cloth. Avoid abrasive cleaners."
   },
   {
     id: "premium-digital",
@@ -104,14 +106,16 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "30 mm ",
       "Height": '78", 81", 84"',
-      "Width": '30", 27", 33", 36", 38"'
+      "Width": '27", 30", 33", 36", 38"'
     },
     features: [
       "They are custom made for quick installations.",
       "Easy to maintain and clean.",
       "Durable and long-lasting.",
       "Eco-friendly and termite resistant."
-    ]
+    ],
+    warranty: "7 Years Warranty on the door structure.",
+    maintenance: "Easy to clean with a damp cloth. Resistant to most household stains."
   },
   {
     id: "teak-veneer",
@@ -126,14 +130,16 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "30 mm | 38 mm",
       "Height": '78", 81", 84" ,96"',
-      "Width": '30", 42", 33", 36", 38" ,45"'
+      "Width": '30", 33", 36", 38", 42", 45"'
     },
     features: [
-      "flexibility in designs.",
+      "Flexibility in designs.",
       "Easy to maintain and clean.",
       "Increased strength and durability.",
       "Better way of wood utilization."
-    ]
+    ],
+    warranty: "10 Years Warranty on structural integrity.",
+    maintenance: "Requires periodic polishing (every 2-3 years) to maintain its sheen."
   },
   {
     id: "premium-teak-wood",
@@ -149,14 +155,16 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "32 mm | 38 mm",
       "Height": '78", 81", 84" ,96"',
-      "Width": '30", 42", 33", 36", 38" ,45"'
+      "Width": '30", 33", 36", 38", 42", 45"'
     },
     features: [
       "Strong, Durable.",
       "Easy to maintain and clean.",
       "Resistance to fungi, Termites.",
       "100% Season Wood."
-    ]
+    ],
+    warranty: "15 Years Warranty on wood and structure.",
+    maintenance: "Regular polishing is recommended to protect the wood and enhance its life."
   },
   {
     id: "laminate-doors",
@@ -172,14 +180,15 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "32 mm | 38 mm | 45 mm",
       "Height": '78", 81", 84"',
-      "Width": '30", 42", 33", 36", 38" ,45"'
+      "Width": '30", 33", 36", 38", 42", 45"'
     },
     features: [
       "Designs can be customised with different shades of colour or texture to create elegant effects.",
       "They’re cost-effective & offer a good value alternative to traditional doors.",
       "Laminate doors with antibacterial property increases the durability, strength of the doors.",
-
-    ]
+    ],
+    warranty: "5 Years Warranty against manufacturing defects.",
+    maintenance: "Very low maintenance. Clean with a damp cloth."
   },
   {
     id: "wpc-door-frame",
@@ -187,47 +196,47 @@ const PRODUCTS = [
     mainImage: "images/WPC.png",
     similarImages: [
       "images/wpc1.png",
-    
-
     ],
 
     shortDescription: "This product is a combination of wooden properties and virgin or recycled plastic WPC overcomes all the negative marking caused by natural wood.",
     specifications: {
       "Thickness": "25 mm | 28 mm | 30 mm",
       "Height": '78", 81", 84"',
-      "Width": '30", 42", 33", 36", 38" ,45"'
+      "Width": '30", 33", 36", 38", 42", 45"'
     },
     features: [
-      "Anti termite.",
-      "Anti corrosion.",
+      "Anti-termite.",
+      "Anti-corrosion.",
       "Low maintenance.",
       "Waterproof."
-
-    ]
+    ],
+    warranty: "Lifetime Warranty against termites and water damage.",
+    maintenance: "Washable and requires no periodic maintenance."
   },
   {
     id: "pooja-door",
     name: "Pooja Door",
     mainImage: "images/pooja-1.jpg",
     similarImages: [
-      "images/pooja-1.jpg",
       "images/pooja-2.jpg",
       "images/pooja-3.jpg",
       "images/pooja-4.jpg"
     ],
 
-    shortDescription: "AJOR presents Beautifully crafted Pooja doors made of solid teakwood (Tanzania & Ghana Teak), veneer, Primer Coated  & UV COATED WPC Doors.",
+    shortDescription: "AJOR presents Beautifully crafted Pooja doors made of solid teakwood (Tanzania & Ghana Teak), veneer, Primer Coated & UV COATED WPC Doors.",
     specifications: {
       "Thickness": "25 mm | 28 mm | 30 mm",
       "Height": '78", 81", 84"',
-      "Width": '30", 42", 33", 36", 38" ,45"'
+      "Width": '30", 33", 36", 38", 42", 45"'
     },
     features: [
-      "anti termite.",
-      "anti corrosion.",
-      "low maintenance.",
-      "waterproof."
-    ]
+      "Anti-termite.",
+      "Anti-corrosion.",
+      "Low maintenance.",
+      "Waterproof."
+    ],
+    warranty: "Varies by material (Teak, Veneer, WPC). See specific product for details.",
+    maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient."
   },
   // Add other products as needed...
 ]
@@ -273,7 +282,7 @@ const DOOR_CATALOG = [
 
 
 
-  // Category 4: Antique Laminated (codes starting with 4)
+  // Category 4: Antique Laminated Doors (codes starting with 4)
   { code: "AJ-401", image: "images/antique laminated.jpg", category: "antique-laminated" },
   { code: "AJ-402", image: "images/a1.jpg", category: "antique-laminated" },
   { code: "AJ-403", image: "images/a2.jpg", category: "antique-laminated" },
@@ -282,7 +291,7 @@ const DOOR_CATALOG = [
   { code: "AJ-406", image: "images/4006.jpg", category: "antique-laminated" },
 
 
-  // Category 5: Premium Digital Korean (codes starting with 5)
+  // Category 5: Premium Digital Korean Doors (codes starting with 5)
   { code: "AJ-501", image: "images/premium digital.jpg", category: "premium-digital" },
   { code: "AJ-502", image: "images/p1.jpg", category: "premium-digital" },
   { code: "AJ-503", image: "images/p2.jpg", category: "premium-digital" },
@@ -296,7 +305,7 @@ const DOOR_CATALOG = [
 
 
 
-  // Category 6: Teak Veneer (codes starting with 6)
+  // Category 6: Premium Teak Wood Doors (codes starting with 6)
   { code: "AJ-601", image: "images/premium teak wood door.jpg", category: "premium-teak-wood" },
   { code: "AJ-602", image: "images/tw1.jpg", category: "premium-teak-wood" },
   { code: "AJ-603", image: "images/tw2.jpg", category: "premium-teak-wood" },
@@ -334,7 +343,7 @@ const DOOR_CATALOG = [
   { code: "AJ-635", image: "images/6035.jpg", category: "premium-teak-wood" },
 
 
-// Category 7: Premium Teak Wood (codes starting with 7)
+  // Category 7: Teak Veneer Doors (codes starting with 7)
   { code: "AJ-701", image: "images/teak wood.jpg", category: "teak-veneer" },
   { code: "AJ-702", image: "images/t1.jpg", category: "teak-veneer" },
   { code: "AJ-703", image: "images/t2.jpg", category: "teak-veneer" },

@@ -121,10 +121,14 @@ if (form) {
         // FIX: We define the URL directly as a string here
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz824FphQ38vAY1Q2qeJt9ZFYtq1rMWCZBjm7-E7IjnSdcPkXCHLsMChiVcaaWYilv2/exec';
 
+        // NOTE: 'no-cors' mode means the response is "opaque".
+        // The .then() block will execute even on a 4xx/5xx server error from Google Scripts,
+        // as the browser cannot inspect the response. The .catch() only handles network failures.
+        // This is a known limitation when submitting to Google Scripts this way.
         fetch(scriptURL, {
             method: 'POST',
             mode: 'no-cors',
-            body: new FormData(form)
+            body: new FormData(form),
         })
             .then(() => {
                 // This will now trigger correctly!
@@ -224,6 +228,9 @@ if (filterBtns.length > 0) {
 }
 
 // 8. Lightbox Logic
+// @review This is a comprehensive lightbox. However, a separate, simpler lightbox is
+// implemented in `product-details.js`. It's recommended to consolidate these into a
+// single, reusable script to avoid code duplication and ensure a consistent UX across the site.
 const galleryContainer = document.querySelector('.gallery-container');
 
 if (galleryContainer) {
