@@ -447,3 +447,21 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('theme', theme);
     });
 });
+
+// 15. Pricing Toggle Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const pricingCheckbox = document.getElementById('pricing-toggle-checkbox');
+    
+    if (pricingCheckbox) {
+        pricingCheckbox.addEventListener('change', function() {
+            const isYearly = this.checked;
+            document.querySelectorAll('.price[data-monthly][data-yearly]').forEach(priceEl => {
+                const monthly = priceEl.getAttribute('data-monthly');
+                const yearly = priceEl.getAttribute('data-yearly');
+                const unit = isYearly ? '/year' : '/month';
+                const amount = isYearly ? yearly : monthly;
+                priceEl.innerHTML = `₹${amount}<span>${unit}</span>`;
+            });
+        });
+    }
+});
