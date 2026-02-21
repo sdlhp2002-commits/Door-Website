@@ -83,7 +83,7 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "30 mm | 38 mm",
       "Height": '78", 81", 84", 96"',
-      "Width": '30", 32", 33", 36", 38", 42", 45", 48"'
+      "Width": '30", 32", 33", 36", 38",'
     },
     features: [
       "Designs can be customised with different shades of colour or texture to create elegant effects.",
@@ -130,7 +130,7 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "30 mm | 38 mm",
       "Height": '78", 81", 84" ,96"',
-      "Width": '30", 33", 36", 38", 42", 45"'
+      "Width": '30", 33", 36", 38",'
     },
     features: [
       "Flexibility in designs.",
@@ -155,7 +155,7 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "32 mm | 38 mm",
       "Height": '78", 81", 84" ,96"',
-      "Width": '30", 33", 36", 38", 42", 45"'
+      "Width": '30", 33", 36", 38", '
     },
     features: [
       "Strong, Durable.",
@@ -180,7 +180,7 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "32 mm | 38 mm | 45 mm",
       "Height": '78", 81", 84"',
-      "Width": '30", 33", 36", 38", 42", 45"'
+      "Width": '30", 33", 36", 38",'
     },
     features: [
       "Designs can be customised with different shades of colour or texture to create elegant effects.",
@@ -202,7 +202,7 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "25 mm | 28 mm | 30 mm",
       "Height": '78", 81", 84"',
-      "Width": '30", 33", 36", 38", 42", 45"'
+      "Width": '30", 33", 36", 38",'
     },
     features: [
       "Anti-termite.",
@@ -227,7 +227,7 @@ const PRODUCTS = [
     specifications: {
       "Thickness": "25 mm | 28 mm | 30 mm",
       "Height": '78", 81", 84"',
-      "Width": '30", 33", 36", 38", 42", 45"'
+      "Width": '30", 33", 36", 38",'
     },
     features: [
       "Anti-termite.",
