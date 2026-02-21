@@ -756,8 +756,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Auto-open on Explore (Scroll) - On every page if not logged in
-    if (localStorage.getItem('ajor_is_logged_in') !== 'true') {
+    // Auto-open on Explore (Scroll) - On specific pages if not logged in
+    const currentPage = window.location.pathname.split('/').pop();
+    const pagesForPopup = ['product.html', 'services.html'];
+
+    if (localStorage.getItem('ajor_is_logged_in') !== 'true' && pagesForPopup.includes(currentPage)) {
         const showLoginOnScroll = () => {
             // Double check login state inside the closure
             if (localStorage.getItem('ajor_is_logged_in') === 'true') {
