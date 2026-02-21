@@ -965,25 +965,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const ratingInput = document.getElementById('selected-rating');
     
     const feedbackMessages = {
-        1: "Unsatisfied 😞",
-        2: "Fair 😐",
-        3: "Good 🙂",
-        4: "Very Good 😊",
-        5: "Excellent! 🤩"
+        0.5: "Terrible 😠",
+        1: "Very Bad 😞",
+        1.5: "Bad 🙁",
+        2: "Poor 😐",
+        2.5: "Average 🙂",
+        3: "Good 😊",
+        3.5: "Very Good 😃",
+        4: "Great! 😄",
+        4.5: "Excellent! 🤩",
+        5: "Outstanding! 🌟"
     };
 
     if (stars.length > 0) {
         stars.forEach(star => {
-            // Hover Effect
-            star.addEventListener('mouseover', () => {
-                const value = parseInt(star.getAttribute('data-value'));
+            // Hover Effect (Mousemove for half-star precision)
+            star.addEventListener('mousemove', (e) => {
+                const rect = star.getBoundingClientRect();
+                const isLeftHalf = (e.clientX - rect.left) < (rect.width / 2);
+                let value = parseFloat(star.getAttribute('data-value'));
+                if (isLeftHalf) value -= 0.5;
+                
                 highlightStars(value);
                 updateFeedback(value);
             });
             
             // Click Effect
-            star.addEventListener('click', () => {
-                const value = parseInt(star.getAttribute('data-value'));
+            star.addEventListener('click', (e) => {
+                const rect = star.getBoundingClientRect();
+                const isLeftHalf = (e.clientX - rect.left) < (rect.width / 2);
+                let value = parseFloat(star.getAttribute('data-value'));
+                if (isLeftHalf) value -= 0.5;
+
                 ratingInput.value = value;
                 highlightStars(value);
                 updateFeedback(value);
@@ -994,7 +1007,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const starContainer = document.querySelector('.star-rating-container .stars');
         if (starContainer) {
             starContainer.addEventListener('mouseleave', () => {
-                const selectedValue = ratingInput.value ? parseInt(ratingInput.value) : 0;
+                const selectedValue = ratingInput.value ? parseFloat(ratingInput.value) : 0;
                 highlightStars(selectedValue);
                 updateFeedback(selectedValue);
             });
@@ -1003,9 +1016,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function highlightStars(value) {
         stars.forEach(s => {
-            const sVal = parseInt(s.getAttribute('data-value'));
+            const sVal = parseFloat(s.getAttribute('data-value'));
+            // Reset to full star shape first
+            s.classList.remove('fa-star-half-stroke');
+            s.classList.add('fa-star');
+            
             if (sVal <= value) {
                 s.style.color = '#ffc107'; // Gold
+            } else if (sVal - 0.5 === value) {
+                s.style.color = '#ffc107'; // Gold
+                s.classList.remove('fa-star');
+                s.classList.add('fa-star-half-stroke');
             } else {
                 s.style.color = '#ddd'; // Gray
             }
@@ -1018,9 +1039,12 @@ document.addEventListener("DOMContentLoaded", () => {
             feedback.style.color = "var(--primary-color)";
             return;
         }
-        feedback.textContent = feedbackMessages[value];
+        // Fallback if exact key doesn't exist
+        let msg = feedbackMessages[value] || feedbackMessages[Math.floor(value)];
+        feedback.textContent = msg;
+        
         if (value <= 2) feedback.style.color = "#dc3545"; // Red
-        else if (value === 3) feedback.style.color = "#fd7e14"; // Orange
+        else if (value <= 3.5) feedback.style.color = "#fd7e14"; // Orange
         else feedback.style.color = "#28a745"; // Green
     }
 
