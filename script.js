@@ -107,8 +107,6 @@ if (document.querySelector('.hero-slider')) {
     });
 }
 
-// --- FIXED FORM SECTION ---
-const form = document.getElementById('ajor-contact-form');
 
 // NEW HELPER FUNCTION to convert FormData to a JSON object for AJAX submission
 function formDataToObject(formData) {
@@ -117,56 +115,6 @@ function formDataToObject(formData) {
         object[key] = value;
     });
     return object;
-}
-
-if (form) {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const btn = document.getElementById('submit-btn');
-        if (btn) btn.innerText = "Sending...";
-        if (btn) btn.disabled = true;
-
-        // --- NEW: FormSubmit.co Endpoint ---
-        // IMPORTANT: Replace YOUR_EMAIL_HERE with your actual email address.
-        const submissionURL = 'https://formsubmit.co/ajax/sdlhp2002@gmail.com';
-        const formData = new FormData(form);
-        const formObject = formDataToObject(formData);
-
-        // Add settings for FormSubmit.co
-        if (formObject.Product_Name) {
-            formObject._subject = `Enquiry: ${formObject.Product_Name}`;
-            if (formObject.Estimated_Price) {
-                formObject._subject += ` (${formObject.Estimated_Price})`;
-            }
-        } else {
-            formObject._subject = "New Enquiry from Ajor Doors Website!";
-        }
-        formObject._next = "https://doors.ajormart.in/thank-you.html"; // Redirect page
-
-        fetch(submissionURL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(formObject),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success === "true") {
-                    window.location.href = formObject._next;
-                } else {
-                    throw new Error(data.message || 'Form submission failed. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                alert("There was an error: " + error.message + ". Please check your form endpoint configuration or contact us directly.");
-                if (btn) btn.innerText = "Get Free Quote";
-                if (btn) btn.disabled = false;
-            });
-    });
 }
 
 // 4. Fade In Animation on Scroll
@@ -253,9 +201,6 @@ if (filterBtns.length > 0) {
 }
 
 // 8. Lightbox Logic
-// @review This is a comprehensive lightbox. However, a separate, simpler lightbox is
-// implemented in `product-details.js`. It's recommended to consolidate these into a
-// single, reusable script to avoid code duplication and ensure a consistent UX across the site.
 const galleryContainer = document.querySelector('.gallery-container');
 
 if (galleryContainer) {
@@ -422,8 +367,61 @@ if (!localStorage.getItem("cookieConsent")) {
     }
 }
 
-// 13. Image Performance Optimization
+// --- MAIN INITIALIZATION BLOCK ---
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- FIXED FORM SECTION (Contact Form) ---
+    const contactForm = document.getElementById('ajor-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submit-btn');
+            if (btn) btn.innerText = "Sending...";
+            if (btn) btn.disabled = true;
+
+            // --- FormSubmit.co Endpoint ---
+            const submissionURL = 'https://formsubmit.co/ajax/sdlhp2002@gmail.com';
+            const formData = new FormData(contactForm);
+            const formObject = formDataToObject(formData);
+
+            // Add settings for FormSubmit.co
+            if (formObject.Product_Name) {
+                formObject._subject = `Enquiry: ${formObject.Product_Name}`;
+                if (formObject.Estimated_Price) {
+                    formObject._subject += ` (${formObject.Estimated_Price})`;
+                }
+            } else {
+                formObject._subject = "New Enquiry from Ajor Doors Website!";
+            }
+            formObject._next = "https://doors.ajormart.in/thank-you.html"; // Redirect page
+
+            fetch(submissionURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formObject),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success === "true") {
+                        window.location.href = formObject._next;
+                    } else {
+                        throw new Error(data.message || 'Form submission failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("There was an error: " + error.message + ". Please check your form endpoint configuration or contact us directly.");
+                    if (btn) btn.innerText = "Get Free Quote";
+                    if (btn) btn.disabled = false;
+                });
+        });
+    }
+
+    // 13. Image Performance Optimization
     // Optimize Logo for LCP (Largest Contentful Paint)
     const logo = document.querySelector('.logo-image');
     if (logo) {
@@ -431,9 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
         logo.setAttribute('decoding', 'async');
     }
 });
-
-// 14. Dark Mode Toggle Logic (Mobile Only)
-document.addEventListener("DOMContentLoaded", () => {
+    // 14. Dark Mode Toggle Logic (Mobile Only)
     // Create the toggle button
     const themeToggleBtn = document.createElement('button');
     themeToggleBtn.id = 'theme-toggle';
@@ -471,10 +467,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         localStorage.setItem('theme', theme);
     });
-});
 
-// 15. Pricing Toggle Logic
-document.addEventListener("DOMContentLoaded", () => {
+    // 15. Pricing Toggle Logic
     const pricingCheckbox = document.getElementById('pricing-toggle-checkbox');
     
     if (pricingCheckbox) {
@@ -489,10 +483,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-});
 
-// 16. Booking Modal Logic
-document.addEventListener("DOMContentLoaded", () => {
+    // 16. Booking Modal Logic
     const modal = document.getElementById("booking-modal");
     const closeBtn = document.querySelector(".close-modal");
     const bookBtns = document.querySelectorAll(".book-service-btn");
@@ -569,29 +561,23 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
-});
 
-// 17. Pre-fill Contact Form from URL Parameters (Enquiry Logic)
-document.addEventListener("DOMContentLoaded", () => {
+    // 17. Pre-fill Contact Form from URL Parameters (Enquiry Logic)
     const params = new URLSearchParams(window.location.search);
     const product = params.get('product');
     const details = params.get('details');
     
     // Check if we are on the contact page and have product info
-    const contactForm = document.getElementById('ajor-contact-form');
-    if (product && contactForm) {
-        const msgField = contactForm.querySelector('textarea[name="Message"]');
+    const contactFormEl = document.getElementById('ajor-contact-form');
+    if (product && contactFormEl) {
+        const msgField = contactFormEl.querySelector('textarea[name="Message"]');
         if (msgField) {
             let text = `I am interested in the ${product}.`;
             if (details) text += `\n\nSelected Specifications:\n${details}`;
             msgField.value = text;
         }
     }
-});
-
-// 18. Login Modal Logic & Injection
-document.addEventListener("DOMContentLoaded", () => {
-    // Inject Login Modal HTML if it doesn't exist
+    // 18. Login Modal Logic & Injection
     if (!document.getElementById('login-modal')) {
         const modalHTML = `
         <div id="login-modal" class="modal">

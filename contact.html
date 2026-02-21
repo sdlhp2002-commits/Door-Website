@@ -190,16 +190,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Script to pre-fill message box from URL parameter
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productName = urlParams.get('product');
-            const messageBox = document.querySelector('textarea[name="Message"]');
-            if (productName && messageBox) {
-                messageBox.value = `I am interested in ${productName}. Please send me more details.`;
-            }
-        });
-    </script>
 </body>
 </html>
