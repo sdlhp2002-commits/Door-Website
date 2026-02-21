@@ -756,8 +756,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Auto-open on Explore (Scroll) - Once per session AND if not logged in
-    if (!sessionStorage.getItem('loginPopupShown') && localStorage.getItem('ajor_is_logged_in') !== 'true') {
+    // Auto-open on Explore (Scroll) - On every page if not logged in
+    if (localStorage.getItem('ajor_is_logged_in') !== 'true') {
         const showLoginOnScroll = () => {
             // Double check login state inside the closure
             if (localStorage.getItem('ajor_is_logged_in') === 'true') {
@@ -767,7 +767,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (window.scrollY > 400) { // Trigger after scrolling down
                 if (loginModal) loginModal.classList.add('active');
-                sessionStorage.setItem('loginPopupShown', 'true');
                 window.removeEventListener('scroll', showLoginOnScroll);
             }
         };
