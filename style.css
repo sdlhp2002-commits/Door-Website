@@ -3896,3 +3896,66 @@ input:checked + .slider:before {
         font-size: 1.8rem;
     }
 }
+
+/* Login Icon Style */
+.login-icon-btn {
+    font-size: 1.3rem;
+    color: var(--dark-color);
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+}
+
+.login-icon-btn:hover {
+    color: var(--secondary-color);
+}
+
+/* Login Welcome Message */
+.login-welcome-msg {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-family: "Poppins", sans-serif;
+    white-space: nowrap;
+    animation: fadeIn 0.5s ease;
+}
+
+.nav-item.logged-in-state {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-item.logged-in-state {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Profile Link Style */
+.profile-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.profile-link:hover {
+    color: var(--secondary-color);
+    background-color: var(--light-pink-color);
+    border-color: var(--secondary-color);
+}
+
+/* Profile Modal Form Labels */
+#profile-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-align: left;
+}

@@ -588,3 +588,336 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+// 18. Login Modal Logic & Injection
+document.addEventListener("DOMContentLoaded", () => {
+    // Inject Login Modal HTML if it doesn't exist
+    if (!document.getElementById('login-modal')) {
+        const modalHTML = `
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" id="close-login-modal">&times;</span>
+                <h2 style="text-align:center; margin-bottom:20px; font-family:'Playfair Display', serif; color:var(--primary-color);">Login</h2>
+                <form id="login-form" class="contact-form" style="box-shadow:none; padding:0;">
+                    <input type="text" name="Name" placeholder="Your Name" class="form-input" required>
+                    <input type="email" name="Email" placeholder="Your Email" class="form-input" required>
+                    <input type="tel" name="Number" placeholder="Phone Number" class="form-input" required>
+                    <button type="submit" class="submit-button" style="width:100%;">Login</button>
+                </form>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    // Inject Profile Modal HTML if it doesn't exist
+    if (!document.getElementById('profile-modal')) {
+        const profileModalHTML = `
+        <div id="profile-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" id="close-profile-modal">&times;</span>
+                <h2 style="text-align:center; margin-bottom:20px; font-family:'Playfair Display', serif; color:var(--primary-color);">My Profile</h2>
+                <form id="profile-form" class="contact-form" style="box-shadow:none; padding:0;">
+                    <label for="profile-name">Name</label>
+                    <input type="text" id="profile-name" name="Name" placeholder="Your Name" class="form-input" required>
+                    
+                    <label for="profile-email">Email</label>
+                    <input type="email" id="profile-email" name="Email" placeholder="Your Email" class="form-input" required>
+                    
+                    <label for="profile-phone">Phone Number</label>
+                    <input type="tel" id="profile-phone" name="Number" placeholder="Phone Number" class="form-input" required>
+                    
+                    <button type="submit" class="submit-button" style="width:100%;">Save Changes</button>
+                </form>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', profileModalHTML);
+    }
+
+    const loginModal = document.getElementById('login-modal');
+    const closeLoginBtn = document.getElementById('close-login-modal');
+    const loginForm = document.getElementById('login-form');
+
+    const profileModal = document.getElementById('profile-modal');
+    const closeProfileBtn = document.getElementById('close-profile-modal');
+    const profileForm = document.getElementById('profile-form');
+
+    // --- Login State Management ---
+    const updateLoginUI = () => {
+        const isLoggedIn = localStorage.getItem('ajor_is_logged_in') === 'true';
+        const userName = localStorage.getItem('ajor_user_name') || 'User';
+        const loginBtns = document.querySelectorAll('.login-icon-btn');
+        
+        loginBtns.forEach(btn => {
+            const icon = btn.querySelector('i');
+            const navItem = btn.closest('.nav-item');
+            
+            // Remove existing welcome message and profile link if any
+            const existingMsg = navItem.querySelector('.login-welcome-msg');
+            const existingProfileLink = navItem.querySelector('.profile-link');
+            if (existingMsg) existingMsg.remove();
+            if (existingProfileLink) existingProfileLink.remove();
+
+            if (isLoggedIn) {
+                if (icon) {
+                    icon.classList.remove('fa-user');
+                    icon.classList.add('fa-sign-out-alt');
+                }
+                btn.setAttribute('aria-label', 'Logout');
+                btn.title = "Logout";
+                
+                // Add Welcome Message
+                const msgSpan = document.createElement('span');
+                msgSpan.className = 'login-welcome-msg';
+                msgSpan.textContent = `Welcome, ${userName}`;
+
+                // Add Profile Link
+                const profileLink = document.createElement('a');
+                profileLink.href = '#';
+                profileLink.id = 'open-profile-modal-btn';
+                profileLink.className = 'profile-link';
+                profileLink.textContent = 'My Profile';
+                navItem.insertBefore(msgSpan, btn);
+                navItem.insertBefore(profileLink, btn);
+                navItem.classList.add('logged-in-state');
+            } else {
+                if (icon) {
+                    icon.classList.remove('fa-sign-out-alt');
+                    icon.classList.add('fa-user');
+                }
+                btn.setAttribute('aria-label', 'Login');
+                btn.title = "Login";
+                navItem.classList.remove('logged-in-state');
+            }
+        });
+    };
+    
+    // Initialize UI on load
+    updateLoginUI();
+
+    // Open Modal or Logout on Icon Click
+    document.body.addEventListener('click', (e) => {
+        const btn = e.target.closest('.login-icon-btn');
+        if (btn) {
+            e.preventDefault();
+            const isLoggedIn = localStorage.getItem('ajor_is_logged_in') === 'true';
+            
+            if (isLoggedIn) {
+                // Logout Logic
+                if(confirm("Are you sure you want to logout?")) {
+                    localStorage.removeItem('ajor_is_logged_in');
+                    // Keep user details for auto-fill next time
+                    // localStorage.removeItem('ajor_user_name');
+                    updateLoginUI();
+                    alert("You have been logged out.");
+                }
+            } else {
+                // Open Login Modal
+                if (loginModal) loginModal.classList.add('active');
+            }
+        }
+    });
+
+    // Open Profile Modal
+    document.body.addEventListener('click', (e) => {
+        if (e.target.id === 'open-profile-modal-btn') {
+            e.preventDefault();
+            
+            // Pre-fill form from localStorage
+            if (profileForm) {
+                profileForm.querySelector('#profile-name').value = localStorage.getItem('ajor_user_full_name') || '';
+                profileForm.querySelector('#profile-email').value = localStorage.getItem('ajor_user_email') || '';
+                profileForm.querySelector('#profile-phone').value = localStorage.getItem('ajor_user_phone') || '';
+            }
+
+            if (profileModal) profileModal.classList.add('active');
+        }
+    });
+
+    // Close Profile Modal
+    if (closeProfileBtn) {
+        closeProfileBtn.addEventListener('click', () => {
+            if (profileModal) profileModal.classList.remove('active');
+        });
+    }
+
+    // Close Modal
+    if (closeLoginBtn) {
+        closeLoginBtn.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+        });
+    }
+
+    // Close on click outside
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal && loginModal) {
+            loginModal.classList.remove('active');
+        } else if (e.target === profileModal && profileModal) {
+            profileModal.classList.remove('active');
+        }
+    });
+
+    // Auto-open on Explore (Scroll) - Once per session AND if not logged in
+    if (!sessionStorage.getItem('loginPopupShown') && localStorage.getItem('ajor_is_logged_in') !== 'true') {
+        const showLoginOnScroll = () => {
+            // Double check login state inside the closure
+            if (localStorage.getItem('ajor_is_logged_in') === 'true') {
+                window.removeEventListener('scroll', showLoginOnScroll);
+                return;
+            }
+            
+            if (window.scrollY > 400) { // Trigger after scrolling down
+                if (loginModal) loginModal.classList.add('active');
+                sessionStorage.setItem('loginPopupShown', 'true');
+                window.removeEventListener('scroll', showLoginOnScroll);
+            }
+        };
+        window.addEventListener('scroll', showLoginOnScroll);
+    }
+
+    // Login Form Validation
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const emailInput = loginForm.querySelector('input[name="Email"]');
+            const phoneInput = loginForm.querySelector('input[name="Number"]');
+            
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            // Email Validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Phone Validation (10 digits)
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            // If valid, prepare for submission to email via FormSubmit.co
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = "Sending...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(loginForm);
+            const formObject = formDataToObject(formData); // Reusing helper function from this script
+
+            // Add settings for FormSubmit.co
+            formObject._subject = "New Login/Lead from Ajor Doors Website Popup";
+
+            fetch('https://formsubmit.co/ajax/sdlhp2002@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Thank you! Your details have been submitted successfully.");
+                loginModal.classList.remove('active');
+                loginForm.reset();
+                
+                // Set login state
+                localStorage.setItem('ajor_is_logged_in', 'true');
+                // Save First Name
+                const userName = formObject.Name ? formObject.Name.split(' ')[0] : 'User';
+                localStorage.setItem('ajor_user_name', userName);
+                localStorage.setItem('ajor_user_full_name', formObject.Name);
+                localStorage.setItem('ajor_user_email', formObject.Email);
+                localStorage.setItem('ajor_user_phone', formObject.Number);
+                
+                updateLoginUI();
+            })
+            .catch(error => {
+                console.error('Error submitting login form:', error);
+                alert("There was an error sending your details. Please try again or contact us directly.");
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+
+    // --- Auto-fill Forms Function ---
+    function autoFillForms() {
+        const storedName = localStorage.getItem('ajor_user_full_name');
+        const storedEmail = localStorage.getItem('ajor_user_email');
+        const storedPhone = localStorage.getItem('ajor_user_phone');
+
+        // Pre-fill Login Form
+        if (loginForm) {
+            if (storedName) loginForm.querySelector('input[name="Name"]').value = storedName;
+            if (storedEmail) loginForm.querySelector('input[name="Email"]').value = storedEmail;
+            if (storedPhone) loginForm.querySelector('input[name="Number"]').value = storedPhone;
+        }
+        
+        // Pre-fill Contact Forms on any page
+        document.querySelectorAll('#ajor-contact-form').forEach(contactForm => {
+            if (storedName) {
+                const nameInput = contactForm.querySelector('input[name="Name"]');
+                if (nameInput) nameInput.value = storedName;
+            }
+            if (storedEmail) {
+                const emailInput = contactForm.querySelector('input[name="Email"]');
+                if (emailInput) emailInput.value = storedEmail;
+            }
+            if (storedPhone) {
+                const phoneInput = contactForm.querySelector('input[name="Number"]');
+                if (phoneInput) phoneInput.value = storedPhone;
+            }
+        });
+    }
+
+    // Initial call to pre-fill forms on page load
+    autoFillForms();
+
+    // Profile Form Submission & Edit Logic
+    if (profileForm) {
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nameInput = profileForm.querySelector('#profile-name');
+            const emailInput = profileForm.querySelector('#profile-email');
+            const phoneInput = profileForm.querySelector('#profile-phone');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            // Validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            // Update localStorage with new details
+            localStorage.setItem('ajor_user_full_name', name);
+            localStorage.setItem('ajor_user_name', name.split(' ')[0]); // Update first name for welcome message
+            localStorage.setItem('ajor_user_email', email);
+            localStorage.setItem('ajor_user_phone', phone);
+
+            // Update UI and other forms
+            updateLoginUI();
+            autoFillForms();
+
+            alert("Profile updated successfully!");
+            if (profileModal) profileModal.classList.remove('active');
+        });
+    }
+});
