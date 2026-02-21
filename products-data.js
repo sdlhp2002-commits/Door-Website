@@ -20,7 +20,8 @@ const PRODUCTS = [
       "Laminate doors with antibacterial property increases the durability & strength."
     ],
     warranty: "5 Years Warranty against manufacturing defects and peeling.",
-    maintenance: "Wipe with a soft, damp cloth. Avoid abrasive cleaners to maintain the laminate finish."
+    maintenance: "Wipe with a soft, damp cloth. Avoid abrasive cleaners to maintain the laminate finish.",
+    price: 7500
   },
 
   {
@@ -44,7 +45,8 @@ const PRODUCTS = [
       "Can be painted or polished."
     ],
     warranty: "10 Years Warranty on structural integrity.",
-    maintenance: "Periodic polishing recommended every 3-5 years to maintain the wood's natural luster."
+    maintenance: "Periodic polishing recommended every 3-5 years to maintain the wood's natural luster.",
+    price: 9000
   },
   {
     id: "wpc-digital",
@@ -68,7 +70,8 @@ const PRODUCTS = [
       "Durable and long-lasting."
     ],
     warranty: "Lifetime Warranty against termites and water damage.",
-    maintenance: "Zero maintenance required. Washable with water and mild soap."
+    maintenance: "Zero maintenance required. Washable with water and mild soap.",
+    price: 8500
   },
   {
     id: "antique-laminated",
@@ -91,7 +94,8 @@ const PRODUCTS = [
       "Laminate doors with antibacterial property increases the durability & strength."
     ],
     warranty: "5 Years Warranty against manufacturing defects.",
-    maintenance: "Wipe with a soft, damp cloth. Avoid abrasive cleaners."
+    maintenance: "Wipe with a soft, damp cloth. Avoid abrasive cleaners.",
+    price: 8000
   },
   {
     id: "premium-digital",
@@ -115,7 +119,8 @@ const PRODUCTS = [
       "Eco-friendly and termite resistant."
     ],
     warranty: "7 Years Warranty on the door structure.",
-    maintenance: "Easy to clean with a damp cloth. Resistant to most household stains."
+    maintenance: "Easy to clean with a damp cloth. Resistant to most household stains.",
+    price: 9500
   },
   {
     id: "teak-veneer",
@@ -139,7 +144,8 @@ const PRODUCTS = [
       "Better way of wood utilization."
     ],
     warranty: "10 Years Warranty on structural integrity.",
-    maintenance: "Requires periodic polishing (every 2-3 years) to maintain its sheen."
+    maintenance: "Requires periodic polishing (every 2-3 years) to maintain its sheen.",
+    price: 12000
   },
   {
     id: "premium-teak-wood",
@@ -164,7 +170,8 @@ const PRODUCTS = [
       "100% Season Wood."
     ],
     warranty: "15 Years Warranty on wood and structure.",
-    maintenance: "Regular polishing is recommended to protect the wood and enhance its life."
+    maintenance: "Regular polishing is recommended to protect the wood and enhance its life.",
+    price: 18000
   },
   {
     id: "laminate-doors",
@@ -188,7 +195,8 @@ const PRODUCTS = [
       "Laminate doors with antibacterial property increases the durability, strength of the doors.",
     ],
     warranty: "5 Years Warranty against manufacturing defects.",
-    maintenance: "Very low maintenance. Clean with a damp cloth."
+    maintenance: "Very low maintenance. Clean with a damp cloth.",
+    price: 6500
   },
   {
     id: "wpc-door-frame",
@@ -211,7 +219,8 @@ const PRODUCTS = [
       "Waterproof."
     ],
     warranty: "Lifetime Warranty against termites and water damage.",
-    maintenance: "Washable and requires no periodic maintenance."
+    maintenance: "Washable and requires no periodic maintenance.",
+    price: 5500
   },
   {
     id: "pooja-door",
@@ -236,7 +245,8 @@ const PRODUCTS = [
       "Waterproof."
     ],
     warranty: "Varies by material (Teak, Veneer, WPC). See specific product for details.",
-    maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient."
+    maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient.",
+    price: 25000
   },
   // Add other products as needed...
 ]

@@ -105,10 +105,36 @@
         <!-- RIGHT COLUMN: TEXT & SPECS -->
         <section class="product-info">
           <p id="short-description" class="product-description"></p>
-          <div class="specifications">
-            <span class="section-label">Specification & Dimensions</span>
-            <table id="spec-table" class="spec-table"></table>
+
+          <!-- Price & Options -->
+          <div id="product-price-container" class="product-price-main"></div>
+          <div id="product-options-container" class="product-options">
+            <!-- Options (select dropdowns) will be injected here by JS -->
           </div>
+
+          <!-- Installation Options -->
+          <div class="installation-section">
+            <span class="option-label">Add Professional Installation</span>
+            <div class="installation-group">
+              <label class="radio-container">
+                <input type="radio" name="installation" value="none" checked>
+                <span class="radio-label">No Installation</span>
+              </label>
+              <label class="radio-container">
+                <input type="radio" name="installation" value="labor">
+                <span class="radio-label">Labor-Only (+₹1,200)</span>
+              </label>
+              <label class="radio-container">
+                <input type="radio" name="installation" value="basic">
+                <span class="radio-label">Basic Installation (+₹1,500)</span>
+              </label>
+              <label class="radio-container">
+                <input type="radio" name="installation" value="premium">
+                <span class="radio-label">Premium Fitting (+₹2,500)</span>
+              </label>
+            </div>
+          </div>
+
           <div class="description-long">
             <span class="section-label">Description</span>
             <ul id="product-features" class="description-list"></ul>

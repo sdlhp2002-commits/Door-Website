@@ -4,16 +4,6 @@ function getProductId() {
     return params.get('id');
 }
 
-// Render the product specs into a table
-function renderSpecs(specs) {
-    let html = "";
-    // Note: Ensure your PRODUCTS.js data uses the format { Thickness: "30mm", Height: "81\"" }
-    for (const [key, value] of Object.entries(specs)) {
-        html += `<tr><th>${key}</th><td>${value}</td></tr>`;
-    }
-    return html;
-}
-
 // Render features as list
 function renderFeatures(features) {
     // Note: Ensure your PRODUCTS.js data features is an array of strings ["Anti termite.", "Waterproof."]
@@ -47,11 +37,130 @@ function swapMainImage(newSrc, clickedThumbnail) {
     }
 }
 
+// Render size/material options as dropdowns
+function renderOptions(specifications) {
+    let optionsHtml = '';
+    // Define which specs should become options
+    const optionKeys = ['Thickness', 'Width', 'Height'];
+
+    optionKeys.forEach(key => {
+        if (specifications[key]) {
+            // Split the string by comma, then trim whitespace and remove quotes from each item
+            const options = specifications[key].split(',').map(opt => opt.trim().replace(/["']/g, ''));
+            
+            if (options.length > 0) {
+                optionsHtml += `
+                    <div class="option-group">
+                        <label for="select-${key.toLowerCase()}">Select ${key}</label>
+                        <select id="select-${key.toLowerCase()}" name="${key}">
+                            ${options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                        </select>
+                    </div>`;
+            }
+        }
+    });
+    return optionsHtml;
+}
+
+// Calculate and update price based on selected options
+function updateDisplayedPrice(basePrice) {
+    let finalPrice = basePrice;
+    
+    // Logic: Add cost for larger dimensions
+    // Height: Add ₹300 per inch above 78"
+    const hSelect = document.getElementById('select-height');
+    if (hSelect) {
+        const val = parseInt(hSelect.value);
+        if (!isNaN(val) && val > 78) finalPrice += (val - 78) * 300; 
+    }
+    
+    // Width: Add ₹400 per inch above 32"
+    const wSelect = document.getElementById('select-width');
+    if (wSelect) {
+        const val = parseInt(wSelect.value);
+        if (!isNaN(val) && val > 32) finalPrice += (val - 32) * 400; 
+    }
+
+    // Thickness: Flat ₹1500 extra for thickness > 32mm
+    const tSelect = document.getElementById('select-thickness');
+    if (tSelect) {
+        const val = parseInt(tSelect.value);
+        if (!isNaN(val) && val > 32) finalPrice += 1500; 
+    }
+
+    // Installation Cost Logic
+    const installRadios = document.getElementsByName('installation');
+    for (const radio of installRadios) {
+        if (radio.checked) {
+            if (radio.value === 'labor') finalPrice += 1200;
+            else if (radio.value === 'basic') finalPrice += 1500;
+            else if (radio.value === 'premium') finalPrice += 2500;
+            break;
+        }
+    }
+
+    const priceContainer = document.getElementById('product-price-container');
+    if (priceContainer) {
+        priceContainer.innerHTML = `Total Price: <span>₹${finalPrice.toLocaleString('en-IN')}</span>`;
+    }
+}
+
 // Product lookup & rendering
 document.addEventListener('DOMContentLoaded', function () {
     const productId = getProductId();
     // Assuming PRODUCTS is defined in products-data.js
     const product = PRODUCTS.find(p => p.id === productId);
+
+    // Function to update the contact form message with selected details
+    function updateFormMessage() {
+        const pageContactForm = document.getElementById('ajor-contact-form');
+        if (!pageContactForm) return;
+
+        // Helper to set or create hidden input
+        const setHidden = (name, value) => {
+            let input = pageContactForm.querySelector(`input[name="${name}"]`);
+            if (!input) {
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                pageContactForm.appendChild(input);
+            }
+            input.value = value;
+        };
+        
+        // 1. Product Name
+        setHidden("Product_Name", product.name);
+
+        // 2. Specifications (Size, Thickness, etc.)
+        document.querySelectorAll('.product-options select').forEach(sel => {
+            if(sel.value) setHidden(sel.name, sel.value);
+        });
+
+        // 3. Installation
+        let installation = "No Installation Selected";
+        const installRadios = document.getElementsByName('installation');
+        for (const radio of installRadios) {
+            if (radio.checked && radio.value !== 'none') {
+                installation = radio.parentElement.querySelector('.radio-label').textContent;
+            }
+        }
+        setHidden("Installation_Type", installation);
+
+        // 4. Price
+        const priceContainer = document.getElementById('product-price-container');
+        if (priceContainer && priceContainer.querySelector('span')) {
+             setHidden("Estimated_Price", priceContainer.querySelector('span').innerText);
+        }
+
+        // 5. Message Box - Set a simple default message
+        const msgBox = pageContactForm.querySelector('textarea[name="Message"]');
+        if (msgBox) {
+            // Only set default if empty or if it looks like our old auto-generated message
+            if (!msgBox.value || msgBox.value.includes("Selected Specifications:")) {
+                 msgBox.value = `I am interested in ${product.name}. Please send me a quote.`;
+            }
+        }
+    }
 
     // ----------------------
     // 1. Initial Checks
@@ -107,8 +216,36 @@ document.addEventListener('DOMContentLoaded', function () {
     // Short desc
     document.getElementById("short-description").textContent = product.shortDescription;
 
-    // Specifications
-    document.getElementById("spec-table").innerHTML = renderSpecs(product.specifications);
+    // Price
+    const priceContainer = document.getElementById('product-price-container');
+    if (product.price && priceContainer) {
+        // Format price with Indian Rupee formatting
+        priceContainer.innerHTML = `Price: <span>₹${product.price.toLocaleString('en-IN')}</span>`;
+    }
+
+    // Size/Material Options
+    const optionsContainer = document.getElementById('product-options-container');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = renderOptions(product.specifications);
+        
+        // Add change listeners for dynamic price updates
+        const selects = optionsContainer.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', () => {
+                updateDisplayedPrice(product.price);
+                updateFormMessage(); // Update form text when size changes
+            });
+        });
+
+        // Add listeners for installation radio buttons
+        const installRadios = document.querySelectorAll('input[name="installation"]');
+        installRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                updateDisplayedPrice(product.price);
+                updateFormMessage(); // Update form text when installation changes
+            });
+        });
+    }
 
     // Features
     document.getElementById("product-features").innerHTML = renderFeatures(product.features);
@@ -165,6 +302,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----------------------
     // Filter catalog by product category on initial load
     renderDoorCatalog(product.id); // Filter to show only doors from this product's category
+
+    // Initial call to set the message on load
+    updateFormMessage();
 
     // ----------------------
     // 5. Event Listener Setup
@@ -313,7 +453,27 @@ function initializeEnquiryButton(product) {
     if (enquiryBtn) {
         enquiryBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            window.location.href = `contact.html?product=${encodeURIComponent(product.name)}`;
+            
+            // Gather selected options
+            let details = [];
+            document.querySelectorAll('.product-options select').forEach(sel => {
+                details.push(`${sel.name}: ${sel.value}`);
+            });
+
+            // Add selected installation to details
+            const installRadios = document.getElementsByName('installation');
+            for (const radio of installRadios) {
+                if (radio.checked && radio.value !== 'none') {
+                    // Find the label text for the selected radio
+                    const label = radio.parentElement.querySelector('.radio-label').textContent;
+                    details.push(`Installation: ${label}`);
+                    break;
+                }
+            }
+            
+            const detailsStr = details.join(', ');
+            const url = `contact.html?product=${encodeURIComponent(product.name)}&details=${encodeURIComponent(detailsStr)}`;
+            window.location.href = url;
         });
     }
 }

@@ -110,6 +110,15 @@ if (document.querySelector('.hero-slider')) {
 // --- FIXED FORM SECTION ---
 const form = document.getElementById('ajor-contact-form');
 
+// NEW HELPER FUNCTION to convert FormData to a JSON object for AJAX submission
+function formDataToObject(formData) {
+    const object = {};
+    formData.forEach((value, key) => {
+        object[key] = value;
+    });
+    return object;
+}
+
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -118,26 +127,42 @@ if (form) {
         if (btn) btn.innerText = "Sending...";
         if (btn) btn.disabled = true;
 
-        // FIX: We define the URL directly as a string here
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz824FphQ38vAY1Q2qeJt9ZFYtq1rMWCZBjm7-E7IjnSdcPkXCHLsMChiVcaaWYilv2/exec';
+        // --- NEW: FormSubmit.co Endpoint ---
+        // IMPORTANT: Replace YOUR_EMAIL_HERE with your actual email address.
+        const submissionURL = 'https://formsubmit.co/ajax/sdlhp2002@gmail.com';
+        const formData = new FormData(form);
+        const formObject = formDataToObject(formData);
 
-        // NOTE: 'no-cors' mode means the response is "opaque".
-        // The .then() block will execute even on a 4xx/5xx server error from Google Scripts,
-        // as the browser cannot inspect the response. The .catch() only handles network failures.
-        // This is a known limitation when submitting to Google Scripts this way.
-        fetch(scriptURL, {
+        // Add settings for FormSubmit.co
+        if (formObject.Product_Name) {
+            formObject._subject = `Enquiry: ${formObject.Product_Name}`;
+            if (formObject.Estimated_Price) {
+                formObject._subject += ` (${formObject.Estimated_Price})`;
+            }
+        } else {
+            formObject._subject = "New Enquiry from Ajor Doors Website!";
+        }
+        formObject._next = "https://doors.ajormart.in/thank-you.html"; // Redirect page
+
+        fetch(submissionURL, {
             method: 'POST',
-            mode: 'no-cors',
-            body: new FormData(form),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(formObject),
         })
-            .then(() => {
-                // This will now trigger correctly!
-                console.log("Success! Redirecting...");
-                window.location.href = 'thank-you.html';
+            .then(response => response.json())
+            .then(data => {
+                if (data.success === "true") {
+                    window.location.href = formObject._next;
+                } else {
+                    throw new Error(data.message || 'Form submission failed. Please try again.');
+                }
             })
             .catch(error => {
                 console.error('Error!', error.message);
-                alert("There was a connection error. Please try again.");
+                alert("There was an error: " + error.message + ". Please check your form endpoint configuration or contact us directly.");
                 if (btn) btn.innerText = "Get Free Quote";
                 if (btn) btn.disabled = false;
             });
@@ -509,20 +534,57 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.innerText = "Booking...";
                 btn.disabled = true;
 
-                // Reuse the existing scriptURL logic or define it here
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbz824FphQ38vAY1Q2qeJt9ZFYtq1rMWCZBjm7-E7IjnSdcPkXCHLsMChiVcaaWYilv2/exec';
+                // --- NEW: FormSubmit.co Endpoint ---
+                // IMPORTANT: Replace YOUR_EMAIL_HERE with your actual email address.
+                const submissionURL = 'https://formsubmit.co/ajax/sdlhp2002@gmail.com';
+                const formData = new FormData(bookingForm);
+                const formObject = formDataToObject(formData);
 
-                fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: new FormData(bookingForm) })
-                    .then(() => {
-                        window.location.href = 'thank-you.html';
+                // Add settings for FormSubmit.co
+                formObject._subject = `New Service Booking: ${formObject.Service_Type || 'Not Specified'}`;
+                formObject._next = "https://doors.ajormart.in/thank-you.html";
+
+                fetch(submissionURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formObject)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success === "true") {
+                            window.location.href = formObject._next;
+                        } else {
+                            throw new Error(data.message || 'Booking submission failed. Please try again.');
+                        }
                     })
                     .catch(error => {
                         console.error('Error!', error.message);
-                        alert("Something went wrong. Please try again.");
+                        alert("There was an error: " + error.message + ". Please check your form endpoint configuration or contact us directly.");
                         btn.innerText = originalText;
                         btn.disabled = false;
                     });
             });
+        }
+    }
+});
+
+// 17. Pre-fill Contact Form from URL Parameters (Enquiry Logic)
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get('product');
+    const details = params.get('details');
+    
+    // Check if we are on the contact page and have product info
+    const contactForm = document.getElementById('ajor-contact-form');
+    if (product && contactForm) {
+        const msgField = contactForm.querySelector('textarea[name="Message"]');
+        if (msgField) {
+            let text = `I am interested in the ${product}.`;
+            if (details) text += `\n\nSelected Specifications:\n${details}`;
+            msgField.value = text;
         }
     }
 });
