@@ -428,7 +428,6 @@ document.addEventListener("DOMContentLoaded", () => {
         logo.setAttribute('fetchpriority', 'high');
         logo.setAttribute('decoding', 'async');
     }
-});
     // 14. Dark Mode Toggle Logic (Mobile Only)
     // Create the toggle button
     const themeToggleBtn = document.createElement('button');
@@ -619,6 +618,34 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.insertAdjacentHTML('beforeend', profileModalHTML);
     }
 
+    // Inject Review Modal HTML
+    if (!document.getElementById('review-modal')) {
+        const reviewModalHTML = `
+        <div id="review-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" id="close-review-modal">&times;</span>
+                <h2 style="text-align:center; margin-bottom:10px; font-family:'Playfair Display', serif; color:var(--primary-color);">Rate Your Experience</h2>
+                <form id="review-form" class="contact-form" style="box-shadow:none; padding:0;">
+                    
+                    <div class="star-rating-container" style="text-align:center; margin-bottom:20px;">
+                        <div class="stars" style="display:inline-block;">
+                            <i class="fas fa-star star" data-value="1"></i>
+                            <i class="fas fa-star star" data-value="2"></i>
+                            <i class="fas fa-star star" data-value="3"></i>
+                            <i class="fas fa-star star" data-value="4"></i>
+                            <i class="fas fa-star star" data-value="5"></i>
+                        </div>
+                        <p id="rating-feedback" class="rating-feedback" style="margin-top:10px;">Select a rating</p>
+                        <input type="hidden" name="Rating" id="selected-rating" required>
+                    </div>
+
+                    <button type="submit" class="submit-button" style="width:100%;">Submit Rating</button>
+                </form>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', reviewModalHTML);
+    }
+
     const loginModal = document.getElementById('login-modal');
     const closeLoginBtn = document.getElementById('close-login-modal');
     const loginForm = document.getElementById('login-form');
@@ -626,6 +653,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const profileModal = document.getElementById('profile-modal');
     const closeProfileBtn = document.getElementById('close-profile-modal');
     const profileForm = document.getElementById('profile-form');
+
+    const reviewModal = document.getElementById('review-modal');
+    const closeReviewBtn = document.getElementById('close-review-modal');
+    const reviewForm = document.getElementById('review-form');
 
     // --- Login State Management ---
     const updateLoginUI = () => {
@@ -703,6 +734,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Open Review Modal
+    document.body.addEventListener('click', (e) => {
+        const reviewBtn = e.target.closest('.open-review-btn');
+        if (reviewBtn) {
+            e.preventDefault();
+            const modal = document.getElementById('review-modal');
+            if (modal) modal.classList.add('active');
+        }
+    });
+
     // Open Profile Modal
     document.body.addEventListener('click', (e) => {
         if (e.target.id === 'open-profile-modal-btn') {
@@ -726,6 +767,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Close Review Modal
+    if (closeReviewBtn) {
+        closeReviewBtn.addEventListener('click', () => {
+            if (reviewModal) reviewModal.classList.remove('active');
+        });
+    }
+
     // Close Modal
     if (closeLoginBtn) {
         closeLoginBtn.addEventListener('click', () => {
@@ -739,6 +787,8 @@ document.addEventListener("DOMContentLoaded", () => {
             loginModal.classList.remove('active');
         } else if (e.target === profileModal && profileModal) {
             profileModal.classList.remove('active');
+        } else if (e.target === reviewModal && reviewModal) {
+            reviewModal.classList.remove('active');
         }
     });
 
@@ -906,6 +956,116 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alert("Profile updated successfully!");
             if (profileModal) profileModal.classList.remove('active');
+        });
+    }
+
+    // --- Review Star Rating Logic ---
+    const stars = document.querySelectorAll('.star-rating-container .star');
+    const feedback = document.getElementById('rating-feedback');
+    const ratingInput = document.getElementById('selected-rating');
+    
+    const feedbackMessages = {
+        1: "Unsatisfied 😞",
+        2: "Fair 😐",
+        3: "Good 🙂",
+        4: "Very Good 😊",
+        5: "Excellent! 🤩"
+    };
+
+    if (stars.length > 0) {
+        stars.forEach(star => {
+            // Hover Effect
+            star.addEventListener('mouseover', () => {
+                const value = parseInt(star.getAttribute('data-value'));
+                highlightStars(value);
+                updateFeedback(value);
+            });
+            
+            // Click Effect
+            star.addEventListener('click', () => {
+                const value = parseInt(star.getAttribute('data-value'));
+                ratingInput.value = value;
+                highlightStars(value);
+                updateFeedback(value);
+            });
+        });
+
+        // Reset on mouse leave if not clicked
+        const starContainer = document.querySelector('.star-rating-container .stars');
+        if (starContainer) {
+            starContainer.addEventListener('mouseleave', () => {
+                const selectedValue = ratingInput.value ? parseInt(ratingInput.value) : 0;
+                highlightStars(selectedValue);
+                updateFeedback(selectedValue);
+            });
+        }
+    }
+
+    function highlightStars(value) {
+        stars.forEach(s => {
+            const sVal = parseInt(s.getAttribute('data-value'));
+            if (sVal <= value) {
+                s.style.color = '#ffc107'; // Gold
+            } else {
+                s.style.color = '#ddd'; // Gray
+            }
+        });
+    }
+
+    function updateFeedback(value) {
+        if (value === 0) {
+            feedback.textContent = "Select a rating";
+            feedback.style.color = "var(--primary-color)";
+            return;
+        }
+        feedback.textContent = feedbackMessages[value];
+        if (value <= 2) feedback.style.color = "#dc3545"; // Red
+        else if (value === 3) feedback.style.color = "#fd7e14"; // Orange
+        else feedback.style.color = "#28a745"; // Green
+    }
+
+    // Handle Review Form Submit
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(!ratingInput.value) {
+                alert("Please select a star rating.");
+                return;
+            }
+            
+            const btn = reviewForm.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+
+            const formData = new FormData(reviewForm);
+            const formObject = formDataToObject(formData);
+            formObject._subject = `New ${formObject.Rating}-Star Rating Received`;
+
+            // Using the same helper function and endpoint pattern
+            // Note: You might want to create a separate endpoint or sheet for reviews later
+            fetch('https://formsubmit.co/ajax/sdlhp2002@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(formObject)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Thank you for your review!");
+                if (reviewModal) reviewModal.classList.remove('active');
+                reviewForm.reset();
+                highlightStars(0);
+                updateFeedback(0);
+                ratingInput.value = "";
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Error submitting review.");
+            })
+            .finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
         });
     }
 });

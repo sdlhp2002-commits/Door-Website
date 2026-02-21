@@ -1410,6 +1410,44 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     transition: width 0.3s;
 }
 
+/* Review Button & Modal Styles */
+.write-review-btn-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.write-review-btn {
+    background: transparent;
+    border: 2px solid var(--white-color);
+    color: var(--white-color);
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.write-review-btn:hover {
+    background: var(--white-color);
+    color: var(--dark-color);
+}
+
+.star-rating-container .stars {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.rating-feedback {
+    font-weight: 600;
+    font-size: 1.1rem;
+    min-height: 1.5rem;
+    transition: color 0.3s;
+}
+
 /* ======================================================= */
 /* PRODUCT DETAIL PAGE STYLING (UPDATED)                   */
 /* ======================================================= */
@@ -3306,7 +3344,7 @@ input:checked + .slider:before {
 .modal {
     display: none;
     position: fixed;
-    z-index: 10000;
+    z-index: 2000000;
     left: 0;
     top: 0;
     width: 100%;
