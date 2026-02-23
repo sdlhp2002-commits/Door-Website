@@ -314,8 +314,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----------------------
     // 4. Door Catalog Gallery Rendering
     // ----------------------
-    // Render a selection of other products to explore.
-    renderOtherProducts(product.id);
+    // Filter catalog by product category on initial load
+    renderDoorCatalog(product.id); // Filter to show only doors from this product's category
 
     // Initial call to set the message on load
     updateFormMessage();
@@ -325,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----------------------
     initializeCatalogListeners();
     initializeEnquiryButton();
+    initializeLightbox();
 });
 
 // Injects Product Schema JSON-LD into the page head for SEO
@@ -378,57 +379,84 @@ function injectProductSchema(product, absoluteImageUrl) {
     document.head.appendChild(script);
 }
 
-/**
- * Renders a grid of other products, excluding the current one.
- * @param {string} currentProductId The ID of the product currently being viewed.
- */
-function renderOtherProducts(currentProductId) {
+// Function to render the door catalog gallery with optional category filter
+function renderDoorCatalog(categoryFilter = null) {
     const catalogGrid = document.getElementById('door-catalog-grid');
     const catalogTitle = document.querySelector('.catalog-section-title');
 
-    if (!catalogGrid || !catalogTitle || typeof PRODUCTS === 'undefined') return;
+    if (!catalogGrid || !catalogTitle || typeof DOOR_CATALOG === 'undefined') return;
 
-    // Filter out the current product and take a slice of others to show
-    const otherProducts = PRODUCTS.filter(p => p.id !== currentProductId).slice(0, 8); // Show up to 8 other products
+    const doorsToShow = DOOR_CATALOG.filter(door => door.category === categoryFilter);
 
-    if (otherProducts.length === 0) {
+    if (doorsToShow.length === 0) {
         document.querySelector('.door-catalog-section').style.display = 'none';
         return;
     }
 
-    catalogTitle.textContent = "Explore Other Products";
+    catalogTitle.textContent = "Explore Available Designs";
     catalogGrid.classList.add('filtering');
 
-    catalogGrid.innerHTML = otherProducts.map(product => `
-        <a href="product-details.html?id=${product.id}" class="door-catalog-item" aria-label="View details for ${product.name}">
+    catalogGrid.innerHTML = doorsToShow.map(door => `
+        <div class="door-catalog-item" 
+             data-image="${door.image}" 
+             data-code="${door.code}" 
+             role="button"
+             tabindex="0"
+             aria-label="View door design ${door.code}">
              <div class="door-catalog-image-wrapper">
-                 <img src="${product.mainImage}" 
-                      alt="${product.name}" 
+                 <img src="${door.image}" 
+                      alt="Door Design ${door.code}" 
                       class="door-catalog-image" 
                       loading="lazy"
                       decoding="async">
              </div>
-             <div class="door-catalog-label">${product.name}</div>
-        </a>
+             <div class="door-catalog-label">${door.code}</div>
+        </div>
     `).join('');
 
     setTimeout(() => catalogGrid.classList.remove('filtering'), 300);
 }
 
 /**
- * This function is now simplified. The grid items are links (`<a>`), so they navigate automatically.
- * We keep this function name in case we want to add more complex JS interactions later.
+ * Uses event delegation to handle clicks and keydowns on the catalog.
  */
 function initializeCatalogListeners() {
     const catalogGrid = document.getElementById('door-catalog-grid');
     if (!catalogGrid) return;
 
-    // The grid items are now `<a>` tags, so default browser navigation handles the clicks.
-    // If we needed to prevent default and do something with JS, the logic would go here.
+    const handleInteraction = (item) => {
+        if (!item) return;
+
+        const imageSrc = item.dataset.image;
+        const doorCode = item.dataset.code;
+        const mainImg = document.getElementById('main-door-image');
+
+        // Update main image and its alt text
+        swapMainImage(imageSrc); // This will also un-select all thumbnails above
+        mainImg.alt = `Door Design ${doorCode}`;
+
+        // Highlight the selected item in the catalog
+        catalogGrid.querySelectorAll('.door-catalog-item.selected').forEach(selected => selected.classList.remove('selected'));
+        item.classList.add('selected');
+
+        // Scroll to main image for better UX and manage focus
+        mainImg.setAttribute('tabindex', -1); // Make it programmatically focusable
+        mainImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        mainImg.focus();
+    };
+
     catalogGrid.addEventListener('click', function (e) {
-        // If the clicked element is not a link, do nothing.
-        if (!e.target.closest('a')) {
-            e.preventDefault();
+        const item = e.target.closest('.door-catalog-item');
+        handleInteraction(item);
+    });
+
+    catalogGrid.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const item = e.target.closest('.door-catalog-item');
+            if (item) {
+                e.preventDefault();
+                handleInteraction(item);
+            }
         }
     });
 }
@@ -446,4 +474,40 @@ function initializeEnquiryButton() {
             contactSection.scrollIntoView({ behavior: 'smooth' });
         });
     }
+}
+
+/**
+ * Initializes a lightbox to view the main image in full screen.
+ */
+function initializeLightbox() {
+    const mainImg = document.getElementById('main-door-image');
+    if (!mainImg) return;
+
+    // Create Lightbox DOM elements
+    const overlay = document.createElement('div');
+    overlay.id = 'product-lightbox';
+    overlay.style.cssText = 'display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:zoom-out;';
+    
+    const img = document.createElement('img');
+    img.style.cssText = 'max-width:90%; max-height:90%; object-fit:contain;';
+    
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+
+    // Event Listeners
+    mainImg.style.cursor = 'zoom-in';
+    mainImg.addEventListener('click', function() {
+        img.src = this.src;
+        overlay.style.display = 'flex';
+    });
+
+    overlay.addEventListener('click', function() {
+        overlay.style.display = 'none';
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') {
+            overlay.style.display = 'none';
+        }
+    });
 }
