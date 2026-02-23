@@ -164,9 +164,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // 5. Message Box - Set a simple default message
         const msgBox = pageContactForm.querySelector('textarea[name="Message"]');
         if (msgBox) {
-            // Only set default if empty or if it looks like our old auto-generated message
-            if (!msgBox.value || msgBox.value.includes("Selected Specifications:")) {
-                 msgBox.value = `I am interested in ${product.name}. Please send me a quote.`;
+            // Only set a default message if the box is empty.
+            if (!msgBox.value) {
+                msgBox.value = `I am interested in the ${product.name}. Please send me a quote.`;
             }
         }
     }
@@ -314,8 +314,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----------------------
     // 4. Door Catalog Gallery Rendering
     // ----------------------
-    // Filter catalog by product category on initial load
-    renderDoorCatalog(product.id); // Filter to show only doors from this product's category
+    // Render a selection of other products to explore.
+    renderOtherProducts(product.id);
 
     // Initial call to set the message on load
     updateFormMessage();
@@ -324,8 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 5. Event Listener Setup
     // ----------------------
     initializeCatalogListeners();
-    initializeEnquiryButton(product);
-    initializeLightbox();
+    initializeEnquiryButton();
 });
 
 // Injects Product Schema JSON-LD into the page head for SEO
@@ -379,155 +378,72 @@ function injectProductSchema(product, absoluteImageUrl) {
     document.head.appendChild(script);
 }
 
-// Function to render the door catalog gallery with optional category filter
-function renderDoorCatalog(categoryFilter = null) {
+/**
+ * Renders a grid of other products, excluding the current one.
+ * @param {string} currentProductId The ID of the product currently being viewed.
+ */
+function renderOtherProducts(currentProductId) {
     const catalogGrid = document.getElementById('door-catalog-grid');
-    if (!catalogGrid || typeof DOOR_CATALOG === 'undefined') return;
+    const catalogTitle = document.querySelector('.catalog-section-title');
 
+    if (!catalogGrid || !catalogTitle || typeof PRODUCTS === 'undefined') return;
+
+    // Filter out the current product and take a slice of others to show
+    const otherProducts = PRODUCTS.filter(p => p.id !== currentProductId).slice(0, 8); // Show up to 8 other products
+
+    if (otherProducts.length === 0) {
+        document.querySelector('.door-catalog-section').style.display = 'none';
+        return;
+    }
+
+    catalogTitle.textContent = "Explore Other Products";
     catalogGrid.classList.add('filtering');
-    const doorsToShow = DOOR_CATALOG.filter(door => door.category === categoryFilter);
 
-    catalogGrid.innerHTML = doorsToShow.map(door => `
-        <div class="door-catalog-item" 
-             data-image="${door.image}" 
-             data-code="${door.code}" 
-             role="button"
-             tabindex="0"
-             aria-label="View door design ${door.code}">
-            <div class="door-catalog-label">${door.code}</div>
-            <div class="door-catalog-image-wrapper">
-                <img src="${door.image}" 
-                     alt="Door Design ${door.code}" 
-                     class="door-catalog-image" 
-                     loading="lazy"
-                     decoding="async"
-                     onerror="this.src='images/logo.png'; this.classList.add('error');">
-                <div class="image-loading-spinner" aria-hidden="true"></div>
-            </div>
-        </div>
+    catalogGrid.innerHTML = otherProducts.map(product => `
+        <a href="product-details.html?id=${product.id}" class="door-catalog-item" aria-label="View details for ${product.name}">
+             <div class="door-catalog-image-wrapper">
+                 <img src="${product.mainImage}" 
+                      alt="${product.name}" 
+                      class="door-catalog-image" 
+                      loading="lazy"
+                      decoding="async">
+             </div>
+             <div class="door-catalog-label">${product.name}</div>
+        </a>
     `).join('');
 
     setTimeout(() => catalogGrid.classList.remove('filtering'), 300);
 }
 
 /**
- * Uses event delegation to handle clicks and keydowns on the catalog.
+ * This function is now simplified. The grid items are links (`<a>`), so they navigate automatically.
+ * We keep this function name in case we want to add more complex JS interactions later.
  */
 function initializeCatalogListeners() {
     const catalogGrid = document.getElementById('door-catalog-grid');
     if (!catalogGrid) return;
 
-    const handleInteraction = (item) => {
-        if (!item) return;
-
-        const imageSrc = item.dataset.image;
-        const doorCode = item.dataset.code;
-        const mainImg = document.getElementById('main-door-image');
-        const thumbnailsContainer = document.getElementById('similar-images');
-
-        // Update main image and its alt text
-        swapMainImage(imageSrc);
-        mainImg.alt = `Door Design ${doorCode}`;
-
-        // Simplify thumbnails to show only the selected design
-        thumbnailsContainer.innerHTML = `<img src="${imageSrc}" class="product-thumb selected" alt="${mainImg.alt}" loading="lazy" decoding="async">`;
-
-        // Highlight the selected item in the catalog
-        catalogGrid.querySelectorAll('.door-catalog-item.selected').forEach(selected => selected.classList.remove('selected'));
-        item.classList.add('selected');
-
-        // Scroll to main image for better UX and manage focus
-        mainImg.setAttribute('tabindex', -1); // Make it programmatically focusable
-        mainImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        mainImg.focus();
-    };
-
+    // The grid items are now `<a>` tags, so default browser navigation handles the clicks.
+    // If we needed to prevent default and do something with JS, the logic would go here.
     catalogGrid.addEventListener('click', function (e) {
-        const item = e.target.closest('.door-catalog-item');
-        handleInteraction(item);
-    });
-
-    catalogGrid.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            const item = e.target.closest('.door-catalog-item');
-            if (item) {
-                e.preventDefault();
-                handleInteraction(item);
-            }
+        // If the clicked element is not a link, do nothing.
+        if (!e.target.closest('a')) {
+            e.preventDefault();
         }
     });
 }
 
 /**
- * Sets up the smart enquiry button to pass the product name.
- * @param {object} product The product data object.
+ * Makes the "Enquiry Now" button scroll to the contact form on the page.
  */
-function initializeEnquiryButton(product) {
+function initializeEnquiryButton() {
     const enquiryBtn = document.getElementById('product-enquiry-btn');
-    if (enquiryBtn) {
+    const contactSection = document.getElementById('contact');
+
+    if (enquiryBtn && contactSection) {
         enquiryBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            
-            // Gather selected options
-            let details = [];
-            document.querySelectorAll('.product-options select').forEach(sel => {
-                details.push(`${sel.name}: ${sel.value}`);
-            });
-
-            // Add selected installation to details
-            const installRadios = document.getElementsByName('installation');
-            for (const radio of installRadios) {
-                if (radio.checked && radio.value !== 'none') {
-                    // Find the label text for the selected radio
-                    const label = radio.parentElement.querySelector('.radio-label').textContent;
-                    details.push(`Installation: ${label}`);
-                    break;
-                }
-            }
-            
-            const detailsStr = details.join(', ');
-            const url = `contact.html?product=${encodeURIComponent(product.name)}&details=${encodeURIComponent(detailsStr)}`;
-            window.location.href = url;
+            contactSection.scrollIntoView({ behavior: 'smooth' });
         });
     }
-}
-
-/**
- * Initializes a lightbox to view the main image in full screen.
- * @review This is a simple lightbox implementation. The main `script.js` contains a more
- * feature-rich lightbox for the gallery page. To reduce code duplication and maintain
- * a consistent user experience, consider creating a single, reusable lightbox utility
- * that both this page and the gallery page can use.
- */
-function initializeLightbox() {
-    const mainImg = document.getElementById('main-door-image');
-    if (!mainImg) return;
-
-    // Create Lightbox DOM elements
-    const overlay = document.createElement('div');
-    overlay.id = 'product-lightbox';
-    overlay.style.cssText = 'display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:zoom-out;';
-    
-    const img = document.createElement('img');
-    img.style.cssText = 'max-width:90%; max-height:90%; object-fit:contain;';
-    
-    overlay.appendChild(img);
-    document.body.appendChild(overlay);
-
-    // Event Listeners
-    mainImg.style.cursor = 'zoom-in';
-    mainImg.addEventListener('click', function() {
-        img.src = this.src;
-        overlay.style.display = 'flex';
-    });
-
-    overlay.addEventListener('click', function() {
-        overlay.style.display = 'none';
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && overlay.style.display === 'flex') {
-            overlay.style.display = 'none';
-        }
-    });
 }

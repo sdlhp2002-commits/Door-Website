@@ -273,7 +273,32 @@ const PRODUCTS = [
     ],
     warranty: "Varies by material (Teak, Veneer, WPC). See specific product for details.",
     maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient.",
-    price: "5000"
+    price: 5000
+  },
+   {
+    id: "hdf-moulded-doors",
+    name: "HDF Moulded Doors",
+    mainImage: "images/HDF-1.jpg",
+    similarImages: [
+      "images/HDF-2.jpg",
+      "images/HDF-3.jpg",
+      "images/HDF-4.jpg"
+    ],
+
+    shortDescription: "HDF Moulded Doors are a cost-effective alternative to solid wood doors. They are made from high-density fiberboard and are known for their durability and resistance to moisture.",
+    specifications: {
+      "Thickness": "25 mm | 28 mm | 30 mm",
+      "Height": '78", 81", 84"',
+      "Width": '30", 33", 36", 38",'
+    },
+    features: [
+      "Termite resistant",
+      "Perfect finishing",
+      "Durable and weathering proof"
+    ],
+    warranty: "Varies by material (Teak, Veneer, WPC). See specific product for details.",
+    maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient.",
+    price: 5000
   },
   // Add other products as needed...
 ]
@@ -474,5 +499,10 @@ const DOOR_CATALOG = [
   {code: "AJ-1113", image: "images/NEO CLS-13.jpg", category: "neo-classic-doors" },
   {code: "AJ-1114", image: "images/NEO CLS-14.jpg", category: "neo-classic-doors" },
   {code: "AJ-1115", image: "images/NEO CLS-15.jpg", category: "neo-classic-doors" },
-  
+  // Category 12: HDF Moulded Doors (codes starting with 12)
+  { code: "AJ-1201", image: "images/HDF-1.jpg", category: "hdf-moulded-doors" },
+  { code: "AJ-1202", image: "images/HDF-2.jpg", category: "hdf-moulded-doors" },
+  { code: "AJ-1203", image: "images/HDF-3.jpg", category: "hdf-moulded-doors" },
+  { code: "AJ-1204", image: "images/HDF-4.jpg", category: "hdf-moulded-doors" },
+  { code: "AJ-1205", image: "images/HDF-5.jpg", category: "hdf-moulded-doors" },
 ]
