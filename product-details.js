@@ -64,6 +64,15 @@ function renderOptions(specifications) {
 
 // Calculate and update price based on selected options
 function updateDisplayedPrice(basePrice) {
+    // If basePrice is not a number (e.g., "As per market price"), just display it and exit.
+    if (typeof basePrice !== 'number') {
+        const priceContainer = document.getElementById('product-price-container');
+        if (priceContainer) {
+            priceContainer.innerHTML = `Total Price: <span>${basePrice}</span>`;
+        }
+        return;
+    }
+
     let finalPrice = basePrice;
     
     // Logic: Add cost for larger dimensions
@@ -219,8 +228,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Price
     const priceContainer = document.getElementById('product-price-container');
     if (product.price && priceContainer) {
-        // Format price with Indian Rupee formatting
-        priceContainer.innerHTML = `Price: <span>₹${product.price.toLocaleString('en-IN')}</span>`;
+        if (typeof product.price === 'number') {
+            // Format price with Indian Rupee formatting
+            priceContainer.innerHTML = `Price: <span>₹${product.price.toLocaleString('en-IN')}</span>`;
+        } else {
+            // If it's a string (like "As per market price"), display it directly
+            priceContainer.innerHTML = `Price: <span>${product.price}</span>`;
+        }
     }
 
     // Size/Material Options

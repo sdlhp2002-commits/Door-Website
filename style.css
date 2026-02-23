@@ -1196,10 +1196,10 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 }
 
 .products-section .products .name {
-    margin-top: 15px;
-    margin-bottom: 5px;
+    margin: 0;
     font-family: "Playfair Display", serif;
     font-size: 1.35rem;
+    text-align: left;
     color: var(--primary-color);
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -1218,7 +1218,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     background: var(--white-color);
     padding: 8px 20px;
     border-radius: 50px;
-    margin-top: 15px;
+    margin-top: 0;
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
@@ -1230,6 +1230,15 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     border-color: var(--secondary-color);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(184, 134, 11, 0.2);
+}
+
+.product-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .products-section .swiper-pagination-bullet {

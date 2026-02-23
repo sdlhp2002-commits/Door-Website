@@ -248,6 +248,33 @@ const PRODUCTS = [
     maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient.",
     price: 25000
   },
+  {
+    id: "neo-classic-doors",
+    name: "Neo Classic Doors",
+    mainImage: "images/NEO CLS-1.jpg",
+    similarImages: [
+      "images/NEO CLS-1.jpg",
+      "images/NEO CLS-2.jpg",
+      "images/NEO CLS-3.jpg",
+      "images/NEO CLS-4.jpg"
+    ],
+
+    shortDescription: "Neo-Classic door is a value for money product developed due to scarcity of solid decorative woods which are becoming unaffordable. The door has got stylistic tradition and modern versatility. ",
+    specifications: {
+      "Thickness": "25 mm | 28 mm | 30 mm",
+      "Height": '78", 81", 84"',
+      "Width": '30", 33", 36", 38",'
+    },
+    features: [
+      "A Great Value for money and elegant Choice.",
+      "The best recommended door for everyday use.",
+      "Known for its durability and robustness.",
+      "Manufactured to hold up against all weather conditions."
+    ],
+    warranty: "Varies by material (Teak, Veneer, WPC). See specific product for details.",
+    maintenance: "Maintenance depends on the material. Generally, gentle cleaning is sufficient.",
+    price: "5000"
+  },
   // Add other products as needed...
 ]
 
@@ -431,5 +458,21 @@ const DOOR_CATALOG = [
   { code: "AJ-1015", image: "images/pooja-15.jpg", category: "pooja-door" },
   { code: "AJ-1016", image: "images/pooja-16.jpg", category: "pooja-door" },
   { code: "AJ-1017", image: "images/pooja-17.jpg", category: "pooja-door" },
+   // Category 11: Neo Classic  Door  (codes starting with 11)
+  { code: "AJ-1101", image: "images/NEO CLS-1.jpg", category: "neo-classic-doors" },
+  { code: "AJ-1102", image: "images/NEO CLS-2.jpg", category: "neo-classic-doors" },
+  { code: "AJ-1103", image: "images/NEO CLS-3.jpg", category: "neo-classic-doors" },
+  { code: "AJ-1104", image: "images/NEO CLS-4.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1105", image: "images/NEO CLS-5.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1106", image: "images/NEO CLS-6.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1107", image: "images/NEO CLS-7.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1108", image: "images/NEO CLS-8.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1109", image: "images/NEO CLS-9.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1110", image: "images/NEO CLS-10.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1111", image: "images/NEO CLS-11.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1112", image: "images/NEO CLS-12.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1113", image: "images/NEO CLS-13.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1114", image: "images/NEO CLS-14.jpg", category: "neo-classic-doors" },
+  {code: "AJ-1115", image: "images/NEO CLS-15.jpg", category: "neo-classic-doors" },
   
 ]
