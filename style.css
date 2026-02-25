@@ -2615,19 +2615,6 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 }
 
 @media screen and (max-width: 768px) {
-    .project-showcase-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-compare {
-        height: 210px;
-    }
-
-    .match-btn {
-        font-size: 0.72rem;
-        padding: 9px 8px;
-    }
-
     .gallery-subtitle {
         font-size: 0.96rem;
         line-height: 1.6;
@@ -3832,6 +3819,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     color: #222;
     padding: 2px 5px;
     border-radius: 4px;
+    z-index: 5;
 }
 
 .custom-preview-peephole {
@@ -4031,6 +4019,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .continuous-gallery-slider .swiper-slide:hover img {
