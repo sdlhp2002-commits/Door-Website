@@ -346,6 +346,46 @@ if (galleryContainer) {
     lightboxPrevBtn.addEventListener('click', showPrevImage);
 }
 
+// 9. Real Project Showcase before/after sliders
+const projectComparisons = document.querySelectorAll('.project-compare');
+
+if (projectComparisons.length > 0) {
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+    projectComparisons.forEach((compareBlock) => {
+        const range = compareBlock.querySelector('.project-range');
+        const beforeImage = compareBlock.querySelector('.project-before');
+        const afterImage = compareBlock.querySelector('.project-after');
+        const divider = compareBlock.querySelector('.project-divider');
+
+        if (!range || !afterImage || !divider) return;
+
+        const fallbackImage = 'images/welcome.webp';
+        [beforeImage, afterImage].forEach((img) => {
+            if (!img) return;
+            img.addEventListener('error', () => {
+                if (img.dataset.fallbackApplied === '1') return;
+                img.dataset.fallbackApplied = '1';
+                img.src = fallbackImage;
+            });
+        });
+
+        const updateComparison = (rawValue) => {
+            const value = clamp(parseInt(rawValue, 10) || 50, 0, 100);
+            const clipValue = `inset(0 ${100 - value}% 0 0)`;
+            afterImage.style.clipPath = clipValue;
+            afterImage.style.webkitClipPath = clipValue;
+            divider.style.left = `${value}%`;
+        };
+
+        updateComparison(range.value);
+
+        range.addEventListener('input', (event) => {
+            updateComparison(event.target.value);
+        });
+    });
+}
+
 // 12. Cookie Consent Banner
 if (!localStorage.getItem("cookieConsent")) {
     const banner = document.createElement("div");
@@ -1091,5 +1131,262 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.disabled = false;
             });
         });
+    }
+
+    // Product page: custom door builder
+    const customDoorForm = document.getElementById('custom-door-form');
+
+    if (customDoorForm) {
+        const styleInput = document.getElementById('custom-door-style');
+        const doorColorInput = document.getElementById('custom-door-color');
+        const frameColorInput = document.getElementById('custom-frame-color');
+        const widthRange = document.getElementById('custom-door-width');
+        const widthValue = document.getElementById('custom-door-width-value');
+        const heightRange = document.getElementById('custom-door-height');
+        const heightValue = document.getElementById('custom-door-height-value');
+        const lockTypeInput = document.getElementById('custom-lock-type');
+        const hingesInput = document.getElementById('custom-hinges');
+        const handleInput = document.getElementById('custom-handle-finish');
+        const openSideInput = document.getElementById('custom-open-side');
+        const openDirectionInput = document.getElementById('custom-open-direction');
+        const accessoryCloser = document.getElementById('custom-accessory-closer');
+        const accessoryPeephole = document.getElementById('custom-accessory-peephole');
+        const accessoryStopper = document.getElementById('custom-accessory-stopper');
+
+        const previewStage = document.querySelector('.custom-preview-stage');
+        const previewFrame = document.getElementById('custom-preview-frame');
+        const previewDoor = document.getElementById('custom-preview-door');
+        const previewHinges = document.getElementById('custom-preview-hinges');
+        const previewHandle = document.getElementById('custom-preview-handle');
+        const previewLockTag = document.getElementById('custom-preview-lock-tag');
+        const previewPeephole = document.getElementById('custom-preview-peephole');
+        const previewCloser = document.getElementById('custom-preview-closer');
+        const previewStopper = document.getElementById('custom-preview-stopper');
+        const dimensionWidthLabel = document.getElementById('custom-dimension-width');
+        const dimensionHeightLabel = document.getElementById('custom-dimension-height');
+
+        const buildStatus = document.getElementById('custom-build-status');
+        const buildMessage = document.getElementById('custom-build-message');
+        const buildNotes = document.getElementById('custom-build-notes');
+        const fallbackLink = document.getElementById('custom-build-fallback-link');
+
+        if (
+            !styleInput || !doorColorInput || !frameColorInput ||
+            !widthRange || !widthValue || !heightRange || !heightValue ||
+            !lockTypeInput || !hingesInput || !handleInput ||
+            !openSideInput || !openDirectionInput || !accessoryCloser ||
+            !accessoryPeephole || !accessoryStopper || !previewStage ||
+            !previewFrame || !previewDoor || !previewHinges || !previewHandle ||
+            !previewLockTag || !previewPeephole || !previewCloser ||
+            !previewStopper || !dimensionWidthLabel || !dimensionHeightLabel ||
+            !buildStatus || !buildMessage || !buildNotes || !fallbackLink
+        ) {
+            return;
+        }
+
+        const handleColors = {
+            steel: '#bfc5cb',
+            black: '#2f2f2f',
+            brass: '#be8d31'
+        };
+
+        const lockLabels = {
+            mortise: 'Mortise',
+            cylindrical: 'Cylinder',
+            smart: 'Smart'
+        };
+
+        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+        const parseDimension = (value, min, max, fallback) => {
+            const parsed = parseInt(value, 10);
+            if (Number.isNaN(parsed)) return fallback;
+            return clamp(parsed, min, max);
+        };
+
+        const syncDimensionPair = (rangeInput, numberInput, min, max, fallbackValue) => {
+            const applyValue = (rawValue) => {
+                const finalValue = parseDimension(rawValue, min, max, fallbackValue);
+                rangeInput.value = finalValue.toString();
+                numberInput.value = finalValue.toString();
+                return finalValue;
+            };
+
+            rangeInput.addEventListener('input', () => {
+                applyValue(rangeInput.value);
+                updateCustomPreview();
+            });
+
+            numberInput.addEventListener('input', () => {
+                applyValue(numberInput.value);
+                updateCustomPreview();
+            });
+
+            numberInput.addEventListener('blur', () => {
+                applyValue(numberInput.value);
+                updateCustomPreview();
+            });
+        };
+
+        const renderHinges = (count) => {
+            previewHinges.innerHTML = '';
+            const hingeCount = clamp(count, 2, 4);
+
+            for (let index = 0; index < hingeCount; index += 1) {
+                const hinge = document.createElement('span');
+                const topPercent = hingeCount === 1 ? 50 : 8 + ((84 / (hingeCount - 1)) * index);
+                hinge.style.top = `${topPercent}%`;
+                previewHinges.appendChild(hinge);
+            }
+        };
+
+        const evaluateBuild = (config) => {
+            const notes = [];
+
+            if (config.width < 700 || config.width > 1100) {
+                notes.push('Width outside standard range (700mm to 1100mm).');
+            }
+
+            if (config.height < 1950 || config.height > 2400) {
+                notes.push('Height outside standard range (1950mm to 2400mm).');
+            }
+
+            if (config.height > 2250 && config.hinges < 4) {
+                notes.push('Height above 2250mm requires 4 hinges for stability.');
+            }
+
+            if (config.lockType === 'smart' && config.height > 2300) {
+                notes.push('Smart lock with this height requires engineering approval.');
+            }
+
+            if (config.openDirection === 'outward' && config.accessoryCloser) {
+                notes.push('Outward opening with door closer may require custom bracket.');
+            }
+
+            if (config.style === 'flush' && config.width > 1050) {
+                notes.push('Flush style above 1050mm width needs a reinforced core.');
+            }
+
+            return notes;
+        };
+
+        const updateBuildStatus = (config) => {
+            const notes = evaluateBuild(config);
+            const isStandard = notes.length === 0;
+
+            buildStatus.dataset.state = isStandard ? 'ok' : 'manual';
+            buildMessage.textContent = isStandard
+                ? 'This configuration is available in standard production.'
+                : 'This configuration needs manual customization approval.';
+
+            buildNotes.innerHTML = '';
+            (isStandard ? [
+                'Estimated standard production: 10-15 working days.',
+                'Hardware can be finalized during order confirmation.'
+            ] : notes).forEach((note) => {
+                const noteItem = document.createElement('li');
+                noteItem.textContent = note;
+                buildNotes.appendChild(noteItem);
+            });
+
+            const query = new URLSearchParams({
+                source: 'custom-door-builder',
+                style: config.style,
+                width_mm: config.width.toString(),
+                height_mm: config.height.toString(),
+                lock: config.lockType,
+                hinges: config.hinges.toString(),
+                handle: config.handleFinish,
+                open_side: config.openSide,
+                open_direction: config.openDirection,
+                door_color: config.doorColor.replace('#', ''),
+                frame_color: config.frameColor.replace('#', ''),
+                closer: config.accessoryCloser ? 'yes' : 'no',
+                peephole: config.accessoryPeephole ? 'yes' : 'no',
+                stopper: config.accessoryStopper ? 'yes' : 'no',
+                mode: isStandard ? 'extra-customization' : 'manual-required'
+            });
+            fallbackLink.href = `contact.html?${query.toString()}`;
+            fallbackLink.textContent = isStandard
+                ? 'Need Extra Customization? Request Manual Build'
+                : 'Manual Customization Required. Send Request';
+        };
+
+        const updateCustomPreview = () => {
+            const config = {
+                style: styleInput.value,
+                doorColor: doorColorInput.value,
+                frameColor: frameColorInput.value,
+                width: parseDimension(widthValue.value, 600, 1200, 900),
+                height: parseDimension(heightValue.value, 1800, 2600, 2100),
+                lockType: lockTypeInput.value,
+                hinges: parseDimension(hingesInput.value, 2, 4, 3),
+                handleFinish: handleInput.value,
+                openSide: openSideInput.value,
+                openDirection: openDirectionInput.value,
+                accessoryCloser: accessoryCloser.checked,
+                accessoryPeephole: accessoryPeephole.checked,
+                accessoryStopper: accessoryStopper.checked
+            };
+
+            widthRange.value = config.width.toString();
+            widthValue.value = config.width.toString();
+            heightRange.value = config.height.toString();
+            heightValue.value = config.height.toString();
+
+            const stageWidth = previewStage.clientWidth || 480;
+            const stageHeight = previewStage.clientHeight || 460;
+            const maxDoorWidth = stageWidth * 0.36;
+            const maxDoorHeight = stageHeight * 0.74;
+            const scale = Math.min(maxDoorWidth / config.width, maxDoorHeight / config.height);
+            const doorWidthPx = Math.max(92, Math.round(config.width * scale));
+            const doorHeightPx = Math.max(198, Math.round(config.height * scale));
+            const frameInset = 18;
+
+            previewFrame.style.width = `${doorWidthPx + frameInset}px`;
+            previewFrame.style.height = `${doorHeightPx + frameInset}px`;
+            previewFrame.style.borderColor = config.frameColor;
+
+            previewDoor.style.backgroundColor = config.doorColor;
+            previewDoor.dataset.style = config.style;
+            previewDoor.dataset.swing = config.openDirection;
+            previewDoor.dataset.side = config.openSide;
+
+            const hingeOnLeft = config.openSide === 'left';
+            previewHinges.className = `custom-preview-hinges ${hingeOnLeft ? 'left' : 'right'}`;
+            renderHinges(config.hinges);
+
+            const handleColor = handleColors[config.handleFinish] || handleColors.steel;
+            previewHandle.style.backgroundColor = handleColor;
+            previewHandle.style.left = hingeOnLeft ? 'calc(100% - 16px)' : '6px';
+
+            previewLockTag.textContent = lockLabels[config.lockType] || 'Lock';
+            previewLockTag.style.left = hingeOnLeft ? 'calc(100% - 66px)' : '6px';
+
+            previewPeephole.style.display = config.accessoryPeephole ? 'block' : 'none';
+            previewPeephole.style.left = hingeOnLeft ? 'calc(100% - 18px)' : '8px';
+
+            previewCloser.style.display = config.accessoryCloser ? 'block' : 'none';
+            previewCloser.style.left = hingeOnLeft ? '8px' : 'calc(100% - 50px)';
+
+            previewStopper.style.display = config.accessoryStopper ? 'block' : 'none';
+            previewStopper.style.left = hingeOnLeft ? '61%' : '39%';
+
+            dimensionWidthLabel.textContent = `${config.width} mm`;
+            dimensionHeightLabel.textContent = `${config.height} mm`;
+
+            updateBuildStatus(config);
+        };
+
+        syncDimensionPair(widthRange, widthValue, 600, 1200, 900);
+        syncDimensionPair(heightRange, heightValue, 1800, 2600, 2100);
+
+        customDoorForm.querySelectorAll('select, input[type="color"], input[type="checkbox"]').forEach((input) => {
+            input.addEventListener('input', updateCustomPreview);
+            input.addEventListener('change', updateCustomPreview);
+        });
+
+        window.addEventListener('resize', updateCustomPreview);
+        updateCustomPreview();
     }
 });

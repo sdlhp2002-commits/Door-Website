@@ -25,6 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -61,155 +62,52 @@
             </div>
         </section>
 
-        <!-- Gallery Section -->
-        <section class="gallery-section">
-            <div class="section-content">
-                <div class="gallery-header">
-                    <span class="gallery-brand-label">Ajor Doors</span>
-                    <h2 class="gallery-main-title">Wood Species Material</h2>
-                </div>
-
-                <!-- Filter Buttons -->
-                <div class="gallery-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="teak">Teak Wood</button>
-                    <button class="filter-btn" data-filter="wpc">WPC</button>
-                    <button class="filter-btn" data-filter="laminate">Laminates</button>
-                </div>
-
-                <!-- Gallery Grid -->
-                <div class="gallery-container">
-                    <!-- Item 1 -->
-                    <div class="gallery-item" data-category="teak">
-
-                        <img src="images/bamboo.jpg" alt="Bamboo style Teak Door Installation" loading="lazy"
-                            decoding="async" width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">BAMBOO</span>
-                        </div>
+        <!-- Continuous Slider Section -->
+        <section class="continuous-slider-section">
+            <div class="section-content" style="text-align: center; margin-bottom: 30px;">
+                <span class="gallery-brand-label">Ajor Doors</span>
+                <h2 class="gallery-main-title">Our Exclusive Collection</h2>
+            </div>
+            
+            <div class="swiper continuous-gallery-slider">
+                <div class="swiper-wrapper">
+                    <!-- Image 1 -->
+                    <div class="swiper-slide">
+                        <img src="images/HDF-Flat-Doors3.png" alt="HDF Flat Door" loading="lazy">
                     </div>
-
-                    <!-- Item 2 -->
-                    <div class="gallery-item" data-category="laminate">
-
-
-                        <img src="images/Birch.jpg" alt="Modern Birch Laminate Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">BIRCH</span>
-                        </div>
+                    <!-- Image 2 -->
+                    <div class="swiper-slide">
+                        <img src="images/HDF-Moulded-Doors2.png" alt="HDF Moulded Door" loading="lazy">
                     </div>
-
-                    <!-- Item 3 -->
-                    <div class="gallery-item" data-category="wpc">
-
-
-                        <img src="images/Cherry.jpg" alt="Cherry WPC Bathroom Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">CHERRY</span>
-                        </div>
+                    <!-- Image 3 -->
+                    <div class="swiper-slide">
+                        <img src="images/Laminated-Doors12.png" alt="Laminated Door" loading="lazy">
                     </div>
-
-                    <!-- Item 4 -->
-                    <div class="gallery-item" data-category="teak">
-
-
-                        <img src="images/Fir.jpg" alt="Classic Fir Teak Design" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">FIR</span>
-                        </div>
+                    <!-- Image 4 -->
+                    <div class="swiper-slide">
+                        <img src="images/neo-classic-doors.png" alt="Neo Classic Door" loading="lazy">
                     </div>
-
-                    <!-- Item 5 -->
-                    <div class="gallery-item" data-category="laminate">
-
-
-                        <img src="images/Lauan.jpg" alt="Lauan wood with Antique Finish Door" loading="lazy"
-                            decoding="async" width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">LAUAN</span>
-                        </div>
+                    <!-- Image 5 -->
+                    <div class="swiper-slide">
+                        <img src="images/Veneer-EXOTICAOAK.png" alt="Veneer Exotica Oak" loading="lazy">
                     </div>
-
-                    <!-- Item 6 -->
-                    <div class="gallery-item" data-category="wpc">
-
-
-                        <img src="images/Mahogany.jpg" alt="Premium Mahogany WPC Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">MAHOGANY</span>
-                        </div>
+                    <!-- Duplicated Images for Smooth Looping on Desktop -->
+                    <div class="swiper-slide">
+                        <img src="images/HDF-Flat-Doors3.png" alt="HDF Flat Door" loading="lazy">
                     </div>
-                    <!-- Item 7 -->
-                    <div class="gallery-item" data-category="wpc">
-
-                        <img src="images/Maple.jpg" alt="Premium Maple WPC Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">MAPLE</span>
-                        </div>
+                    <div class="swiper-slide">
+                        <img src="images/HDF-Moulded-Doors2.png" alt="HDF Moulded Door" loading="lazy">
                     </div>
-                    <!-- Item 8-->
-                    <div class="gallery-item" data-category="wpc">
-
-                        <img src="images/Oak.jpg" alt="Premium WPC Door" loading="lazy" decoding="async" width="320"
-                            height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">OAK</span>
-                        </div>
+                    <div class="swiper-slide">
+                        <img src="images/Laminated-Doors12.png" alt="Laminated Door" loading="lazy">
                     </div>
-                    <!-- Item 9 -->
-                    <div class="gallery-item" data-category="wpc">
-
-                        <img src="images/Pine.jpg" alt="Premium Pine WPC Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">PINE</span>
-                        </div>
+                    <div class="swiper-slide">
+                        <img src="images/neo-classic-doors.png" alt="Neo Classic Door" loading="lazy">
                     </div>
-                    <!-- Item 10 -->
-                    <div class="gallery-item" data-category="wpc">
-
-                        <img src="images/Sapele.jpg" alt="Premium Sapele WPC Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">SAPELE</span>
-                        </div>
+                    <div class="swiper-slide">
+                        <img src="images/Veneer-EXOTICAOAK.png" alt="Veneer Exotica Oak" loading="lazy">
                     </div>
-                    <!-- Item 11-->
-                    <div class="gallery-item" data-category="wpc">
-
-                        <img src="images/walnut.jpg" alt="Premium Walnut WPC Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">WALNUT</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 12-->
-                    <div class="gallery-item" data-category="wpc">
-
-                        <img src="images/woodgrain.jpg" alt="Premium Woodgrain WPC Door" loading="lazy" decoding="async"
-                            width="320" height="400">
-
-                        <div class="gallery-overlay">
-                            <span class="gallery-cat">woodgrain</span>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </section>
@@ -289,6 +187,28 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize Continuous Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallerySlider = new Swiper('.continuous-gallery-slider', {
+                slidesPerView: 'auto', // Allows slides to have their own width
+                spaceBetween: 0,       // No gap between images
+                loop: true,            // Infinite loop
+                speed: 3000,           // Duration of transition (slower is smoother for continuous)
+                observer: true,        // Update on DOM changes
+                observeParents: true,  // Update if parent container changes
+                autoplay: {
+                    delay: 0,          // No delay between transitions
+                    disableOnInteraction: false,
+                },
+                freeMode: true,        // Free movement
+                freeModeMomentum: false, // Constant speed
+                grabCursor: true,
+                allowTouchMove: true
+            });
+        });
+    </script>
 </body>
 
 </html>

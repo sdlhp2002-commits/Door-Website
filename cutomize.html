@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Own Door | Ajor Doors Bengaluru</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5TMG8NTF9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-B5TMG8NTF9');
+    </script>
+
+    <meta name="description"
+        content="Configure your own custom door with live preview. Select size, color, lock, hinges, and accessories.">
+
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="images/logo.png" sizes="any">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar section-content">
+            <a href="./" class="nav-logo" id="logo-link">
+                <img src="images/logo.png" alt="Ajor Doors Manufacturer Logo Bengaluru" class="logo-image" width="150"
+                    height="80">
+            </a>
+
+            <ul class="nav-menu" id="nav-menu-list">
+                <button id="menu-close-button" class="fas fa-times" aria-label="Close menu"></button>
+                <li class="nav-item"><a href="./" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="product.html" class="nav-link">Product</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                <li class="nav-item nav-dropdown">
+                    <a href="gallery.html" class="nav-link active">Gallery</a>
+                    <ul class="nav-submenu">
+                        <li><a href="cutomize.html" class="nav-link submenu-link">Customize Your Own Door</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><button class="nav-link login-icon-btn" aria-label="Login"><i
+                            class="fas fa-user"></i></button></li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars" aria-label="Open menu" aria-expanded="false"
+                aria-controls="nav-menu-list"></button>
+        </nav>
+    </header>
+
+    <main class="main-content-padding">
+    <section class="product-detail-hero">
+        <div class="section-content">
+            <div class="hero-title-box">
+                <h1 class="hero-main-title">Customize Your Own Door</h1>
+                <nav class="breadcrumbs-container">
+                    <a href="./">Home</a> / <a href="gallery.html">Gallery</a> / Customize Door
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Door Builder -->
+    <section class="custom-door-section" id="custom-door-builder">
+        <div class="section-content">
+            <div class="custom-door-head">
+                <h2 class="section-title">Customize Your Own Door</h2>
+                <p>Select your preferred style, size, finish and hardware. The preview updates live as you customize.
+                </p>
+            </div>
+
+            <div class="custom-door-layout">
+                <div class="custom-door-form-panel">
+                    <form id="custom-door-form" class="custom-door-form" novalidate>
+                        <div class="custom-form-grid">
+                            <div class="custom-field">
+                                <label for="custom-door-style">Door Style</label>
+                                <select id="custom-door-style" class="custom-control">
+                                    <option value="neo">Neo Classic</option>
+                                    <option value="flush">Modern Flush</option>
+                                    <option value="veneer">Veneer Vertical</option>
+                                </select>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-door-color">Door Color</label>
+                                <input type="color" id="custom-door-color" class="custom-control color-control"
+                                    value="#a97442">
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-frame-color">Frame Color</label>
+                                <input type="color" id="custom-frame-color" class="custom-control color-control"
+                                    value="#6f4a2e">
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-door-width">Door Width (mm)</label>
+                                <div class="custom-size-row">
+                                    <input type="range" id="custom-door-width" min="600" max="1200" step="10"
+                                        value="900">
+                                    <input type="number" id="custom-door-width-value" min="600" max="1200" step="10"
+                                        value="900" class="custom-control">
+                                </div>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-door-height">Door Height (mm)</label>
+                                <div class="custom-size-row">
+                                    <input type="range" id="custom-door-height" min="1800" max="2600" step="10"
+                                        value="2100">
+                                    <input type="number" id="custom-door-height-value" min="1800" max="2600" step="10"
+                                        value="2100" class="custom-control">
+                                </div>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-lock-type">Lock Type</label>
+                                <select id="custom-lock-type" class="custom-control">
+                                    <option value="mortise">Mortise Lock</option>
+                                    <option value="cylindrical">Cylindrical Lock</option>
+                                    <option value="smart">Smart Lock</option>
+                                </select>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-hinges">Hinges</label>
+                                <select id="custom-hinges" class="custom-control">
+                                    <option value="2">2 Hinges</option>
+                                    <option value="3" selected>3 Hinges</option>
+                                    <option value="4">4 Hinges</option>
+                                </select>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-handle-finish">Handle Finish</label>
+                                <select id="custom-handle-finish" class="custom-control">
+                                    <option value="steel">Stainless Steel</option>
+                                    <option value="black">Matte Black</option>
+                                    <option value="brass">Brass</option>
+                                </select>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-open-side">Open Side</label>
+                                <select id="custom-open-side" class="custom-control">
+                                    <option value="left">Left Hinged</option>
+                                    <option value="right">Right Hinged</option>
+                                </select>
+                            </div>
+
+                            <div class="custom-field">
+                                <label for="custom-open-direction">Open Direction</label>
+                                <select id="custom-open-direction" class="custom-control">
+                                    <option value="inward">Inward</option>
+                                    <option value="outward">Outward</option>
+                                </select>
+                            </div>
+
+                            <div class="custom-field custom-field-full">
+                                <label>Accessories</label>
+                                <div class="custom-check-row">
+                                    <label><input type="checkbox" id="custom-accessory-closer"> Door Closer</label>
+                                    <label><input type="checkbox" id="custom-accessory-peephole"> Peephole</label>
+                                    <label><input type="checkbox" id="custom-accessory-stopper"> Floor Stopper</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="custom-door-preview-panel">
+                    <div class="custom-preview-stage">
+                        <div class="custom-preview-wall"></div>
+                        <div class="custom-preview-floor"></div>
+
+                        <div class="custom-preview-frame" id="custom-preview-frame">
+                            <div class="custom-preview-door" id="custom-preview-door" data-style="neo">
+                                <span class="custom-preview-groove top"></span>
+                                <span class="custom-preview-groove mid"></span>
+                                <span class="custom-preview-groove low"></span>
+                                <span class="custom-preview-lock-tag" id="custom-preview-lock-tag">Mortise</span>
+                                <span class="custom-preview-handle" id="custom-preview-handle"></span>
+                                <span class="custom-preview-peephole" id="custom-preview-peephole"></span>
+                                <span class="custom-preview-closer" id="custom-preview-closer"></span>
+                            </div>
+                            <div class="custom-preview-hinges left" id="custom-preview-hinges"></div>
+                        </div>
+
+                        <span class="custom-dimension custom-dimension-height" id="custom-dimension-height">2100
+                            mm</span>
+                        <span class="custom-dimension custom-dimension-width" id="custom-dimension-width">900 mm</span>
+                        <span class="custom-preview-stopper" id="custom-preview-stopper"></span>
+                    </div>
+
+                    <div class="custom-build-status" id="custom-build-status" data-state="ok">
+                        <h3>Build Feasibility</h3>
+                        <p id="custom-build-message">This configuration is available in standard production.</p>
+                        <ul id="custom-build-notes"></ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gallery-cta">
+        <h2>Need Custom Dimensions?</h2>
+        <p>We manufacture doors to your exact specifications. Contact us for a free consultation.</p>
+        <a href="contact.html" class="cta-btn">Get Free Quote</a>
+    </section>
+    </main>
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="section-content">
+            <p class="copyright-text"> ©2002 Ajor Doors Manufacturer</p>
+            <div class="social-link-list">
+                <a href="https://www.facebook.com/sdlhp2002" class="social-link" aria-label="Facebook"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/Sdlhp2002" class="social-link" aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/shree-dhanalaxmi-hardware-and-plywood-4b25103b1"
+                    class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <p class="policy-text">
+                <a href="./" class="policy-link">Home</a>
+                <span class="separator"></span>
+                <a href="about.html" class="policy-link">About</a>
+                <span class="separator"></span>
+                <a href="contact.html" class="policy-link">Contact</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
+
