@@ -32,8 +32,9 @@
     <!-- Header (Same as Index) -->
     <header>
         <nav class="navbar section-content">
-            <a href="./" class="nav-logo">
-                <img src="images/logo.png" alt="Ajor Doors Logo" class="logo-image" width="150" height="80">
+            <a href="./" class="nav-logo" id="logo-link">
+                <img src="images/logo.png" alt="Ajor Doors Manufacturer Logo Bengaluru" class="logo-image" width="150"
+                    height="80">
             </a>
             <ul class="nav-menu">
                 <button id="menu-close-button" class="fas fa-times"></button>
@@ -41,7 +42,12 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="product.html" class="nav-link">Product</a></li>
                 <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li class="nav-item nav-dropdown">
+                    <a href="gallery.html" class="nav-link active">Gallery</a>
+                    <ul class="nav-submenu">
+                        <li><a href="cutomize.html" class="nav-link submenu-link">Customize Your Own Door</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item"><button class="nav-link login-icon-btn" aria-label="Login"><i class="fas fa-user"></i></button></li>
             </ul>

@@ -2472,6 +2472,7 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
     font-size: 2.5rem;
     color: var(--primary-color);
     margin: 0;
+    text-transform: uppercase;
 }
 
 /* Lightbox Styling */
