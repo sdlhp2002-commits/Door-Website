@@ -4036,3 +4036,89 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 .continuous-gallery-slider .swiper-slide:hover img {
     transform: scale(1.05);
 }
+
+/* --- Values Section Styles (About Page) --- */
+.values-section {
+    padding: 80px 0;
+    background: var(--white-color);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.value-card {
+    background: #f9f9f9;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--secondary-color);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    display: inline-block;
+    background: rgba(184, 134, 11, 0.1);
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.value-card:hover .value-icon {
+    background: var(--secondary-color);
+    color: var(--white-color);
+    transform: rotateY(360deg);
+}
+
+.value-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.value-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* --- Map Section Styles (Contact Page) --- */
+.map-section {
+    padding: 0 0 80px;
+    position: relative;
+}
+
+.full-width-map {
+    width: 100%;
+    height: 450px;
+    border: 0;
+    display: block;
+    filter: grayscale(0.1);
+}
+
+@media screen and (max-width: 768px) {
+    .full-width-map {
+        height: 350px;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
