@@ -3996,7 +3996,8 @@ body.show-mobile-menu .navbar .nav-menu .nav-item:nth-child(6) .nav-link {
 
 /* --- Continuous Gallery Slider Styles --- */
 .continuous-slider-section {
-    padding: 60px 0 0;9f9;
+    padding: 60px 0 0;
+    background: #f9f9f9;
     overflow: hidden;
 }
 
