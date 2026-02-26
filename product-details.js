@@ -45,8 +45,11 @@ function renderOptions(specifications) {
 
     optionKeys.forEach(key => {
         if (specifications[key]) {
-            // Split the string by comma, then trim whitespace and remove quotes from each item
-            const options = specifications[key].split(',').map(opt => opt.trim().replace(/["']/g, ''));
+            // Split by comma OR pipe, then trim whitespace and remove quotes from each item
+            const options = specifications[key]
+                .split(/[,|]/)
+                .map(opt => opt.trim().replace(/["']/g, ''))
+                .filter(opt => opt); // Remove empty strings
             
             if (options.length > 0) {
                 optionsHtml += `
@@ -68,7 +71,7 @@ function updateDisplayedPrice(basePrice) {
     if (typeof basePrice !== 'number') {
         const priceContainer = document.getElementById('product-price-container');
         if (priceContainer) {
-            priceContainer.innerHTML = `Total Price: <span>${basePrice}</span>`;
+            priceContainer.innerHTML = `Price: <span>${basePrice}</span>`;
         }
         return;
     }
@@ -110,7 +113,7 @@ function updateDisplayedPrice(basePrice) {
 
     const priceContainer = document.getElementById('product-price-container');
     if (priceContainer) {
-        priceContainer.innerHTML = `Total Price: <span>₹${finalPrice.toLocaleString('en-IN')}</span>`;
+        priceContainer.innerHTML = `Price: <span>₹${finalPrice.toLocaleString('en-IN')}</span>`;
     }
 }
 
@@ -225,17 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Short desc
     document.getElementById("short-description").textContent = product.shortDescription;
 
-    // Price
-    const priceContainer = document.getElementById('product-price-container');
-    if (product.price && priceContainer) {
-        if (typeof product.price === 'number') {
-            // Format price with Indian Rupee formatting
-            priceContainer.innerHTML = `Price: <span>₹${product.price.toLocaleString('en-IN')}</span>`;
-        } else {
-            // If it's a string (like "As per market price"), display it directly
-            priceContainer.innerHTML = `Price: <span>${product.price}</span>`;
-        }
-    }
+    // Initial Price Render (Calculates based on default options)
+    // We defer this slightly to ensure options are rendered first
 
     // Size/Material Options
     const optionsContainer = document.getElementById('product-options-container');
@@ -259,6 +253,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateFormMessage(); // Update form text when installation changes
             });
         });
+
+        // Calculate initial price with defaults
+        updateDisplayedPrice(product.price);
     }
 
     // Features
@@ -316,6 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----------------------
     // Filter catalog by product category on initial load
     renderDoorCatalog(product.id); // Filter to show only doors from this product's category
+    initializeImageLazyLoader();
 
     // Initial call to set the message on load
     updateFormMessage();
@@ -404,17 +402,56 @@ function renderDoorCatalog(categoryFilter = null) {
              tabindex="0"
              aria-label="View door design ${door.code}">
              <div class="door-catalog-image-wrapper">
-                 <img src="${door.image}" 
+                 <img data-src="${door.image}" 
                       alt="Door Design ${door.code}" 
-                      class="door-catalog-image" 
-                      loading="lazy"
-                      decoding="async">
+                      class="door-catalog-image lazy-load" 
+                      decoding="async"
+                      width="250" height="280">
+                 <div class="image-loading-spinner"></div>
              </div>
              <div class="door-catalog-label">${door.code}</div>
         </div>
     `).join('');
 
     setTimeout(() => catalogGrid.classList.remove('filtering'), 300);
+}
+
+/**
+ * Sets up an IntersectionObserver to lazy-load images in the catalog.
+ */
+function initializeImageLazyLoader() {
+    const lazyImages = document.querySelectorAll('.door-catalog-image.lazy-load');
+
+    if (!lazyImages.length) return;
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const src = img.dataset.src;
+
+                if (!src) return;
+
+                img.classList.add('loading');
+
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                    img.src = src;
+                    img.classList.remove('loading', 'lazy-load');
+                };
+                tempImg.onerror = () => {
+                    img.classList.remove('loading');
+                    img.classList.add('error');
+                };
+                
+                tempImg.src = src;
+
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: '0px 0px 200px 0px' }); // Load 200px before viewport
+
+    lazyImages.forEach(img => imageObserver.observe(img));
 }
 
 /**
