@@ -228,9 +228,11 @@ header .navbar {
     left: -10px; /* Centered in the 20px gap */
     top: 50%;
     transform: translateY(-50%);
-    height: 16px; /* Smaller height */
-    width: 1px;
-    background-color: var(--border-color); /* Lighter color */
+    height: 12px; /* Shorter */
+    width: 2px; /* Thicker */
+    background-color: var(--secondary-color); /* Use brand accent color */
+    border-radius: 2px; /* Rounded ends */
+    opacity: 0.4; /* Make it subtle */
 }
 .navbar .nav-menu .nav-item.nav-dropdown {
     position: relative;
