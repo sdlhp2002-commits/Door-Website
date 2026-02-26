@@ -217,6 +217,21 @@ header .navbar {
     gap: 20px;
 }
 
+.navbar .nav-menu .nav-item {
+    position: relative;
+}
+
+/* Add a subtle separator between nav items */
+.navbar .nav-menu .nav-item + .nav-item::before {
+    content: "";
+    position: absolute;
+    left: -10px; /* Centered in the 20px gap */
+    top: 50%;
+    transform: translateY(-50%);
+    height: 16px; /* Smaller height */
+    width: 1px;
+    background-color: var(--border-color); /* Lighter color */
+}
 .navbar .nav-menu .nav-item.nav-dropdown {
     position: relative;
 }
@@ -703,6 +718,11 @@ header .navbar {
         box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
         /* Stronger shadow to separate from background */
         border-right: 2px solid var(--secondary-color);
+    }
+
+    /* Hide the separator on mobile */
+    .navbar .nav-menu .nav-item + .nav-item::before {
+        display: none;
     }
 
     .navbar .nav-menu .nav-item.nav-dropdown {
