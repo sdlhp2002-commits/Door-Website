@@ -1144,6 +1144,10 @@ header .navbar {
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .contact-section .contact-form .form-input,
@@ -1151,6 +1155,8 @@ header .navbar {
     width: 100%;
     background: var(--white-color);
     border: 1px solid var(--medium-gray-color);
+    background: transparent;
+    border: 2px solid var(--white-color);
     border-radius: var(--border-radius-s);
     padding: 15px;
     outline: none;
@@ -1158,6 +1164,12 @@ header .navbar {
     /* Increased margin to prevent overlap */
     font-size: 1.2rem;
     font-family: inherit;
+    color: var(--white-color);
+}
+
+.contact-section .contact-form .form-input::placeholder,
+.contact-section .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .contact-section .contact-form textarea {
