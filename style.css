@@ -1602,7 +1602,7 @@ header .navbar {
 
 /* Replaces inline style on <main> tag */
 .main-content-padding {
-    padding-top: 90px;
+    padding-top: 0;
     min-height: 70vh;
 }
 
@@ -1740,7 +1740,7 @@ header .navbar {
 .product-detail-hero {
     background: var(--primary-color);
     /* Rich charcoal background */
-    padding: 70px 0 10px;
+    padding: 150px 0 50px;
     text-align: center;
 }
 
@@ -3395,6 +3395,54 @@ header .navbar {
     }
 }
 
+/* Cookie Consent Banner */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.95);
+    color: var(--white-color);
+    padding: 20px;
+    z-index: 10000;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+.cookie-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: var(--site-max-width);
+    width: 100%;
+}
+
+.cookie-content p {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.cookie-btn {
+    background: var(--secondary-color);
+    color: var(--white-color);
+    padding: 10px 25px;
+    border-radius: var(--border-radius-m);
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.cookie-btn:hover {
+    background: var(--accent-gold);
+}
+
 @keyframes slideUp {
     from {
         transform: translateY(100%);
@@ -3409,6 +3457,11 @@ header .navbar {
     .cookie-content {
         flex-direction: column;
         text-align: center;
+        gap: 15px;
+    }
+    .cookie-btn {
+        width: 100%;
+        max-width: 200px;
     }
 }
 
