@@ -52,7 +52,7 @@
     --light-gray: #f5f5f5;
     /* Light gray for subtle backgrounds */
     --border-color: #e8e6e3;
-    /* Soft border color */
+    
 
     /* Custom Fonts */
     --body-font: "MontBook", sans-serif;
@@ -1068,8 +1068,8 @@ header .navbar {
 /* --- Base Contact Section Styling --- */
 .contact-section {
     padding: 80px 0;
-    background: var(--light-pink-color);
-    /* Matching your screenshot background */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/contact-bg.jpg') no-repeat center center/cover;
+    color: var(--white-color);
 }
 
 .contact-section .section-content {
