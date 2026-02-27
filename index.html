@@ -35,9 +35,10 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <link rel="preload" href="fonts/Mont-Book.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Mont-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Mont-Bold.woff2" as="font" type="font/woff2" crossorigin>
+ 
     <!-- Preload Hero Images for Faster LCP -->
     <link rel="preload" as="image"
         href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop"
@@ -546,10 +547,10 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
 
-    <script src="products-data.js"></script>
-    <script src="script.js"></script>
+    <script src="products-data.js" defer></script>
+    <script src="script.js" defer></script>
 
     <!-- Modern Google Maps Loader -->
 
