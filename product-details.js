@@ -6,23 +6,30 @@ function getProductId() {
 
 // Render features as list
 function renderFeatures(features) {
-    // Note: Ensure your PRODUCTS.js data features is an array of strings ["Anti termite.", "Waterproof."]
+    if (!Array.isArray(features)) return '';
     return features.map(f => `<li>${f}</li>`).join('');
 }
 
 // Function to handle the image swap and 'selected' styling
+let currentLoadingSrc = null;
+
 function swapMainImage(newSrc, clickedThumbnail) {
     const mainImage = document.getElementById('main-door-image');
     if (!mainImage || !newSrc) return;
 
+    currentLoadingSrc = newSrc;
     mainImage.classList.add('loading');
     const imgPreload = new Image();
     imgPreload.onload = () => {
-        mainImage.src = newSrc;
-        mainImage.classList.remove('loading');
+        if (currentLoadingSrc === newSrc) {
+            mainImage.src = newSrc;
+            mainImage.classList.remove('loading');
+        }
     };
     imgPreload.onerror = () => {
-        mainImage.classList.remove('loading'); // Still remove loading on error
+        if (currentLoadingSrc === newSrc) {
+            mainImage.classList.remove('loading'); // Still remove loading on error
+        }
     };
     imgPreload.src = newSrc;
 
@@ -39,6 +46,7 @@ function swapMainImage(newSrc, clickedThumbnail) {
 
 // Render size/material options as dropdowns
 function renderOptions(specifications) {
+    if (!specifications) return '';
     let optionsHtml = '';
     // Define which specs should become options
     const optionKeys = ['Thickness', 'Width', 'Height'];
@@ -120,6 +128,13 @@ function updateDisplayedPrice(basePrice) {
 // Product lookup & rendering
 document.addEventListener('DOMContentLoaded', function () {
     const productId = getProductId();
+    
+    if (typeof PRODUCTS === 'undefined') {
+        console.error("Product data scripts (products-data.js) are not loaded.");
+        document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Error: Product data could not be loaded.</h2><a href='./'>Back to Home</a></div>";
+        return;
+    }
+
     // Assuming PRODUCTS is defined in products-data.js
     const product = PRODUCTS.find(p => p.id === productId);
 
@@ -177,13 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----------------------
     // 1. Initial Checks
     // ----------------------
-    if (!product || !PRODUCTS) {
-        // A check for the data files is also good practice
-        if (typeof PRODUCTS === 'undefined' || typeof DOOR_CATALOG === 'undefined') {
-            console.error("Product data scripts (products-data.js) are not loaded.");
-            document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Error: Product data could not be loaded.</h2><a href='./'>Back to Home</a></div>";
-            return;
-        }
+    if (!product) {
         document.body.innerHTML = "<div style='text-align:center; margin-top:80px'><h2>Product Not Found</h2><a href='./'>Back to Home</a></div>";
         return;
     }
