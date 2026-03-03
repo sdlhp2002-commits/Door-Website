@@ -34,20 +34,14 @@ if (document.querySelector('.slider-wrapper')) {
     const swiper = new Swiper('.slider-wrapper', {
         loop: true,
         grabCursor: true,
+        speed: 6000,
         spaceBetween: 30,
 
         // Autoplay
         autoplay: {
-            delay: 3000,
+            delay: 0,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-        },
-
-        // Pagination (Dots)
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            dynamicBullets: true // Optional: makes dots look premium
+            pauseOnMouseEnter: false,
         },
 
         // Navigation (Arrows)

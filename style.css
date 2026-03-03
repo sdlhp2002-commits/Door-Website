@@ -60,13 +60,20 @@
     --heading-font-bold: "MontBold", serif;
 
     /*font size - New Typographic Scale */
-    --font-size-s: 0.9rem;    /* Small text, labels */
-    --font-size-n: 1rem;      /* Body text */
-    --font-size-m: 1.15rem;   /* Large body / small heading */
-    --font-size-l: 1.3rem;    /* Card titles, h4 */
-    --font-size-xl: 1.8rem;   /* Sub-section titles, h3 */
-    --font-size-xxl: 2.5rem;  /* Section titles, h2 */
-    --font-size-xxxl: 3.5rem; /* Hero title, h1 */
+    --font-size-s: 0.9rem;
+    /* Small text, labels */
+    --font-size-n: 1rem;
+    /* Body text */
+    --font-size-m: 1.15rem;
+    /* Large body / small heading */
+    --font-size-l: 1.3rem;
+    /* Card titles, h4 */
+    --font-size-xl: 1.8rem;
+    /* Sub-section titles, h3 */
+    --font-size-xxl: 2.5rem;
+    /* Section titles, h2 */
+    --font-size-xxxl: 3.5rem;
+    /* Hero title, h1 */
 
     /*font weight*/
     --font-weight-normal: 400;
@@ -166,6 +173,7 @@ body.use-custom-cursor * {
     .cursor-circle {
         display: none;
     }
+
     .cursor-dot {
         display: none;
     }
@@ -1837,11 +1845,7 @@ header .navbar {
 /*products-style*/
 .products-section {
     padding: 30px 0 30px;
-    background-color: var(--light-pink-color);
-    /* Subtle dot pattern for texture */
-    background-image: radial-gradient(rgba(184, 134, 11, 0.15) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
-
+    background-color: #ffffff;
 }
 
 .products-section .section-title {
@@ -1852,19 +1856,38 @@ header .navbar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35px;
-    text-align: center;
+    padding: 0;
+    text-align: left;
     position: relative;
+}
+
+.products-section .products a {
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: transparent;
+}
+
+.products-section .products a::before {
+    content: none;
+}
+
+.products-section .products a::after {
+    content: none;
 }
 
 .products-section .products .Products-image {
     /* Set a reasonable maximum size for product images in the slider */
     width: 100%;
-    max-width: 300px;
-    height: 350px;
+    max-width: none;
+    height: 360px;
     object-fit: contain;
-    margin-bottom: 10px;
-    transition: transform 0.3s ease;
+    background: transparent;
+    margin-bottom: 0;
+    transition: transform 0.4s ease;
+    z-index: 0;
 }
 
 .products-section .products:hover .Products-image {
@@ -1872,18 +1895,21 @@ header .navbar {
 }
 
 .products-section .products .name {
-    margin-top: 15px;
+    position: absolute;
+    left: 18px;
+    bottom: 16px;
+    margin: 0;
     font-family: var(--heading-font-semibold);
-    font-size: 1.35rem;
     font-size: var(--font-size-l);
-    color: var(--primary-color);
+    color: #ffffff;
     font-weight: 700;
     letter-spacing: 0.5px;
-    transition: color 0.3s ease;
+    z-index: 2;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .products-section .products:hover .name {
-    color: var(--secondary-color);
+    color: #ffffff;
 }
 
 .products .product-price {
@@ -1909,8 +1935,8 @@ header .navbar {
 }
 
 .products-section .swiper-pagination-bullet {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     opacity: 1;
     background: var(--secondary-color);
 
@@ -1932,6 +1958,10 @@ header .navbar {
 .products-section .slider-wrapper {
     overflow: hidden;
     margin: 0 60px 30px;
+}
+
+.products-section .slider-wrapper .swiper-wrapper {
+    transition-timing-function: linear !important;
 }
 
 /* --- Product Slider Visibility Logic --- */
