@@ -245,12 +245,15 @@ header .navbar {
 .navbar .nav-menu .nav-link {
     color: var(--dark-color);
     padding: 10px 20px;
-    font-weight: var(--font-weight-bold);
+    font-weight: 700;
     transition: 0.3s;
     border-radius: var(--border-radius-m);
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .navbar .nav-menu .nav-link:hover {
@@ -263,6 +266,14 @@ header .navbar {
     color: var(--secondary-color);
 }
 
+.navbar .nav-menu .nav-link .nav-icon {
+    font-size: 0.95rem;
+}
+
+.navbar .nav-menu .nav-submenu .nav-icon {
+    font-size: 0.9rem;
+}
+
 /* FIXED: Correct ID names */
 .navbar :where(#menu-open-button, #menu-close-button) {
     display: none;
@@ -270,7 +281,7 @@ header .navbar {
 
 .navbar .nav-logo .logo-text {
     color: var(--dark-color);
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-l);
     font-weight: var(--font-weight-semibold);
     font-family: var(--heading-font-bold);
 }
@@ -348,7 +359,7 @@ header .navbar {
 .navbar .nav-menu .nav-submenu .submenu-link.nav-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 14px 14px;
     margin: 0;
     font-size: 1.02rem;
@@ -367,7 +378,7 @@ header .navbar {
     font-weight: 900;
     font-size: 0.92rem;
     color: #8a8a8a;
-    margin-left: 10px;
+    margin-left: auto;
 }
 
 .navbar .nav-menu .nav-submenu .submenu-link.nav-link:hover {
