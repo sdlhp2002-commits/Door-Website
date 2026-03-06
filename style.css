@@ -3027,6 +3027,8 @@ header .navbar {
         right: 20px;
         width: 45px;
         height: 45px;
+        /* Hide the scroll-to-top button on mobile views */
+        display: none;
     }
 }
 
