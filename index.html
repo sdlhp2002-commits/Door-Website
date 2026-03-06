@@ -49,6 +49,215 @@
         href="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=60&w=1920&auto=format&fit=crop"
         media="(min-width: 769px)">
 
+    <style>
+        /* Chatbot Styles */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #b8860b, #d4af37);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 9998;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .chatbot-icon.hidden {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 350px;
+            max-width: 90vw;
+            height: 500px;
+            max-height: 70vh;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .chatbot-window.hidden {
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #b8860b, #d4af37);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chatbot-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            max-width: 85%;
+            display: flex;
+        }
+
+        .chat-message p {
+            margin: 0;
+            padding: 10px 15px;
+            border-radius: 18px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .chat-message p a {
+            color: #b8860b;
+            text-decoration: underline;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-message.user p {
+            background-color: #e1e1e1;
+            color: #333;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-message.bot {
+            align-self: flex-start;
+        }
+
+        .chat-message.bot p {
+            background-color: #f1f0f0;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: #fff;
+            flex-shrink: 0;
+        }
+
+        #chatbot-input {
+            flex-grow: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            transition: border-color 0.2s;
+        }
+
+        #chatbot-input:focus {
+            outline: none;
+            border-color: #b8860b;
+        }
+
+        #chatbot-send-btn {
+            background: #b8860b;
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background-color 0.2s;
+        }
+
+        #chatbot-send-btn:hover {
+            background-color: #9a6f09;
+        }
+
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .suggestion-chip {
+            background: white;
+            border: 1px solid #b8860b;
+            color: #b8860b;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .suggestion-chip:hover {
+            background: #b8860b;
+            color: white;
+        }
+
+        /* 'Thinking' indicator styles */
+        .chat-message.thinking p {
+            color: #888;
+            font-style: italic;
+        }
+        .fa-spinner {
+            animation: fa-spin 1.5s infinite linear;
+        }
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -556,10 +765,34 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 
+    <!-- Chatbot Icon -->
+    <div id="chatbot-icon" class="chatbot-icon">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" class="chatbot-window">
+        <div class="chatbot-header">
+            <h3>Ajor Doors Assistant</h3>
+            <button id="chatbot-close-btn" class="chatbot-close-btn">&times;</button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages">
+            <!-- Initial welcome message -->
+            <div class="chat-message bot">
+                <p>Hello! I'm the Ajor Doors assistant. How can I help you today? You can ask about our products, services, or contact details.</p>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="chatbot-input" placeholder="Type your question...">
+            <button id="chatbot-send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
 
     <script src="products-data.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="chatbot.js" defer></script>
 
     <!-- Modern Google Maps Loader -->
 
