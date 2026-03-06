@@ -249,63 +249,6 @@ if (!localStorage.getItem("cookieConsent")) {
 
 // --- MAIN INITIALIZATION BLOCK ---
 document.addEventListener("DOMContentLoaded", () => {
-    // 0. Cursor highlight ring for large headings
-    if (!window.matchMedia('(pointer: coarse)').matches) {
-        document.body.classList.add('use-custom-cursor');
-
-        const existingRing = document.querySelector('.cursor-circle');
-        const cursorRing = existingRing || document.createElement('div');
-        if (!existingRing) {
-            cursorRing.className = 'cursor-circle';
-            document.body.appendChild(cursorRing);
-        }
-
-        const existingDot = document.querySelector('.cursor-dot');
-        const cursorDot = existingDot || document.createElement('div');
-        if (!existingDot) {
-            cursorDot.className = 'cursor-dot';
-            document.body.appendChild(cursorDot);
-        }
-
-        const headingTargets = document.querySelectorAll(
-            'h1, h2, h3, .section-title, .hero-main-title, .hero-details .title'
-        );
-
-        const setRingActive = (active) => {
-            cursorRing.classList.toggle('is-active', active);
-            cursorDot.classList.toggle('is-muted', active);
-        };
-
-        const setDotVisible = (visible) => {
-            cursorDot.classList.toggle('is-visible', visible);
-        };
-
-        headingTargets.forEach((target) => {
-            target.addEventListener('mouseenter', () => setRingActive(true));
-            target.addEventListener('mouseleave', () => setRingActive(false));
-        });
-
-        document.addEventListener('mousemove', (event) => {
-            const x = `${event.clientX}px`;
-            const y = `${event.clientY}px`;
-            cursorRing.style.left = x;
-            cursorRing.style.top = y;
-            cursorDot.style.left = x;
-            cursorDot.style.top = y;
-            setDotVisible(true);
-        });
-
-        document.addEventListener('mouseleave', () => {
-            setRingActive(false);
-            setDotVisible(false);
-        });
-
-        window.addEventListener('blur', () => {
-            setRingActive(false);
-            setDotVisible(false);
-        });
-    }
-
     // 0.1 Force menu links to open in same tab
     document.querySelectorAll('.nav-menu a').forEach((link) => {
         link.removeAttribute('target');
