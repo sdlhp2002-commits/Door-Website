@@ -142,29 +142,29 @@ img {
 /* navbar */
 
 header {
-    background: var(--white-color);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: absolute;
     top: 15px;
     left: 20px;
     right: 20px;
     z-index: 100;
-    box-shadow: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     border-radius: var(--border-radius-m);
 }
 
 header.scrolled {
     position: fixed;
-    /* Add a semi-transparent background and blur effect for a modern look */
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    /* For Safari support */
     top: 0;
     left: 0;
     right: 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-radius: 0;
 }
 
@@ -480,7 +480,7 @@ header .navbar {
 .hero-section .button {
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-gold));
     color: #fff;
-    padding: 15px 35px;
+    padding: 18px 40px;
     border-radius: var(--border-radius-m);
     font-weight: 700;
     text-transform: uppercase;
@@ -489,6 +489,12 @@ header .navbar {
     border: none;
     box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
     animation-delay: 0.8s;
+}
+
+.hero-section .button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(184, 134, 11, 0.5);
+    color: #fff;
 }
 
 /* Swiper Navigation Customization */
@@ -1047,7 +1053,7 @@ header .navbar {
 /* --- NEW WHY CHOOSE US SECTION STYLE --- */
 .why-section {
     padding: 100px 0;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
     /* Subtle dot pattern for texture */
     background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
     background-size: 30px 30px;
@@ -1130,7 +1136,7 @@ header .navbar {
 
 .why-door-img {
     width: 100%;
-    max-width: 800px;
+    max-width: 400px;
 
 
     border-radius: 4px;
@@ -1857,7 +1863,7 @@ header .navbar {
 }
 
 .products-section .products:hover .Products-image {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .products-section .products .name {
@@ -1866,12 +1872,12 @@ header .navbar {
     bottom: 16px;
     margin: 0;
     font-family: var(--heading-font-semibold);
-    font-size: var(--font-size-l);
+    font-size: 1.4rem;
     color: #ffffff;
     font-weight: 700;
     letter-spacing: 0.5px;
     z-index: 2;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .products-section .products:hover .name {
