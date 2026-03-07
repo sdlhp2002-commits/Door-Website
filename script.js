@@ -247,6 +247,20 @@ if (!localStorage.getItem("cookieConsent")) {
     }
 }
 
+// 18. Scroll Progress Bar Logic
+const progressContainer = document.createElement('div');
+progressContainer.className = 'scroll-progress-container';
+progressContainer.innerHTML = '<div class="scroll-progress-bar" id="scroll-progress-bar"></div>';
+document.body.prepend(progressContainer);
+
+window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const bar = document.getElementById('scroll-progress-bar');
+    if (bar) bar.style.width = scrolled + "%";
+});
+
 // --- MAIN INITIALIZATION BLOCK ---
 document.addEventListener("DOMContentLoaded", () => {
     // 0.1 Force menu links to open in same tab

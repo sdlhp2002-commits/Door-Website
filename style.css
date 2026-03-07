@@ -88,6 +88,11 @@
 
     /*site max width*/
     --site-max-width: 1300px;
+
+    /* Effective Style Additions */
+    --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+    --shadow-hover: 0 20px 40px -5px rgba(0,0,0,0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -112,6 +117,26 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+/* --- Effective Style: Custom Scrollbar & Selection --- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 6px;
+    border: 2px solid #f5f5f5;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-brown);
+}
+::selection {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
 }
 
 .section-content {
@@ -142,30 +167,40 @@ img {
 /* navbar */
 
 header {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    right: 20px;
-    z-index: 100;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--white-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* Position header above overlay but below mobile menu */
+    min-height: 100px; /* Ensure header has height */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: none;
     transition: all 0.3s ease;
-    border-radius: var(--border-radius-m);
+    border-radius: 0;
 }
 
 header.scrolled {
+    background: var(--white-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Scroll Progress Bar --- */
+.scroll-progress-container {
     position: fixed;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     top: 0;
     left: 0;
-    right: 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 99999;
+    background: transparent;
+}
+.scroll-progress-bar {
+    height: 100%;
+    background: var(--secondary-color);
+    width: 0%;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
 }
 
 header .navbar {
@@ -847,6 +882,28 @@ header .navbar {
     }
 }
 
+/* --- FIX: Ensure Desktop Menu is Visible --- */
+@media screen and (min-width: 769px) {
+    .navbar .nav-menu {
+        display: flex !important;
+        position: static !important;
+        transform: none !important;
+        background: transparent !important;
+        width: auto !important;
+        height: auto !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        flex-direction: row !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    .navbar .nav-menu .nav-link {
+        opacity: 1 !important;
+        transform: none !important;
+        display: inline-flex !important;
+    }
+}
+
 /* responsive */
 @media screen and (max-width: 768px) {
 
@@ -868,7 +925,7 @@ header .navbar {
         width: 100%;
         /* FIX: Increase opacity to 0.5 or 0.7 to hide background better */
         background: rgba(0, 0, 0, 0.6);
-        z-index: 999;
+        z-index: 998; /* Must be below header */
         /* Must be lower than nav-menu but higher than everything else */
     }
 
@@ -1373,6 +1430,7 @@ header .navbar {
 .contact-section .contact-form .form-input:focus,
 .contact-section .contact-form textarea:focus {
     border: 2px solid var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(184, 134, 11, 0.15); /* Focus ring for better UX */
 }
 
 .contact-section .contact-form .submit-button {
@@ -1858,12 +1916,12 @@ header .navbar {
     object-fit: contain;
     background: transparent;
     margin-bottom: 0;
-    transition: transform 0.4s ease;
+    transition: var(--transition-smooth);
     z-index: 0;
 }
 
 .products-section .products:hover .Products-image {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .products-section .products .name {
@@ -1895,15 +1953,15 @@ header .navbar {
     margin-top: 0;
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
 }
 
 .products:hover .product-price {
     background: var(--secondary-color);
     color: var(--white-color);
     border-color: var(--secondary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(184, 134, 11, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(184, 134, 11, 0.25);
 }
 
 .products-section .swiper-pagination-bullet {
@@ -2011,7 +2069,7 @@ header .navbar {
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-color);
-    transition: transform 0.3s ease;
+    transition: var(--transition-smooth);
     height: auto;
     /* Allow content to dictate height */
     display: flex;
@@ -2019,8 +2077,8 @@ header .navbar {
 }
 
 .testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
     border-color: var(--secondary-color);
 }
 
@@ -2714,6 +2772,33 @@ header .navbar {
 
 .door-catalog-grid.filtering {
     opacity: 0.7;
+}
+
+/* --- Catalog Search Styles --- */
+.catalog-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.catalog-search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    background: var(--white-color);
+}
+
+.catalog-search-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 5px 20px rgba(184, 134, 11, 0.15);
+    transform: translateY(-2px);
 }
 
 .door-catalog-item {
